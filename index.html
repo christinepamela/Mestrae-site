@@ -5,10 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Mestrae</title>
   <link rel="icon" href="Favicon.png" type="image/png" />
-  <link
-    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=Poppins:wght@400;600&display=swap"
-    rel="stylesheet"
-  />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=Poppins:wght@400;600&display=swap" rel="stylesheet" />
   <style>
     /* Global resets */
     body {
@@ -19,7 +16,7 @@
       line-height: 1.6;
     }
 
-    /* Grey texture background for grey blocks */
+    /* Grey block */
     .grey-block {
       background: url('paper-texture2.png');
       background-repeat: repeat;
@@ -52,31 +49,33 @@
       display: flex;
       flex-direction: row;
       justify-content: space-between;
-      align-items: stretch;
+      align-items: center; /* vertical center */
       gap: 40px;
       box-sizing: border-box;
       background: #fff;
       padding-left: 80px;
       padding-right: 80px;
       box-shadow: 0 2px 5px rgba(0, 0, 0, 0.03);
+      min-height: 320px;
     }
 
-    /* Shift section */
+    /* Specific padding and height for each section */
     .section.shift {
       padding-top: 140px;
       padding-bottom: 100px;
+      min-height: 320px;
     }
 
-    /* Gratitude section */
     .section.gratitude {
       padding-top: 140px;
       padding-bottom: 120px;
+      min-height: 320px;
     }
 
-    /* Return section */
     .section.return {
       padding-top: 140px;
       padding-bottom: 140px;
+      min-height: 360px;
     }
 
     /* Left and right columns inside sections */
@@ -85,11 +84,17 @@
       padding-right: 30px;
       height: 100%;
       box-sizing: border-box;
+      display: flex;
+      flex-direction: column;
+      justify-content: center; /* vertically center content */
     }
 
     .section > div:last-child {
       padding-left: 30px;
       box-sizing: border-box;
+      display: flex;
+      flex-direction: column;
+      justify-content: center; /* vertically center content */
     }
 
     /* Headings for the sections */
@@ -125,8 +130,7 @@
       font-family: 'Poppins', sans-serif;
       font-weight: 600;
       font-size: 1.25rem;
-      /* Removed shadow as requested */
-      box-shadow: none;
+      box-shadow: none; /* removed shadow as requested */
       border-radius: 8px;
       cursor: pointer;
       transition: background-color 0.3s ease;
@@ -167,6 +171,36 @@
       }
     }
 
+    /* Responsive mobile */
+    @media (max-width: 768px) {
+      .section {
+        flex-direction: column;
+        padding-left: 20px;
+        padding-right: 20px;
+        min-height: auto;
+      }
+      .section > div:first-child {
+        border-right: none;
+        border-bottom: 1px solid #ccc;
+        padding-right: 0;
+        padding-bottom: 20px;
+      }
+      .section > div:last-child {
+        padding-left: 0;
+        padding-top: 20px;
+      }
+      .flexboard {
+        flex-direction: column;
+        padding-left: 20px;
+        padding-right: 20px;
+      }
+      .flexboard > div {
+        margin-bottom: 20px;
+      }
+      footer {
+        padding: 20px;
+      }
+    }
   </style>
 </head>
 <body>
