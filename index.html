@@ -23,16 +23,16 @@
       display: flex;
       flex-direction: row;
       justify-content: space-between;
-      align-items: stretch; /* FIX 3 */
+      align-items: stretch;
       padding: 80px 80px;
       max-width: 1200px;
       margin: 0 auto;
     }
     .section > div {
       width: 48%;
-      display: flex;               /* FIX 3 */
+      display: flex;
       flex-direction: column;
-      justify-content: center;     /* FIX 3 */
+      justify-content: center;
     }
     .section > div:first-child {
       border-right: 1px solid #ccc;
@@ -60,26 +60,25 @@
     .section-grey {
       background-color: #999;
       color: white;
-      display: flex;               /* FIX 1 */
+      display: flex;
+      flex-direction: column;
       justify-content: center;
       align-items: center;
-      padding: 60px 80px;
-      min-height: 200px;           /* FIX 1 */
+      padding: 100px 80px;
       text-align: center;
       font-size: 48px;
-      font-weight: bold;           /* FIX 2 */
+      font-weight: bold;
       margin: 0 auto;
       width: 100%;
       box-sizing: border-box;
-      flex-direction: column;
-    }
-    .section-grey-small {
-      font-weight: bold;           /* FIX 2 */
+      gap: 40px;
     }
     .pillars {
       display: flex;
       justify-content: space-between;
-      margin-top: 40px;
+      margin-top: 20px;
+      width: 100%;
+      max-width: 1000px;
     }
     .pillar {
       flex: 1;
@@ -106,6 +105,7 @@
     .footer-icons img {
       width: 24px;
       margin: 0 10px;
+      filter: brightness(0); /* ensures all icons are black */
     }
   </style>
 </head>
@@ -122,7 +122,7 @@
     </div>
   </div>
 
-  <div class="section-grey section-grey-small">Underserved. Open ecosystem</div>
+  <div class="section-grey">Underserved. Open ecosystem</div>
 
   <div class="section">
     <div>
@@ -134,7 +134,7 @@
     </div>
   </div>
 
-  <div class="section-grey section-grey-small">This time, we build it together</div>
+  <div class="section-grey">This time, we build it together</div>
 
   <div class="section">
     <div>
@@ -145,8 +145,8 @@
     </div>
   </div>
 
-  <div class="section-grey section-grey-small">
-    Our journey now branches into three pillars:
+  <div class="section-grey">
+    <div>Our journey now branches into three pillars:</div>
     <div class="pillars">
       <div class="pillar">
         <div class="pillar-title">Mestrae</div>
@@ -169,7 +169,7 @@
       <a href="https://instagram.com"><img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/instagram.svg" alt="Instagram"></a>
       <a href="https://facebook.com"><img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/facebook.svg" alt="Facebook"></a>
       <a href="https://mestrae.substack.com/"><img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/substack.svg" alt="Substack"></a>
-      <a href="mailto:info@mestrae.com"><img src="https://upload.wikimedia.org/wikipedia/commons/4/4e/Mail_%28iOS%29.svg" alt="Email"></a>
+      <a href="mailto:info@mestrae.com"><img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/maildotru.svg" alt="Email"></a>
     </div>
   </footer>
 </body>
