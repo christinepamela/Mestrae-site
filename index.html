@@ -59,27 +59,7 @@
       gap: 40px;
       min-height: 320px;
       box-sizing: border-box;
-    }
-
-    .section:nth-of-type(2) {
-      padding-top: 120px;
-      padding-bottom: 120px;
-      padding-left: 80px;
-      padding-right: 80px;
-    }
-
-    .section:nth-of-type(4) {
-      padding-top: 140px;
-      padding-bottom: 120px;
-      padding-left: 80px;
-      padding-right: 80px;
-    }
-
-    .section:nth-of-type(6) {
-      padding-top: 140px;
-      padding-bottom: 140px;
-      padding-left: 80px;
-      padding-right: 80px;
+      padding: 80px;
     }
 
     .section > div {
@@ -128,7 +108,6 @@
       text-align: center;
       font-size: 72px;
       font-weight: bold;
-      margin: 0 auto;
       width: 100%;
       box-sizing: border-box;
       gap: 40px;
@@ -137,27 +116,32 @@
       box-shadow: inset 0 0 12px 3px rgba(0,0,0,0.1);
     }
 
+    .pillar-section {
+      max-width: 1000px;
+      margin: 0 auto;
+      padding: 80px 20px;
+      box-sizing: border-box;
+    }
+
     .pillars {
       display: flex;
       justify-content: space-between;
-      margin-top: 20px;
-      width: 100%;
-      max-width: 1000px;
       flex-wrap: wrap;
+      gap: 40px;
     }
 
     .pillar {
-    flex: 1;
-    border-left: 1px solid #ccc;
-    padding: 0 20px;
-    text-align: center;
-    min-width: 30%;
-    box-sizing: border-box;
-}
+      flex: 1;
+      min-width: 250px;
+      border-left: 1px solid #ccc;
+      padding: 0 20px;
+      text-align: center;
+      box-sizing: border-box;
+    }
 
-.pillar:first-child {
-  border-left: none;
-}
+    .pillar:first-child {
+      border-left: none;
+    }
 
     .pillar-title {
       font-size: 22px;
@@ -216,14 +200,9 @@
         font-size: 22px;
       }
 
-      .section p {
-        max-width: 100%;
-      }
-
       .pillars {
         flex-direction: column;
         align-items: center;
-        gap: 40px;
       }
 
       .pillar {
@@ -248,6 +227,7 @@
     <div class="hero-caption">The Mestrae Journey</div>
   </div>
 
+  <!-- Section 1 -->
   <div class="section">
     <div>
       <h2>the Shift</h2>
@@ -258,8 +238,10 @@
     </div>
   </div>
 
+  <!-- Grey divider -->
   <div class="section-grey">Underserved. Open ecosystem</div>
 
+  <!-- Section 2 -->
   <div class="section">
     <div>
       <h3>We’re still here because of you.</h3>
@@ -270,8 +252,10 @@
     </div>
   </div>
 
+  <!-- Grey divider -->
   <div class="section-grey">This time, we build it together</div>
 
+  <!-- Section 3 -->
   <div class="section">
     <div>
       <h2>the Return</h2>
@@ -281,29 +265,28 @@
     </div>
   </div>
 
- <!-- Grey section for the intro -->
-<div class="section-grey">
-  Our journey now branches into three pillars
-</div>
+  <!-- Grey divider -->
+  <div class="section-grey">Our journey now branches into three pillars</div>
 
-<!-- White section for the actual pillars -->
-<div class="section">
-  <div class="pillars">
-    <div class="pillar">
-      <div class="pillar-title">Mestrae</div>
-      <div class="pillar-text">for exclusive heels and fashion design</div>
-    </div>
-    <div class="pillar">
-      <div class="pillar-title">Tiga</div>
-      <div class="pillar-text">health-focused wearables for the underserved</div>
-    </div>
-    <div class="pillar">
-      <div class="pillar-title">OwnIt</div>
-      <div class="pillar-text">open-source platform to redefine footwear innovation and ecosystem for women</div>
+  <!-- Pillar Section -->
+  <div class="pillar-section">
+    <div class="pillars">
+      <div class="pillar">
+        <div class="pillar-title">Mestrae</div>
+        <div class="pillar-text">for exclusive heels and fashion design</div>
+      </div>
+      <div class="pillar">
+        <div class="pillar-title">Tiga</div>
+        <div class="pillar-text">health-focused wearables for the underserved</div>
+      </div>
+      <div class="pillar">
+        <div class="pillar-title">OwnIt</div>
+        <div class="pillar-text">open-source platform to redefine footwear innovation and ecosystem for women</div>
+      </div>
     </div>
   </div>
-</div>
 
+  <!-- Footer -->
   <footer>
     <div class="footer-icons">
       <a href="https://twitter.com"><img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/twitter.svg" alt="Twitter"></a>
