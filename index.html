@@ -17,16 +17,29 @@
       font-weight: bold;
       text-align: left;
       font-size: 24px;
+      letter-spacing: 2px;
     }
     .section {
       display: flex;
       flex-direction: row;
       justify-content: space-between;
-      align-items: flex-start;
+      align-items: center;
       padding: 80px 80px;
       max-width: 1200px;
       margin: 0 auto;
     }
+    .section > div {
+    width: 48%;
+    }
+
+   .section > div:first-child {
+   border-right: 1px solid #ccc;
+   padding-right: 30px;
+   }
+
+  .section > div:last-child {
+  padding-left: 30px;
+  }
     .section h2 {
       font-size: 60px;
       font-weight: bold;
@@ -50,8 +63,9 @@
       text-align: center;
       font-size: 48px;
       font-weight: normal;
-      max-width: 1200px;
       margin: 0 auto;
+      width: 100%; 
+      box-sizing: border-box;
     }
     .section-grey-small {
       font-size: 48px;
@@ -150,7 +164,7 @@
       <a href="https://instagram.com"><img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/instagram.svg" alt="Instagram"></a>
       <a href="https://facebook.com"><img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/facebook.svg" alt="Facebook"></a>
       <a href="https://mestrae.substack.com/"><img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/substack.svg" alt="Substack"></a>
-      <a href="mailto:info@mestrae.com"><img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/maildotru.svg" alt="Email"></a>
+      <a href="mailto:info@mestrae.com"><img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/mail.svg" alt="Email"></a>
     </div>
   </footer>
 </body>
