@@ -1,93 +1,94 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mestrae</title>
-    <style>
-        body {
-            margin: 0;
-            font-family: Arial, sans-serif;
-            background-color: white;
-            color: black;
-        }
-        section {
-            padding: 60px 20px;
-            max-width: 800px;
-            margin: 0 auto;
-        }
-        .grey-header {
-            background-color: #888;
-            color: white;
-            padding: 40px 20px;
-            text-align: center;
-            font-size: 1.5em;
-            font-weight: bold;
-        }
-        footer {
-            text-align: center;
-            padding: 40px 0;
-        }
-        .social-icons a {
-            margin: 0 10px;
-            text-decoration: none;
-            color: black;
-            font-size: 20px;
-        }
-    </style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>MESTRAE</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: 'Inter', sans-serif; background: #fff; color: #000; }
+    header { padding: 2rem; font-size: 2rem; font-weight: bold; text-align: center; }
+    .section { display: flex; flex-wrap: wrap; padding: 4rem 2rem; max-width: 1200px; margin: auto; }
+    .left, .right { flex: 1 1 50%; padding: 1rem; }
+    .left h2, .right h2 { font-size: 2rem; font-weight: bold; }
+    .grey-banner { background: #888; color: white; text-align: center; padding: 2rem; font-size: 1.25rem; letter-spacing: 1px; }
+    .section-3 .grey-banner { padding: 3rem 2rem; }
+    .pillars { display: flex; flex-direction: row; justify-content: space-between; flex-wrap: wrap; gap: 2rem; margin-top: 2rem; }
+    .pillar { flex: 1 1 30%; border-top: 1px solid #fff; padding-top: 1rem; color: #fff; }
+    .footer { background: #fff; text-align: center; padding: 2rem; }
+    .footer a { margin: 0 0.5rem; color: #000; text-decoration: none; font-size: 1.25rem; }
+    @media (max-width: 768px) {
+      .left, .right, .pillar { flex: 1 1 100%; text-align: center; }
+    }
+  </style>
 </head>
 <body>
+  <header>MESTRAE</header>
 
-<section>
-    <h2>The Shift</h2>
-    <h1>From heels to something far more meaningful.</h1>
-    <p>
-        Mestrae began with interchangeable heels, but we’re stepping into a bigger purpose. 
-        We’re bridging fashion and tech for the underserved and for a freer, more open ecosystem.
-    </p>
-</section>
-
-<div class="grey-header">Nec nulla turpis elit ac tristique natoque</div>
-
-<section>
-    <h2>The Gratitude</h2>
-    <h1>We’re still here because of you.</h1>
-    <p>
-        Thank you for standing by us. Mestrae faced immense systemic challenges. 
-        And we also launched too soon, grew too fast, and made mistakes along the way. 
-        But your patience and support helped us find our way back. 
-        Who are we without our customers?
-    </p>
-</section>
-
-<div class="grey-header">Curae enim sagittis nunc risus cubilia diam aliquam</div>
-
-<section>
-    <h2>The Return</h2>
-    <p>
-        We want to make things right. In October, we’ll begin refunding all early customers and invite you back as early adopters.
-    </p>
-    <p>
-        Our journey now branches into three pillars:
-        <ul>
-            <li><strong>Mestrae</strong> for exclusive heels and fashion design</li>
-            <li><strong>Tiga</strong> for health-focused wearables</li>
-            <li><strong>OwnIt</strong> as the open-source platform to reshape footwear innovation</li>
-        </ul>
-        You’ve seen our past. We’d love you to help shape what comes next.
-    </p>
-</section>
-
-<footer>
-    <div class="social-icons">
-        <a href="#">🐦</a>
-        <a href="#">📸</a>
-        <a href="#">📘</a>
-        <a href="#">✉️</a>
-        <a href="#">📰</a>
+  <!-- Section 1 -->
+  <div class="section">
+    <div class="left">
+      <h2>The Shift</h2>
     </div>
-</footer>
+    <div class="right">
+      <h2>From heels to something far more meaningful.</h2>
+      <p style="margin-top: 1rem;">
+        Mestrae began with interchangeable heels, but we’re stepping into a bigger purpose. We’re bridging fashion and tech for the underserved and for a freer, more open ecosystem.
+      </p>
+    </div>
+  </div>
+  <div class="grey-banner">Underserved. Open ecosystem</div>
 
+  <!-- Section 2 -->
+  <div class="section">
+    <div class="left">
+      <h2>We’re still here because of you.</h2>
+      <p style="margin-top: 1rem;">
+        Thank you for standing by us. Mestrae faced immense systemic challenges. And we also launched too soon, grew too fast, and made mistakes along the way. But your patience and support helped us find our way back. Who are we without our customers?
+      </p>
+    </div>
+    <div class="right">
+      <h2>The Gratitude</h2>
+    </div>
+  </div>
+  <div class="grey-banner">This time, we build it together</div>
+
+  <!-- Section 3 -->
+  <div class="section section-3">
+    <div class="left">
+      <h2>The Return</h2>
+    </div>
+    <div class="right">
+      <p>
+        We want to make things right. In October, we’ll begin refunding all early customers and invite you back as early adopters rebuilding together. You’ve seen our past. We’d love you to help be part of what comes next.
+      </p>
+    </div>
+  </div>
+  <div class="grey-banner">
+    <div>Our journey now branches into three pillars:</div>
+    <div class="pillars">
+      <div class="pillar">
+        <strong>Mestrae</strong><br />
+        for exclusive heels and fashion design
+      </div>
+      <div class="pillar">
+        <strong>Tiga</strong><br />
+        health-focused wearables for the underserved
+      </div>
+      <div class="pillar">
+        <strong>OwnIt</strong><br />
+        open-source platform to redefine footwear innovation and ecosystem for women
+      </div>
+    </div>
+  </div>
+
+  <div class="footer">
+    <a href="https://twitter.com" target="_blank">Twitter</a>
+    <a href="https://instagram.com" target="_blank">Instagram</a>
+    <a href="https://facebook.com" target="_blank">Facebook</a>
+    <a href="https://mestrae.substack.com" target="_blank">Substack</a>
+    <a href="mailto:info@mestrae.com">Email</a>
+  </div>
 </body>
 </html>
