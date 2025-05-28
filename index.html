@@ -1,94 +1,184 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>MESTRAE</title>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mestrae</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;900&display=swap" rel="stylesheet">
   <style>
-    * { margin: 0; padding: 0; box-sizing: border-box; }
-    body { font-family: 'Inter', sans-serif; background: #fff; color: #000; }
-    header { padding: 2rem; font-size: 2rem; font-weight: bold; text-align: center; }
-    .section { display: flex; flex-wrap: wrap; padding: 4rem 2rem; max-width: 1200px; margin: auto; }
-    .left, .right { flex: 1 1 50%; padding: 1rem; }
-    .left h2, .right h2 { font-size: 2rem; font-weight: bold; }
-    .grey-banner { background: #888; color: white; text-align: center; padding: 2rem; font-size: 1.25rem; letter-spacing: 1px; }
-    .section-3 .grey-banner { padding: 3rem 2rem; }
-    .pillars { display: flex; flex-direction: row; justify-content: space-between; flex-wrap: wrap; gap: 2rem; margin-top: 2rem; }
-    .pillar { flex: 1 1 30%; border-top: 1px solid #fff; padding-top: 1rem; color: #fff; }
-    .footer { background: #fff; text-align: center; padding: 2rem; }
-    .footer a { margin: 0 0.5rem; color: #000; text-decoration: none; font-size: 1.25rem; }
-    @media (max-width: 768px) {
-      .left, .right, .pillar { flex: 1 1 100%; text-align: center; }
+    body {
+      margin: 0;
+      font-family: 'Inter', sans-serif;
+      background-color: #fff;
+      color: #000;
+    }
+    header {
+      padding: 20px 40px;
+      border-bottom: 1px solid #ccc;
+      font-weight: 900;
+      font-size: 24px;
+      text-align: left;
+    }
+    section {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 80px 10%;
+      max-width: 1600px;
+      margin: auto;
+    }
+    .section-text {
+      display: flex;
+      flex-direction: row;
+      gap: 60px;
+      flex-wrap: wrap;
+    }
+    .left-title {
+      font-size: 64px;
+      font-weight: 900;
+      flex: 1;
+      min-width: 200px;
+    }
+    .right-content {
+      flex: 2;
+      min-width: 300px;
+    }
+    .right-content h2 {
+      font-size: 28px;
+      font-weight: 600;
+      margin-bottom: 20px;
+    }
+    .right-content p {
+      font-size: 18px;
+      text-align: justify;
+      line-height: 1.6;
+    }
+    .grey-banner {
+      background-color: #888;
+      color: white;
+      font-size: 64px;
+      font-weight: 900;
+      text-align: center;
+      padding: 80px 10%;
+      max-width: 1600px;
+      margin: auto;
+    }
+    .pillar-section {
+      background-color: #888;
+      color: white;
+      padding: 80px 10%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      max-width: 1600px;
+      margin: auto;
+    }
+    .pillar-title {
+      font-size: 64px;
+      font-weight: 900;
+      margin-bottom: 60px;
+    }
+    .pillar-list {
+      display: flex;
+      gap: 40px;
+      justify-content: space-between;
+      width: 100%;
+      flex-wrap: wrap;
+    }
+    .pillar-item {
+      flex: 1;
+      min-width: 200px;
+      text-align: center;
+      border-left: 1px solid #fff;
+      padding-left: 20px;
+    }
+    .pillar-item:first-child {
+      border-left: none;
+      padding-left: 0;
+    }
+    .pillar-item h3 {
+      font-size: 24px;
+      font-weight: 600;
+      margin-bottom: 10px;
+    }
+    .pillar-item p {
+      font-size: 16px;
+      line-height: 1.5;
+    }
+    footer {
+      padding: 40px;
+      text-align: center;
+    }
+    .social-icons a {
+      margin: 0 10px;
+      color: #000;
+      text-decoration: none;
+      font-size: 20px;
     }
   </style>
 </head>
 <body>
   <header>MESTRAE</header>
 
-  <!-- Section 1 -->
-  <div class="section">
-    <div class="left">
-      <h2>The Shift</h2>
+  <section>
+    <div class="section-text">
+      <div class="left-title">The Shift</div>
+      <div class="right-content">
+        <h2>From heels to something far more meaningful.</h2>
+        <p>Mestrae began with interchangeable heels, but we’re stepping into a bigger purpose. We’re bridging fashion and tech for the underserved and for a freer, more open ecosystem.</p>
+      </div>
     </div>
-    <div class="right">
-      <h2>From heels to something far more meaningful.</h2>
-      <p style="margin-top: 1rem;">
-        Mestrae began with interchangeable heels, but we’re stepping into a bigger purpose. We’re bridging fashion and tech for the underserved and for a freer, more open ecosystem.
-      </p>
-    </div>
-  </div>
+  </section>
+
   <div class="grey-banner">Underserved. Open ecosystem</div>
 
-  <!-- Section 2 -->
-  <div class="section">
-    <div class="left">
-      <h2>We’re still here because of you.</h2>
-      <p style="margin-top: 1rem;">
-        Thank you for standing by us. Mestrae faced immense systemic challenges. And we also launched too soon, grew too fast, and made mistakes along the way. But your patience and support helped us find our way back. Who are we without our customers?
-      </p>
+  <section>
+    <div class="section-text">
+      <div class="left-title">The Gratitude</div>
+      <div class="right-content">
+        <h2>We’re still here because of you.</h2>
+        <p>Thank you for standing by us. Mestrae faced immense systemic challenges. And we also launched too soon, grew too fast, and made mistakes along the way. But your patience and support helped us find our way back. Who are we without our customers?</p>
+      </div>
     </div>
-    <div class="right">
-      <h2>The Gratitude</h2>
-    </div>
-  </div>
+  </section>
+
   <div class="grey-banner">This time, we build it together</div>
 
-  <!-- Section 3 -->
-  <div class="section section-3">
-    <div class="left">
-      <h2>The Return</h2>
-    </div>
-    <div class="right">
-      <p>
-        We want to make things right. In October, we’ll begin refunding all early customers and invite you back as early adopters rebuilding together. You’ve seen our past. We’d love you to help be part of what comes next.
-      </p>
-    </div>
-  </div>
-  <div class="grey-banner">
-    <div>Our journey now branches into three pillars:</div>
-    <div class="pillars">
-      <div class="pillar">
-        <strong>Mestrae</strong><br />
-        for exclusive heels and fashion design
+  <section>
+    <div class="section-text">
+      <div class="left-title">The Return</div>
+      <div class="right-content">
+        <p>In October, we’ll begin refunding all early customers and invite you back as early adopters rebuilding together. You’ve seen our past. We’d love you to help be part of what comes next.</p>
       </div>
-      <div class="pillar">
-        <strong>Tiga</strong><br />
-        health-focused wearables for the underserved
+    </div>
+  </section>
+
+  <div class="pillar-section">
+    <div class="pillar-title">Our journey now branches into three pillars:</div>
+    <div class="pillar-list">
+      <div class="pillar-item">
+        <h3>Mestrae</h3>
+        <p>for exclusive heels and fashion design</p>
       </div>
-      <div class="pillar">
-        <strong>OwnIt</strong><br />
-        open-source platform to redefine footwear innovation and ecosystem for women
+      <div class="pillar-item">
+        <h3>Tiga</h3>
+        <p>health-focused wearables for the underserved</p>
+      </div>
+      <div class="pillar-item">
+        <h3>OwnIt</h3>
+        <p>open-source platform to redefine footwear innovation and ecosystem for women</p>
       </div>
     </div>
   </div>
 
-  <div class="footer">
-    <a href="https://twitter.com" target="_blank">Twitter</a>
-    <a href="https://instagram.com" target="_blank">Instagram</a>
-    <a href="https://facebook.com" target="_blank">Facebook</a>
-    <a href="https://mestrae.substack.com" target="_blank">Substack</a>
-    <a href="mailto:info@mestrae.com">Email</a>
-  </div>
+  <footer>
+    <div class="social-icons">
+      <a href="https://twitter.com">Twitter</a>
+      <a href="https://instagram.com">Instagram</a>
+      <a href="https://facebook.com">Facebook</a>
+      <a href="https://mestrae.substack.com">Substack</a>
+      <a href="mailto:info@mestrae.com">Email</a>
+    </div>
+  </footer>
 </body>
 </html>
