@@ -74,6 +74,9 @@
 
     .section-grey {
       background-color: #999;
+      background-image: url('paper-texture2.png');
+      background-repeat: repeat;
+      background-size: auto;
       color: white;
       display: flex;
       flex-direction: column;
@@ -90,26 +93,23 @@
     }
 
     .pillars-section {
-      background-color: #fff;
+      background-color: white;
       max-width: 1200px;
-      margin: 0 auto;
-      padding: 60px 80px;
+      margin: 40px auto 0 auto;
+      padding: 100px 80px;
       box-sizing: border-box;
-    }
-
-    .pillars-section hr {
-      border: none;
-      border-top: 1px solid #999;
-      margin-top: 40px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+      border-radius: 6px;
     }
 
     .pillars {
       display: flex;
       justify-content: space-between;
-      margin-top: 20px;
       width: 100%;
       max-width: 1000px;
       flex-wrap: wrap;
+      margin: 0 auto;
+      gap: 40px;
     }
 
     .pillar {
@@ -133,6 +133,12 @@
 
     .pillar-text {
       font-size: 16px;
+    }
+
+    .separator-line {
+      max-width: 1200px;
+      margin: 20px auto 40px auto;
+      border-bottom: 1px solid #ccc;
     }
 
     footer {
@@ -178,6 +184,10 @@
         max-width: 100%;
       }
 
+      .pillars-section {
+        padding: 60px 20px;
+      }
+
       .pillars {
         flex-direction: column;
         align-items: center;
@@ -194,9 +204,9 @@
         font-size: 54px;
         padding: 120px 20px;
       }
-
-      .pillars-section {
-        padding: 40px 20px;
+      
+      .separator-line {
+        margin: 20px 20px 40px 20px;
       }
     }
   </style>
@@ -239,7 +249,7 @@
   </div>
 
   <div class="section-grey">
-    <div>Our journey now branches into three pillars:</div>
+    Our journey now branches into three pillars:
   </div>
 
   <div class="pillars-section">
@@ -257,8 +267,9 @@
         <div class="pillar-text">open-source platform to redefine footwear innovation and ecosystem for women</div>
       </div>
     </div>
-    <hr />
   </div>
+
+  <div class="separator-line"></div>
 
   <footer>
     <div class="footer-icons">
