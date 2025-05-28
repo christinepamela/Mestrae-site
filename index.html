@@ -2,12 +2,9 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Mestrae</title>
-
-  <!-- Google Fonts: Inter with Poppins fallback -->
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Poppins:wght@400;600&display=swap" rel="stylesheet" />
-
+  <link rel="icon" type="image/png" href="Favicon.png" />
   <style>
     html {
       scroll-behavior: smooth;
@@ -15,16 +12,15 @@
 
     body {
       margin: 0;
-      font-family: 'Inter', 'Poppins', sans-serif;
+      font-family: 'Inter', sans-serif;
       background-color: #fff;
       color: #000;
-      line-height: 1.75;
     }
 
     header {
       padding: 20px 40px;
       border-bottom: 1px solid #ccc;
-      font-weight: 700;
+      font-weight: bold;
       text-align: left;
       font-size: 24px;
       letter-spacing: 2px;
@@ -34,11 +30,13 @@
       display: flex;
       flex-direction: row;
       justify-content: space-between;
-      align-items: stretch;
+      align-items: center; /* vertically center content */
       padding: 140px 80px 80px; /* taller top padding */
       max-width: 1200px;
       margin: 0 auto;
       gap: 40px;
+      min-height: 320px; /* uniform minimum height */
+      box-sizing: border-box;
     }
 
     .section > div {
@@ -58,33 +56,28 @@
     }
 
     .section h2 {
-      font-size: 56px;
-      font-weight: 600; /* softened weight */
+      font-size: 60px;
+      font-weight: bold;
       margin: 0;
       line-height: 1.2;
     }
 
     .section h3 {
       font-size: 28px;
-      font-weight: 400;
+      font-weight: normal;
       margin-bottom: 20px;
     }
 
     .section p {
       max-width: 600px;
       text-align: justify;
-      font-weight: 400;
-      margin: 0;
+      line-height: 1.6;
     }
 
-    /* Grey blocks with textured background and subtle dark overlay */
+    /* Grey sections */
     .section-grey {
-      position: relative;
       background-color: #999;
       color: white;
-      background-image: url('paper-texture2.png');
-      background-repeat: repeat;
-      background-size: auto;
       display: flex;
       flex-direction: column;
       justify-content: center;
@@ -92,24 +85,24 @@
       padding: 200px 80px;
       text-align: center;
       font-size: 72px;
-      font-weight: 700;
+      font-weight: bold;
       margin: 0 auto;
       width: 100%;
       box-sizing: border-box;
       gap: 40px;
-      overflow: hidden;
-      z-index: 0;
-    }
-    .section-grey::before {
-      content: "";
-      position: absolute;
-      top: 0; left: 0; right: 0; bottom: 0;
-      background: rgba(0, 0, 0, 0.2); /* subtle darkening overlay */
-      z-index: -1;
-      pointer-events: none;
+      background-image: url('paper-texture2.png');
+      background-repeat: repeat;
+      background-size: auto;
+      box-shadow: inset 0 0 10px rgba(0,0,0,0.15);
     }
 
-    /* White block for pillars */
+    /* Shorter third grey block */
+    .section-grey:nth-of-type(3) {
+      padding: 140px 80px; /* shorter vertical padding */
+      font-size: 64px;
+    }
+
+    /* Pillars container - white block below third grey */
     .pillars-container {
       max-width: 1200px;
       margin: 0 auto 40px;
@@ -117,7 +110,7 @@
       padding: 100px 80px 80px;
       box-sizing: border-box;
       border-top: 1px solid #ccc;
-      box-shadow: 0 1px 4px rgba(0,0,0,0.08);
+      /* Removed box-shadow */
     }
 
     .pillars {
@@ -126,66 +119,59 @@
       width: 100%;
       max-width: 1000px;
       flex-wrap: wrap;
+      margin: 0 auto;
       gap: 40px;
     }
 
     .pillar {
       flex: 1;
+      border-left: 1px solid #ccc;
+      padding: 0 20px;
       text-align: center;
       min-width: 30%;
       box-sizing: border-box;
-      cursor: pointer;
-      transition: color 0.3s ease, transform 0.3s ease;
-      font-weight: 600;
-      font-size: 22px;
-      color: #000;
-      text-decoration: none;
-      user-select: none;
+      box-shadow: none; /* removed shadow */
     }
 
-    .pillar:hover {
-      color: #5a5a5a;
-      transform: scale(1.05);
+    .pillar:first-child {
+      border-left: none;
     }
 
     .pillar-title {
-      font-size: 28px;
-      font-weight: 700;
-      margin-bottom: 12px;
-      user-select: none;
+      font-size: 24px; /* increased font size */
+      font-weight: bold;
+      margin-bottom: 10px;
+      color: #000;
     }
 
     .pillar-text {
-      font-size: 18px;
-      font-weight: 400;
-      user-select: none;
+      font-size: 18px; /* increased font size */
+      color: #333;
     }
 
     footer {
       text-align: center;
       padding: 20px;
       background-color: #fff;
-      border-top: 1px solid #ccc;
     }
 
     .footer-icons a img {
       width: 24px;
       margin: 0 10px;
       filter: brightness(0);
-      transition: transform 0.3s ease, opacity 0.3s ease, filter 0.3s ease;
+      transition: transform 0.3s ease, opacity 0.3s ease;
     }
 
     .footer-icons a:hover img {
       transform: scale(1.2);
       opacity: 0.7;
-      filter: brightness(0.4);
     }
 
     /* Responsive for Mobile */
     @media (max-width: 768px) {
       .section {
         flex-direction: column;
-        padding: 100px 20px 40px; /* adjusted for smaller screens */
+        padding: 80px 20px 40px;
       }
 
       .section > div:first-child,
@@ -217,18 +203,22 @@
       }
 
       .pillar {
+        border-left: none !important;
         width: 100%;
         max-width: 400px;
-        font-size: 20px;
       }
 
       .section-grey {
         font-size: 54px;
         padding: 120px 20px;
       }
+
+      .section-grey:nth-of-type(3) {
+        padding: 100px 20px;
+        font-size: 48px;
+      }
     }
   </style>
-  <link rel="icon" href="Favicon.png" type="image/png" />
 </head>
 <body>
 
@@ -267,36 +257,34 @@
     </div>
   </div>
 
-  <!-- Grey block with text only -->
   <div class="section-grey">
-    Our journey now branches into three pillars:
+    Our journey now branches into three pillars
   </div>
 
-  <!-- White block for clickable pillars -->
   <div class="pillars-container">
     <div class="pillars">
-      <a href="#" class="pillar" aria-label="Mestrae exclusive heels and fashion design">
+      <div class="pillar">
         <div class="pillar-title">Mestrae</div>
         <div class="pillar-text">for exclusive heels and fashion design</div>
-      </a>
-      <a href="#" class="pillar" aria-label="Tiga health-focused wearables for the underserved">
+      </div>
+      <div class="pillar">
         <div class="pillar-title">Tiga</div>
         <div class="pillar-text">health-focused wearables for the underserved</div>
-      </a>
-      <a href="#" class="pillar" aria-label="OwnIt open-source platform to redefine footwear innovation and ecosystem for women">
+      </div>
+      <div class="pillar">
         <div class="pillar-title">OwnIt</div>
         <div class="pillar-text">open-source platform to redefine footwear innovation and ecosystem for women</div>
-      </a>
+      </div>
     </div>
   </div>
 
   <footer>
     <div class="footer-icons">
-      <a href="https://twitter.com" aria-label="Twitter"><img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/twitter.svg" alt="Twitter"></a>
-      <a href="https://instagram.com" aria-label="Instagram"><img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/instagram.svg" alt="Instagram"></a>
-      <a href="https://facebook.com" aria-label="Facebook"><img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/facebook.svg" alt="Facebook"></a>
-      <a href="https://mestrae.substack.com/" aria-label="Substack"><img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/substack.svg" alt="Substack"></a>
-      <a href="mailto:info@mestrae.com" aria-label="Email"><img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/maildotru.svg" alt="Email"></a>
+      <a href="https://twitter.com"><img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/twitter.svg" alt="Twitter"></a>
+      <a href="https://instagram.com"><img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/instagram.svg" alt="Instagram"></a>
+      <a href="https://facebook.com"><img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/facebook.svg" alt="Facebook"></a>
+      <a href="https://mestrae.substack.com/"><img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/substack.svg" alt="Substack"></a>
+      <a href="mailto:info@mestrae.com"><img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/maildotru.svg" alt="Email"></a>
     </div>
   </footer>
 
