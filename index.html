@@ -5,7 +5,10 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Mestrae</title>
   <link rel="icon" href="Favicon.png" type="image/png" />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=Poppins:wght@400;600&display=swap" rel="stylesheet" />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=Poppins:wght@400;600&display=swap"
+    rel="stylesheet"
+  />
   <style>
     /* Global resets */
     body {
@@ -16,47 +19,71 @@
       line-height: 1.6;
     }
 
-    /* Section styles */
+    /* Grey texture background for grey blocks */
+    .grey-block {
+      background: url('paper-texture2.png');
+      background-repeat: repeat;
+      color: #fff;
+      text-align: center;
+      padding: 40px 20px;
+      font-family: 'Poppins', sans-serif;
+      font-weight: 600;
+      font-size: 1.5rem;
+      margin-bottom: 40px;
+      box-sizing: border-box;
+    }
+
+    /* Divider line with subtle shadow */
+    .divider-line {
+      border: none;
+      height: 1px;
+      background: #ccc;
+      box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+      margin: 40px 0;
+      max-width: 1200px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    /* Section styles - container for each white block */
     .section {
       max-width: 1200px;
-      margin: 0 auto;
+      margin: 0 auto 40px auto;
       display: flex;
       flex-direction: row;
       justify-content: space-between;
-      align-items: stretch; /* stretch to equalize heights */
+      align-items: stretch;
       gap: 40px;
       box-sizing: border-box;
+      background: #fff;
+      padding-left: 80px;
+      padding-right: 80px;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.03);
     }
 
     /* Shift section */
     .section.shift {
       padding-top: 140px;
-      padding-bottom: 100px; /* slightly less bottom padding */
-      padding-left: 80px;
-      padding-right: 80px;
+      padding-bottom: 100px;
     }
 
     /* Gratitude section */
     .section.gratitude {
       padding-top: 140px;
-      padding-bottom: 120px; /* keep as is */
-      padding-left: 80px;
-      padding-right: 80px;
+      padding-bottom: 120px;
     }
 
     /* Return section */
     .section.return {
       padding-top: 140px;
-      padding-bottom: 140px; /* slightly taller */
-      padding-left: 80px;
-      padding-right: 80px;
+      padding-bottom: 140px;
     }
 
-    /* Left and right columns */
+    /* Left and right columns inside sections */
     .section > div:first-child {
       border-right: 1px solid #ccc;
       padding-right: 30px;
-      height: 100%; /* full height for border */
+      height: 100%;
       box-sizing: border-box;
     }
 
@@ -65,9 +92,9 @@
       box-sizing: border-box;
     }
 
-    /* Headings */
+    /* Headings for the sections */
     .section h2 {
-      font-weight: 600; /* reduce boldness */
+      font-weight: 600; /* lighter bold */
       font-family: 'Poppins', sans-serif;
       font-size: 1.8rem;
       margin: 0 0 20px 0;
@@ -79,46 +106,130 @@
       margin: 0;
     }
 
-    /* Other existing styles (flexboard, grey blocks, footer) remain unchanged */
+    /* Flexboard for Mestrae, Tiga, OwnIt */
+    .flexboard {
+      max-width: 1200px;
+      margin: 0 auto 60px auto;
+      display: flex;
+      justify-content: space-between;
+      gap: 40px;
+      padding-left: 80px;
+      padding-right: 80px;
+    }
+
+    .flexboard > div {
+      background: #f5f5f5;
+      padding: 30px 20px;
+      flex: 1;
+      text-align: center;
+      font-family: 'Poppins', sans-serif;
+      font-weight: 600;
+      font-size: 1.25rem;
+      /* Removed shadow as requested */
+      box-shadow: none;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    .flexboard > div:hover {
+      background-color: #eaeaea;
+    }
+
+    /* Footer styling */
+    footer {
+      max-width: 1200px;
+      margin: 0 auto 40px auto;
+      padding: 20px 80px;
+      display: flex;
+      justify-content: center;
+      gap: 30px;
+    }
+
+    footer a {
+      color: #555;
+      text-decoration: none;
+      font-size: 1.4rem;
+      transition: color 0.3s ease;
+    }
+
+    footer a:hover {
+      color: #000;
+      animation: pulse 1.5s infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% {
+        opacity: 1;
+      }
+      50% {
+        opacity: 0.6;
+      }
+    }
 
   </style>
 </head>
 <body>
 
-  <!-- Example section for Shift -->
+  <!-- Grey block -->
+  <div class="grey-block">
+    Our journey now branches into three pillars
+  </div>
+
+  <!-- White section: Shift -->
   <section class="section shift">
     <div>
       <h2>Shift</h2>
-      <p>Some content here on the left side...</p>
+      <p>Your content for Shift left side goes here...</p>
     </div>
     <div>
       <p>Right side content for Shift section.</p>
     </div>
   </section>
 
-  <!-- Example section for Gratitude -->
+  <!-- Divider line -->
+  <hr class="divider-line" />
+
+  <!-- White section: Gratitude -->
   <section class="section gratitude">
     <div>
       <h2>Gratitude</h2>
-      <p>Left content for Gratitude section.</p>
+      <p>Your content for Gratitude left side goes here...</p>
     </div>
     <div>
-      <p>Right content for Gratitude.</p>
+      <p>Right side content for Gratitude section.</p>
     </div>
   </section>
 
-  <!-- Example section for Return -->
+  <!-- Divider line -->
+  <hr class="divider-line" />
+
+  <!-- White section: Return -->
   <section class="section return">
     <div>
       <h2>Return</h2>
-      <p>Left content for Return section.</p>
+      <p>Your content for Return left side goes here...</p>
     </div>
     <div>
-      <p>Right side content for Return.</p>
+      <p>Right side content for Return section.</p>
     </div>
   </section>
 
-  <!-- Your other page content here... -->
+  <!-- Flexboard for the pillars -->
+  <div class="flexboard">
+    <div id="mestrae">Mestrae</div>
+    <div id="tiga">Tiga</div>
+    <div id="ownit">OwnIt</div>
+  </div>
+
+  <!-- Footer -->
+  <footer>
+    <a href="#" aria-label="Twitter">🐦</a>
+    <a href="#" aria-label="Instagram">📸</a>
+    <a href="#" aria-label="Facebook">📘</a>
+    <a href="#" aria-label="Substack">✉️</a>
+    <a href="mailto:email@example.com" aria-label="Email">📧</a>
+  </footer>
 
 </body>
 </html>
