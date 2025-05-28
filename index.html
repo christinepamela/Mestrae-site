@@ -8,12 +8,14 @@
     html {
       scroll-behavior: smooth;
     }
+
     body {
       margin: 0;
       font-family: sans-serif;
       background-color: #fff;
       color: #000;
     }
+
     header {
       padding: 20px 40px;
       border-bottom: 1px solid #ccc;
@@ -22,44 +24,53 @@
       font-size: 24px;
       letter-spacing: 2px;
     }
+
     .section {
       display: flex;
-      flex-direction: row;
+      flex-wrap: wrap;
       justify-content: space-between;
       align-items: stretch;
       padding: 80px 80px;
       max-width: 1200px;
       margin: 0 auto;
+      box-sizing: border-box;
     }
+
     .section > div {
       width: 48%;
       display: flex;
       flex-direction: column;
       justify-content: center;
     }
+
     .section > div:first-child {
       border-right: 1px solid #ccc;
       padding-right: 30px;
     }
+
     .section > div:last-child {
       padding-left: 30px;
     }
+
     .section h2 {
       font-size: 60px;
       font-weight: bold;
       margin: 0;
       line-height: 1.2;
     }
+
     .section h3 {
       font-size: 28px;
       font-weight: normal;
       margin-bottom: 20px;
     }
+
     .section p {
       max-width: 600px;
       text-align: justify;
       line-height: 1.6;
     }
+
     .section-grey {
       background-color: #999;
       color: white;
@@ -76,11 +87,156 @@
       box-sizing: border-box;
       gap: 40px;
     }
-    .pillars {
+
+    .pillars-section {
       display: flex;
+      flex-wrap: wrap;
       justify-content: space-between;
-      margin-top: 20px;
-      width: 100%;
-      max-width: 1000px;
+      align-items: stretch;
+      padding: 60px 80px;
+      max-width: 1200px;
+      margin: 0 auto;
+      box-sizing: border-box;
+      gap: 20px;
     }
-    .pill
+
+    .pillar {
+      flex: 1 1 calc(33.333% - 40px);
+      background-color: #f5f5f5;
+      padding: 20px;
+      text-align: center;
+      box-sizing: border-box;
+      border-radius: 8px;
+    }
+
+    .pillar-title {
+      font-size: 20px;
+      font-weight: bold;
+      margin-bottom: 10px;
+    }
+
+    .pillar-text {
+      font-size: 16px;
+    }
+
+    footer {
+      text-align: center;
+      padding: 20px;
+      background-color: #fff;
+    }
+
+    .footer-icons img {
+      width: 24px;
+      margin: 0 10px;
+      filter: brightness(0); /* ensures all icons are black */
+      transition: transform 0.3s ease, opacity 0.3s ease;
+    }
+
+    .footer-icons img:hover {
+      transform: scale(1.1);
+      opacity: 0.6;
+    }
+
+    @media screen and (max-width: 768px) {
+      .section {
+        flex-direction: column;
+        padding: 40px 20px;
+      }
+
+      .section > div {
+        width: 100%;
+        padding: 0 !important;
+        border: none !important;
+        margin-bottom: 40px;
+      }
+
+      .section h2 {
+        font-size: 40px;
+      }
+
+      .section h3 {
+        font-size: 22px;
+      }
+
+      .pillars-section {
+        flex-direction: column;
+        padding: 40px 20px;
+      }
+
+      .pillar {
+        width: 100%;
+      }
+
+      .section-grey {
+        font-size: 32px;
+        padding: 60px 20px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <header>MESTRAE</header>
+
+  <div class="section">
+    <div>
+      <h2>the Shift</h2>
+    </div>
+    <div>
+      <h3>From heels to something far more meaningful.</h3>
+      <p>Mestrae began with interchangeable heels, but we’re stepping into a bigger purpose. We’re bridging fashion and tech for the underserved and for a freer, more open ecosystem.</p>
+    </div>
+  </div>
+
+  <div class="section-grey">Underserved. Open ecosystem</div>
+
+  <div class="section">
+    <div>
+      <h3>We’re still here because of you.</h3>
+      <p>Thank you for standing by us. Mestrae faced immense systemic challenges. And we also launched too soon, grew too fast, and made mistakes along the way. But your patience and support helped us find our way back. Who are we without our customers?</p>
+    </div>
+    <div>
+      <h2>the Gratitude</h2>
+    </div>
+  </div>
+
+  <div class="section-grey">This time, we build it together</div>
+
+  <div class="section">
+    <div>
+      <h2>the Return</h2>
+    </div>
+    <div>
+      <p>In October, we’ll begin refunding all early customers and invite you back as early adopters rebuilding together. You’ve seen our past. We’d love you to help be part of what comes next.</p>
+    </div>
+  </div>
+
+  <div class="section-grey">Our journey now branches into three pillars:</div>
+
+  <div class="pillars-section">
+    <div class="pillar">
+      <div class="pillar-title">Mestrae</div>
+      <div class="pillar-text">for exclusive heels and fashion design</div>
+    </div>
+    <div class="pillar">
+      <div class="pillar-title">Tiga</div>
+      <div class="pillar-text">health-focused wearables for the underserved</div>
+    </div>
+    <div class="pillar">
+      <div class="pillar-title">OwnIt</div>
+      <div class="pillar-text">open-source platform to redefine footwear innovation and ecosystem for women</div>
+    </div>
+  </div>
+
+  <footer>
+    <div class="footer-icons">
+      <a href="https://twitter.com"><img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/twitter.svg" alt="Twitter"></a>
+      <a href="https://instagram.com"><img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/instagram.svg" alt="Instagram"></a>
+      <a href="https://facebook.com"><img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/facebook.svg" alt="Facebook"></a>
+      <a href="https://mestrae.substack.com/"><img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/substack.svg" alt="Substack"></a>
+      <a href="mailto:info@mestrae.com"><img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/maildotru.svg" alt="Email"></a>
+    </div>
+  </footer>
+
+</body>
+</html>
