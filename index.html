@@ -4,6 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Mestrae</title>
+  <link rel="icon" type="image/png" href="favicon.png" />
   <style>
     html {
       scroll-behavior: smooth;
@@ -88,6 +89,20 @@
       gap: 40px;
     }
 
+    .pillars-section {
+      background-color: #fff;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 60px 80px;
+      box-sizing: border-box;
+    }
+
+    .pillars-section hr {
+      border: none;
+      border-top: 1px solid #999;
+      margin-top: 40px;
+    }
+
     .pillars {
       display: flex;
       justify-content: space-between;
@@ -99,7 +114,7 @@
 
     .pillar {
       flex: 1;
-      border-left: 1px solid white;
+      border-left: 1px solid #ccc;
       padding: 0 20px;
       text-align: center;
       min-width: 30%;
@@ -179,6 +194,10 @@
         font-size: 54px;
         padding: 120px 20px;
       }
+
+      .pillars-section {
+        padding: 40px 20px;
+      }
     }
   </style>
 </head>
@@ -221,6 +240,9 @@
 
   <div class="section-grey">
     <div>Our journey now branches into three pillars:</div>
+  </div>
+
+  <div class="pillars-section">
     <div class="pillars">
       <div class="pillar">
         <div class="pillar-title">Mestrae</div>
@@ -235,6 +257,7 @@
         <div class="pillar-text">open-source platform to redefine footwear innovation and ecosystem for women</div>
       </div>
     </div>
+    <hr />
   </div>
 
   <footer>
