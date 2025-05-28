@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Mestrae</title>
   <style>
     body {
@@ -23,23 +23,24 @@
       display: flex;
       flex-direction: row;
       justify-content: space-between;
-      align-items: center;
+      align-items: stretch; /* FIX 3 */
       padding: 80px 80px;
       max-width: 1200px;
       margin: 0 auto;
     }
     .section > div {
-    width: 48%;
+      width: 48%;
+      display: flex;               /* FIX 3 */
+      flex-direction: column;
+      justify-content: center;     /* FIX 3 */
     }
-
-   .section > div:first-child {
-   border-right: 1px solid #ccc;
-   padding-right: 30px;
-   }
-
-  .section > div:last-child {
-  padding-left: 30px;
-  }
+    .section > div:first-child {
+      border-right: 1px solid #ccc;
+      padding-right: 30px;
+    }
+    .section > div:last-child {
+      padding-left: 30px;
+    }
     .section h2 {
       font-size: 60px;
       font-weight: bold;
@@ -59,17 +60,21 @@
     .section-grey {
       background-color: #999;
       color: white;
+      display: flex;               /* FIX 1 */
+      justify-content: center;
+      align-items: center;
       padding: 60px 80px;
+      min-height: 200px;           /* FIX 1 */
       text-align: center;
       font-size: 48px;
-      font-weight: normal;
+      font-weight: bold;           /* FIX 2 */
       margin: 0 auto;
-      width: 100%; 
+      width: 100%;
       box-sizing: border-box;
+      flex-direction: column;
     }
     .section-grey-small {
-      font-size: 48px;
-      font-weight: normal;
+      font-weight: bold;           /* FIX 2 */
     }
     .pillars {
       display: flex;
@@ -164,7 +169,7 @@
       <a href="https://instagram.com"><img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/instagram.svg" alt="Instagram"></a>
       <a href="https://facebook.com"><img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/facebook.svg" alt="Facebook"></a>
       <a href="https://mestrae.substack.com/"><img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/substack.svg" alt="Substack"></a>
-      <a href="mailto:info@mestrae.com"><img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/mail.svg" alt="Email"></a>
+      <a href="mailto:info@mestrae.com"><img src="https://upload.wikimedia.org/wikipedia/commons/4/4e/Mail_%28iOS%29.svg" alt="Email"></a>
     </div>
   </footer>
 </body>
