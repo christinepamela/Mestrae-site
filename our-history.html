@@ -5,13 +5,34 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Our History - Mestrae</title>
   <link rel="icon" href="Favicon.png" type="image/png" />
+  <!-- Typography: Combining elegant serif for headlines with readable sans-serif for body text -->
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600&family=Inter:wght@300;400;600&display=swap" rel="stylesheet" />
   <style>
+    /* Core Variables */
     :root {
       --color-primary: #000000;
       --color-secondary: #f5f5f5;
       --color-accent: #e6e2dd;
       --spacing-unit: 8px;
+      
+      /* Typography scale */
+      --text-xs: 12px;
+      --text-sm: 14px;
+      --text-base: 16px;
+      --text-lg: 18px;
+      --text-xl: 24px;
+      --text-2xl: 32px;
+      --text-3xl: 42px;
+      
+      /* Breakpoints (for reference in comments) */
+      /* mobile: 375px - 767px */
+      /* tablet: 768px - 1023px */
+      /* desktop: 1024px+ */
+    }
+
+    /* Base Styles */
+    html {
+      scroll-behavior: smooth; /* Enable smooth scrolling */
     }
 
     body {
@@ -19,10 +40,11 @@
       font-family: 'Inter', sans-serif;
       background-color: #fff;
       color: var(--color-primary);
-      font-size: 16px;
+      font-size: var(--text-base);
       line-height: 1.8;
     }
 
+    /* Navigation Styles */
     .nav-container {
       position: fixed;
       top: 0;
@@ -30,6 +52,7 @@
       right: 0;
       background: white;
       z-index: 1000;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.05);
     }
 
     .top-bar {
@@ -37,7 +60,7 @@
       color: white;
       text-align: center;
       padding: var(--spacing-unit);
-      font-size: 12px;
+      font-size: var(--text-xs);
     }
 
     header {
@@ -50,11 +73,12 @@
 
     .logo {
       font-family: 'Cormorant Garamond', serif;
-      font-size: 32px;
+      font-size: var(--text-2xl);
       letter-spacing: 3px;
       font-weight: 400;
     }
 
+    /* Main Content Container */
     .history-container {
       max-width: 1200px;
       margin: 180px auto 100px;
@@ -63,7 +87,7 @@
 
     .history-title {
       font-family: 'Cormorant Garamond', serif;
-      font-size: 42px;
+      font-size: var(--text-3xl);
       font-weight: 400;
       margin-bottom: 60px;
       text-align: center;
@@ -92,7 +116,7 @@
     .year-title {
       text-align: center;
       font-family: 'Cormorant Garamond', serif;
-      font-size: 32px;
+      font-size: var(--text-2xl);
       margin-bottom: 30px;
       position: relative;
       background: white;
@@ -108,6 +132,7 @@
       border: 1px solid var(--color-accent);
       box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
       margin-bottom: 30px;
+      border-radius: 4px;
     }
 
     .year-content p {
@@ -117,7 +142,7 @@
     /* Image Grid Styling */
     .image-grid-title {
       font-family: 'Cormorant Garamond', serif;
-      font-size: 32px;
+      font-size: var(--text-2xl);
       text-align: center;
       margin: 80px 0 40px;
     }
@@ -133,11 +158,6 @@
       aspect-ratio: 1;
       width: 100%;
       object-fit: cover;
-      transition: transform 0.3s ease;
-    }
-
-    .grid-image:hover {
-      transform: scale(1.02);
     }
 
     /* Footer Styling */
@@ -177,12 +197,30 @@
       opacity: 0.8;
     }
 
-    @media (max-width: 768px) {
+    /* Responsive Design */
+    @media (max-width: 1023px) {
+      /* Tablet adjustments */
+      .history-container {
+        padding: 0 30px;
+      }
+
+      .image-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (max-width: 767px) {
+      /* Mobile adjustments */
       .history-container {
         padding: 0 20px;
         margin-top: 140px;
       }
 
+      .history-title {
+        font-size: var(--text-2xl);
+      }
+
+      /* Adjust timeline for mobile */
       .timeline::before {
         left: 20px;
       }
@@ -191,20 +229,51 @@
         left: 20px;
         transform: none;
         text-align: left;
+        font-size: var(--text-xl);
       }
 
+      .year-content {
+        padding: 20px;
+        font-size: var(--text-sm);
+      }
+
+      /* Single column grid for mobile */
       .image-grid {
-        grid-template-columns: repeat(2, 1fr);
+        grid-template-columns: 1fr;
+        gap: 15px;
       }
 
+      /* Footer adjustments */
       .footer-content {
         grid-template-columns: repeat(2, 1fr);
         gap: calc(var(--spacing-unit) * 4);
+        padding: 0 20px;
+      }
+    }
+
+    /* iPhone 6s specific adjustments */
+    @media (max-width: 375px) {
+      .history-container {
+        padding: 0 15px;
+      }
+
+      .year-content {
+        padding: 15px;
+      }
+
+      .footer-content {
+        grid-template-columns: 1fr;
+        text-align: center;
+      }
+
+      .footer-icons {
+        justify-content: center;
       }
     }
   </style>
 </head>
-<body>
+
+  <body>
   <div class="nav-container">
     <div class="top-bar">
       In the workshop, rebuilding with style
@@ -228,21 +297,116 @@
         </div>
       </div>
 
-      <!-- Continue with other years... [Similar structure for each year] -->
-      <!-- 2016-2026 sections follow the same pattern -->
-      
+      <!-- 2016 -->
+      <div class="year-section">
+        <h2 class="year-title">2016 – First Launch</h2>
+        <div class="year-content">
+          <p>Built Prototype 1, funded through Cradle CIP150 grant.</p>
+          <p>Formed a team of 4.</p>
+          <p>Launched internationally — reached 20 countries in first wave.</p>
+        </div>
+      </div>
+
+      <!-- 2017 -->
+      <div class="year-section">
+        <h2 class="year-title">2017 – Scaling Ambition</h2>
+        <div class="year-content">
+          <p>Developed Prototype 2 with improved engineering and aesthetics.</p>
+          <p>Funded through Platcom Commercialisation Fund (RM 250K).</p>
+          <p>Expanded reach to 31 countries.</p>
+          <p>Set up a global supply chain for sourcing, production, and delivery.</p>
+        </div>
+      </div>
+
+      <!-- 2018 -->
+      <div class="year-section">
+        <h2 class="year-title">2018 – In-House Manufacturing</h2>
+        <div class="year-content">
+          <p>Established own manufacturing facility to control quality and speed.</p>
+          <p>Team grew to 8 members.</p>
+          <p>Achieved faster turnaround on small production runs.</p>
+          <p>Won global and national awards.</p>
+        </div>
+      </div>
+
+      <!-- 2019 -->
+      <div class="year-section">
+        <h2 class="year-title">2019 – Setback Amid Growth</h2>
+        <div class="year-content">
+          <p>Began global distribution partnerships.</p>
+          <p>Faced major setback when a government reimbursement grant was not disbursed, leaving us with debt from meeting grant obligations without repayment.</p>
+        </div>
+      </div>
+
+      <!-- 2020 -->
+      <div class="year-section">
+        <h2 class="year-title">2020 – Crowdfunding High & Pandemic Low</h2>
+        <div class="year-content">
+          <p>Launched Kickstarter campaign, achieving 200% funding target.</p>
+          <p>Manufacturing was shut down; pivoted to OEM manufacturing.</p>
+          <p>COVID-19 disrupted OEM production, halting product delivery.</p>
+        </div>
+      </div>
+
+      <!-- 2021 -->
+      <div class="year-section">
+        <h2 class="year-title">2021 – Disaster Strikes</h2>
+        <div class="year-content">
+          <p>Attempted to revive OEM production.</p>
+          <p>Severe floods destroyed remaining stock and raw materials.</p>
+          <p>Mestrae operations ground to a halt.</p>
+        </div>
+      </div>
+
+      <!-- 2022-2025 -->
+      <div class="year-section">
+        <h2 class="year-title">2022–2025 – Survival Mode</h2>
+        <div class="year-content">
+          <p>Took on alternative jobs and consulting to repay debt.</p>
+          <p>Applied startup lessons learned to help other founders and corporates avoid common scaling pitfalls.</p>
+          <p>Quietly redesigning Mestrae technology to take advantage of cheaper prototyping and better engineering solutions.</p>
+          <p>Planned an open-source version under OwnIt by Rangkai.Store to democratise innovation in the space.</p>
+          <p>Developing Tiga, a wearable line for underserved groups (elderly, pregnant women, autistic children, and pets).</p>
+        </div>
+      </div>
+
+      <!-- End of 2025 -->
+      <div class="year-section">
+        <h2 class="year-title">End of 2025 – Reset Point</h2>
+        <div class="year-content">
+          <p>Target date to resolve financial struggles.</p>
+          <p>Begin preparing for official relaunch of Mestrae, OwnIt, and Tiga.</p>
+          <p>Start refunding early customers and re-engaging the community.</p>
+        </div>
+      </div>
+
+      <!-- 2026 -->
+      <div class="year-section">
+        <h2 class="year-title">2026 – The Comeback</h2>
+        <div class="year-content">
+          <p>Relaunch Mestrae with new engineering, better fit, and expanded style range.</p>
+          <p>Launch OwnIt (Rangkai) — the open-source heel tech platform.</p>
+          <p>Introduce Tiga wearables to market.</p>
+          <p>Rebuild a global creative-tech brand rooted in innovation and openness.</p>
+        </div>
+      </div>
     </div>
 
+    <!-- Image Grid Section -->
     <h2 class="image-grid-title">Our Visual Journey</h2>
     <div class="image-grid">
-      <!-- 30 image placeholders -->
+      <!-- 51 image placeholders (3x17 grid) -->
       <img src="history-1.jpg" alt="Mestrae History 1" class="grid-image">
       <img src="history-2.jpg" alt="Mestrae History 2" class="grid-image">
       <img src="history-3.jpg" alt="Mestrae History 3" class="grid-image">
-      <!-- Continue for all 30 images -->
+      <img src="history-4.jpg" alt="Mestrae History 4" class="grid-image">
+      <img src="history-5.jpg" alt="Mestrae History 5" class="grid-image">
+      <!-- Continuing through history-51.jpg -->
+      <!-- For brevity, showing first 5. In actual implementation, continue pattern through 51 -->
     </div>
   </div>
 
+  <!-- Footer -->
   <footer>
     <div class="footer-content">
       <div>
@@ -271,3 +435,93 @@
   </footer>
 </body>
 </html>
+
+    <!-- Image Grid Section -->
+    <h2 class="image-grid-title">Our Visual Journey</h2>
+    <div class="image-grid">
+      <!-- Row 1 -->
+      <img src="history-1.jpg" alt="Mestrae History 1" class="grid-image">
+      <img src="history-2.jpg" alt="Mestrae History 2" class="grid-image">
+      <img src="history-3.jpg" alt="Mestrae History 3" class="grid-image">
+      
+      <!-- Row 2 -->
+      <img src="history-4.jpg" alt="Mestrae History 4" class="grid-image">
+      <img src="history-5.jpg" alt="Mestrae History 5" class="grid-image">
+      <img src="history-6.jpg" alt="Mestrae History 6" class="grid-image">
+      
+      <!-- Row 3 -->
+      <img src="history-7.jpg" alt="Mestrae History 7" class="grid-image">
+      <img src="history-8.jpg" alt="Mestrae History 8" class="grid-image">
+      <img src="history-9.jpg" alt="Mestrae History 9" class="grid-image">
+      
+      <!-- Row 4 -->
+      <img src="history-10.jpg" alt="Mestrae History 10" class="grid-image">
+      <img src="history-11.jpg" alt="Mestrae History 11" class="grid-image">
+      <img src="history-12.jpg" alt="Mestrae History 12" class="grid-image">
+      
+      <!-- Row 5 -->
+      <img src="history-13.jpg" alt="Mestrae History 13" class="grid-image">
+      <img src="history-14.jpg" alt="Mestrae History 14" class="grid-image">
+      <img src="history-15.jpg" alt="Mestrae History 15" class="grid-image">
+      
+      <!-- Row 6 -->
+      <img src="history-16.jpg" alt="Mestrae History 16" class="grid-image">
+      <img src="history-17.jpg" alt="Mestrae History 17" class="grid-image">
+      <img src="history-18.jpg" alt="Mestrae History 18" class="grid-image">
+      
+      <!-- Row 7 -->
+      <img src="history-19.jpg" alt="Mestrae History 19" class="grid-image">
+      <img src="history-20.jpg" alt="Mestrae History 20" class="grid-image">
+      <img src="history-21.jpg" alt="Mestrae History 21" class="grid-image">
+      
+      <!-- Row 8 -->
+      <img src="history-22.jpg" alt="Mestrae History 22" class="grid-image">
+      <img src="history-23.jpg" alt="Mestrae History 23" class="grid-image">
+      <img src="history-24.jpg" alt="Mestrae History 24" class="grid-image">
+      
+      <!-- Row 9 -->
+      <img src="history-25.jpg" alt="Mestrae History 25" class="grid-image">
+      <img src="history-26.jpg" alt="Mestrae History 26" class="grid-image">
+      <img src="history-27.jpg" alt="Mestrae History 27" class="grid-image">
+      
+      <!-- Row 10 -->
+      <img src="history-28.jpg" alt="Mestrae History 28" class="grid-image">
+      <img src="history-29.jpg" alt="Mestrae History 29" class="grid-image">
+      <img src="history-30.jpg" alt="Mestrae History 30" class="grid-image">
+      
+      <!-- Row 11 -->
+      <img src="history-31.jpg" alt="Mestrae History 31" class="grid-image">
+      <img src="history-32.jpg" alt="Mestrae History 32" class="grid-image">
+      <img src="history-33.jpg" alt="Mestrae History 33" class="grid-image">
+      
+      <!-- Row 12 -->
+      <img src="history-34.jpg" alt="Mestrae History 34" class="grid-image">
+      <img src="history-35.jpg" alt="Mestrae History 35" class="grid-image">
+      <img src="history-36.jpg" alt="Mestrae History 36" class="grid-image">
+      
+      <!-- Row 13 -->
+      <img src="history-37.jpg" alt="Mestrae History 37" class="grid-image">
+      <img src="history-38.jpg" alt="Mestrae History 38" class="grid-image">
+      <img src="history-39.jpg" alt="Mestrae History 39" class="grid-image">
+      
+      <!-- Row 14 -->
+      <img src="history-40.jpg" alt="Mestrae History 40" class="grid-image">
+      <img src="history-41.jpg" alt="Mestrae History 41" class="grid-image">
+      <img src="history-42.jpg" alt="Mestrae History 42" class="grid-image">
+      
+      <!-- Row 15 -->
+      <img src="history-43.jpg" alt="Mestrae History 43" class="grid-image">
+      <img src="history-44.jpg" alt="Mestrae History 44" class="grid-image">
+      <img src="history-45.jpg" alt="Mestrae History 45" class="grid-image">
+      
+      <!-- Row 16 -->
+      <img src="history-46.jpg" alt="Mestrae History 46" class="grid-image">
+      <img src="history-47.jpg" alt="Mestrae History 47" class="grid-image">
+      <img src="history-48.jpg" alt="Mestrae History 48" class="grid-image">
+      
+      <!-- Row 17 -->
+      <img src="history-49.jpg" alt="Mestrae History 49" class="grid-image">
+      <img src="history-50.jpg" alt="Mestrae History 50" class="grid-image">
+      <img src="history-51.jpg" alt="Mestrae History 51" class="grid-image">
+    </div>
+  
