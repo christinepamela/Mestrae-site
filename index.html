@@ -5,16 +5,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Mestrae</title>
   <link rel="icon" href="Favicon.png" type="image/png" />
-  <!-- Adding Cormorant Garamond for serif headlines -->
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600&family=Inter:wght@300;400;600&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter&family=Poppins&display=swap" rel="stylesheet" />
   <style>
-    :root {
-      --color-primary: #000000;
-      --color-secondary: #f5f5f5;
-      --color-accent: #e6e2dd;
-      --spacing-unit: 8px;
-    }
-
     html {
       scroll-behavior: smooth;
     }
@@ -23,193 +15,261 @@
       margin: 0;
       font-family: 'Inter', sans-serif;
       background-color: #fff;
-      color: var(--color-primary);
-      font-size: 14px;
-      line-height: 1.6;
-    }
-
-    /* Navigation */
-    .nav-container {
-      position: fixed;
-      top: 0;
-      left: 0;
-      right: 0;
-      background: white;
-      z-index: 1000;
-    }
-
-    .top-bar {
-      background-color: var(--color-primary);
-      color: white;
-      text-align: center;
-      padding: var(--spacing-unit);
-      font-size: 12px;
+      color: #000;
     }
 
     header {
+      padding: 20px 40px;
+      border-bottom: 1px solid #ccc;
+      font-weight: bold;
+      text-align: left;
+      font-size: 24px;
+      letter-spacing: 2px;
+    }
+
+    .hero-section {
+      width: 100%;
+      height: 80vh;
+      background-image: url('paper-texture(1).png');
+      background-size: cover;
+      background-repeat: repeat;
+      background-position: center;
       display: flex;
       justify-content: center;
       align-items: center;
-      padding: calc(var(--spacing-unit) * 3) 0;
-      border-bottom: 1px solid var(--color-accent);
-    }
-
-    .logo {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 32px;
-      letter-spacing: 3px;
-      font-weight: 400;
-    }
-
-    /* Hero Section */
-    .hero-section {
-      margin-top: 120px; /* Account for fixed header */
-      width: 100%;
-      height: 90vh;
-      position: relative;
-      overflow: hidden;
-    }
-
-    .hero-section img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
+      box-shadow: inset 0 0 12px 3px rgba(0, 0, 0, 0.1);
     }
 
     .hero-caption {
-      position: absolute;
-      bottom: 10%;
-      left: 50%;
-      transform: translateX(-50%);
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 48px;
+      font-size: 64px;
+      font-weight: bold;
       color: white;
+      text-shadow: 2px 2px 12px rgba(0, 0, 0, 0.5);
       text-align: center;
-      max-width: 800px;
+      padding: 0 20px;
     }
 
-    /* Content Sections */
     .section {
-      padding: calc(var(--spacing-unit) * 12) calc(var(--spacing-unit) * 8);
-      max-width: 1400px;
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: center;
+      max-width: 1200px;
       margin: 0 auto;
+      gap: 40px;
+      min-height: 320px;
+      box-sizing: border-box;
+      padding: 80px;
     }
 
-    .grid-container {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: calc(var(--spacing-unit) * 8);
-      align-items: center;
+    .section > div {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .section > div:first-child {
+      border-right: 1px solid #ccc;
+      padding-right: 30px;
+    }
+
+    .section > div:last-child {
+      padding-left: 30px;
     }
 
     .section h2 {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 42px;
-      font-weight: 400;
-      margin-bottom: calc(var(--spacing-unit) * 3);
+      font-size: 60px;
+      font-weight: bold;
+      margin: 0;
+      line-height: 1.2;
+    }
+
+    .section h3 {
+      font-size: 28px;
+      font-weight: normal;
+      margin-bottom: 20px;
     }
 
     .section p {
-      font-size: 16px;
-      line-height: 1.8;
+      max-width: 600px;
+      text-align: justify;
+      line-height: 1.6;
     }
 
-    /* Pillars Section */
+    .section-grey {
+      background-color: #999;
+      color: white;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      padding: 200px 80px;
+      text-align: center;
+      font-size: 72px;
+      font-weight: bold;
+      width: 100%;
+      box-sizing: border-box;
+      gap: 40px;
+      background-image: url('paper-texture2.png');
+      background-repeat: repeat;
+      box-shadow: inset 0 0 12px 3px rgba(0,0,0,0.1);
+    }
+
+    .pillar-section {
+      max-width: 1000px;
+      margin: 0 auto;
+      padding: 80px 20px;
+      box-sizing: border-box;
+    }
+
     .pillars {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: calc(var(--spacing-unit) * 4);
-      padding: calc(var(--spacing-unit) * 8) 0;
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 40px;
     }
 
     .pillar {
+      flex: 1;
+      min-width: 250px;
+      border-left: 1px solid #ccc;
+      padding: 0 20px;
       text-align: center;
-      padding: calc(var(--spacing-unit) * 4);
-      background-color: var(--color-secondary);
+      box-sizing: border-box;
+    }
+
+    .pillar:first-child {
+      border-left: none;
     }
 
     .pillar-title {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 24px;
-      margin-bottom: calc(var(--spacing-unit) * 2);
+      font-size: 22px;
+      font-weight: bold;
+      margin-bottom: 10px;
     }
 
-    /* Footer */
+    .pillar-text {
+      font-size: 18px;
+    }
+
     footer {
-      background-color: var(--color-primary);
-      color: white;
-      padding: calc(var(--spacing-unit) * 8) 0;
-      margin-top: calc(var(--spacing-unit) * 8);
+      text-align: center;
+      padding: 20px;
+      background-color: #fff;
     }
 
-    .footer-content {
-      max-width: 1400px;
-      margin: 0 auto;
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: calc(var(--spacing-unit) * 4);
-      padding: 0 calc(var(--spacing-unit) * 8);
+    .footer-icons a img {
+      width: 24px;
+      margin: 0 10px;
+      filter: brightness(0);
+      transition: transform 0.3s ease, opacity 0.3s ease;
     }
 
-    .footer-icons {
-      display: flex;
-      gap: calc(var(--spacing-unit) * 2);
-      margin-top: calc(var(--spacing-unit) * 2);
-    }
-
-    .footer-icons img {
-      width: 20px;
-      filter: invert(1);
+    .footer-icons a:hover img {
+      transform: scale(1.2);
+      opacity: 0.7;
     }
 
     @media (max-width: 768px) {
-      .grid-container {
-        grid-template-columns: 1fr;
-      }
-
-      .pillars {
-        grid-template-columns: 1fr;
-      }
-
-      .footer-content {
-        grid-template-columns: 1fr 1fr;
+      .hero-section {
+        height: 60vh;
+        padding: 0 20px;
       }
 
       .hero-caption {
-        font-size: 32px;
-        padding: 0 var(--spacing-unit);
+        font-size: 40px;
+      }
+
+      .section {
+        flex-direction: column;
+        padding: 40px 20px;
+      }
+
+      .section > div:first-child,
+      .section > div:last-child {
+        border: none;
+        padding: 0;
+      }
+
+      .section h2 {
+        font-size: 40px;
+      }
+
+      .section h3 {
+        font-size: 22px;
+      }
+
+      .pillars {
+        flex-direction: column;
+        align-items: center;
+      }
+
+      .pillar {
+        border-left: none !important;
+        width: 100%;
+        max-width: 400px;
+      }
+
+      .section-grey {
+        font-size: 54px;
+        padding: 120px 20px;
       }
     }
   </style>
 </head>
 <body>
-  <div class="nav-container">
-    <div class="top-bar">
-      Free shipping on all orders over $150
-    </div>
-    <header>
-      <div class="logo">MESTRAE</div>
-    </header>
-  </div>
 
+  <header>MESTRAE</header>
+
+  <!-- Hero Section -->
   <div class="hero-section">
-    <img src="paper-texture(1).png" alt="Hero Image">
     <div class="hero-caption">The Mestrae Journey</div>
   </div>
 
+  <!-- Section 1 -->
   <div class="section">
-    <div class="grid-container">
-      <div>
-        <h2>the Shift</h2>
-        <p>From heels to something far more meaningful. Mestrae began with interchangeable heels, but we're stepping into a bigger purpose. We're bridging fashion and tech for the underserved and for a freer, more open ecosystem.</p>
-      </div>
-      <div>
-        <!-- Add an image here -->
-      </div>
+    <div>
+      <h2>the Shift</h2>
+    </div>
+    <div>
+      <h3>From heels to something far more meaningful.</h3>
+      <p>Mestrae began with interchangeable heels, but we’re stepping into a bigger purpose. We’re bridging fashion and tech for the underserved and for a freer, more open ecosystem.</p>
     </div>
   </div>
 
-  <div class="section" style="background-color: var(--color-accent);">
+  <!-- Grey divider -->
+  <div class="section-grey">Underserved. Open ecosystem</div>
+
+  <!-- Section 2 -->
+  <div class="section">
+    <div>
+      <h3>We’re still here because of you.</h3>
+      <p>Thank you for standing by us. Mestrae faced immense systemic challenges. And we also launched too soon, grew too fast, and made mistakes along the way. But your patience and support helped us find our way back. Who are we without our customers?</p>
+    </div>
+    <div>
+      <h2>the Gratitude</h2>
+    </div>
+  </div>
+
+  <!-- Grey divider -->
+  <div class="section-grey">This time, we build it together</div>
+
+  <!-- Section 3 -->
+  <div class="section">
+    <div>
+      <h2>the Return</h2>
+    </div>
+    <div>
+      <p>In October, we’ll begin refunding all early customers and invite you back as early adopters rebuilding together. You’ve seen our past. We’d love you to help be part of what comes next.</p>
+    </div>
+  </div>
+
+  <!-- Grey divider -->
+  <div class="section-grey">Our journey now branches into three pillars</div>
+
+  <!-- Pillar Section -->
+  <div class="pillar-section">
     <div class="pillars">
       <div class="pillar">
         <div class="pillar-title">Mestrae</div>
@@ -221,27 +281,21 @@
       </div>
       <div class="pillar">
         <div class="pillar-title">OwnIt</div>
-        <div class="pillar-text">open-source platform to redefine footwear innovation and ecosystem</div>
+        <div class="pillar-text">open-source platform to redefine footwear innovation and ecosystem </div>
       </div>
     </div>
   </div>
 
+  <!-- Footer -->
   <footer>
-    <div class="footer-content">
-      <div>
-        <h3>Contact</h3>
-        <p>info@mestrae.com</p>
-      </div>
-      <div>
-        <h3>Follow Us</h3>
-        <div class="footer-icons">
-          <a href="https://twitter.com"><img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/twitter.svg" alt="Twitter"></a>
-          <a href="https://instagram.com"><img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/instagram.svg" alt="Instagram"></a>
-          <a href="https://facebook.com"><img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/facebook.svg" alt="Facebook"></a>
-          <a href="https://mestrae.substack.com/"><img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/substack.svg" alt="Substack"></a>
-        </div>
-      </div>
+    <div class="footer-icons">
+      <a href="https://twitter.com"><img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/twitter.svg" alt="Twitter"></a>
+      <a href="https://instagram.com"><img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/instagram.svg" alt="Instagram"></a>
+      <a href="https://facebook.com"><img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/facebook.svg" alt="Facebook"></a>
+      <a href="https://mestrae.substack.com/"><img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/substack.svg" alt="Substack"></a>
+      <a href="mailto:info@mestrae.com"><img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/maildotru.svg" alt="Email"></a>
     </div>
   </footer>
+
 </body>
 </html>
