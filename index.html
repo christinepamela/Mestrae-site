@@ -5,7 +5,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Mestrae</title>
   <link rel="icon" href="Favicon.png" type="image/png" />
-  <!-- Adding Cormorant Garamond for serif headlines -->
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600&family=Inter:wght@300;400;600&display=swap" rel="stylesheet" />
   <style>
     :root {
@@ -28,7 +27,6 @@
       line-height: 1.6;
     }
 
-    /* Navigation */
     .nav-container {
       position: fixed;
       top: 0;
@@ -61,9 +59,8 @@
       font-weight: 400;
     }
 
-    /* Hero Section */
     .hero-section {
-      margin-top: 120px; /* Account for fixed header */
+      margin-top: 120px;
       width: 100%;
       height: 90vh;
       position: relative;
@@ -88,7 +85,6 @@
       max-width: 800px;
     }
 
-    /* Content Sections */
     .section {
       padding: calc(var(--spacing-unit) * 12) calc(var(--spacing-unit) * 8);
       max-width: 1400px;
@@ -114,7 +110,6 @@
       line-height: 1.8;
     }
 
-    /* Pillars Section */
     .pillars {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
@@ -134,7 +129,6 @@
       margin-bottom: calc(var(--spacing-unit) * 2);
     }
 
-    /* Footer */
     footer {
       background-color: var(--color-primary);
       color: white;
@@ -155,11 +149,27 @@
       display: flex;
       gap: calc(var(--spacing-unit) * 2);
       margin-top: calc(var(--spacing-unit) * 2);
+      flex-wrap: wrap;
     }
 
     .footer-icons img {
       width: 20px;
       filter: invert(1);
+      transition: opacity 0.3s ease;
+    }
+
+    .footer-icons img:hover {
+      opacity: 0.8;
+    }
+
+    .footer-link {
+      color: white;
+      text-decoration: none;
+      transition: opacity 0.3s ease;
+    }
+
+    .footer-link:hover {
+      opacity: 0.8;
     }
 
     @media (max-width: 768px) {
@@ -172,7 +182,8 @@
       }
 
       .footer-content {
-        grid-template-columns: 1fr 1fr;
+        grid-template-columns: repeat(2, 1fr);
+        gap: calc(var(--spacing-unit) * 4);
       }
 
       .hero-caption {
@@ -204,7 +215,8 @@
         <p>From heels to something far more meaningful. Mestrae began with interchangeable heels, but we're stepping into a bigger purpose. We're bridging fashion and tech for the underserved and for a freer, more open ecosystem.</p>
       </div>
       <div>
-        <!-- Add an image here -->
+        <h2>the Gratitude</h2>
+        <p>We're still here because of you. Thank you for standing by us. Mestrae faced immense systemic challenges. And we also launched too soon, grew too fast, and made mistakes along the way. But your patience and support helped us find our way back. Who are we without our customers?</p>
       </div>
     </div>
   </div>
@@ -229,6 +241,14 @@
   <footer>
     <div class="footer-content">
       <div>
+        <h3>Message</h3>
+        <p><a href="message.html" class="footer-link">Share your thoughts</a></p>
+      </div>
+      <div>
+        <h3>Our History</h3>
+        <p><a href="our-history.html" class="footer-link">Learn our story</a></p>
+      </div>
+      <div>
         <h3>Contact</h3>
         <p>info@mestrae.com</p>
       </div>
@@ -239,6 +259,7 @@
           <a href="https://instagram.com"><img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/instagram.svg" alt="Instagram"></a>
           <a href="https://facebook.com"><img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/facebook.svg" alt="Facebook"></a>
           <a href="https://mestrae.substack.com/"><img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/substack.svg" alt="Substack"></a>
+          <a href="https://www.youtube.com/channel/UCxHOxnBYmGdhOZ-XzTzIYOQ"><img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/youtube.svg" alt="YouTube"></a>
         </div>
       </div>
     </div>
