@@ -1,0 +1,584 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>The Shift — Mestrae</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Source+Sans+3:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary:  #1E2B2C;
+      --bone:     #F2EEE8;
+      --bone-mid: #E8E3DC;
+      --ink:      #1A1A1A;
+      --pink:     #C9A8B2;
+      --slate:    #5C6B6E;
+      --muted:    #7A8F87;
+      --border:   #E0DBD4;
+      --font:     'Source Sans 3', sans-serif;
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body { font-family: var(--font); background: var(--bone); color: var(--ink); font-size: 16px; line-height: 1.7; -webkit-font-smoothing: antialiased; }
+    a { text-decoration: none; color: inherit; }
+    img { display: block; max-width: 100%; object-fit: cover; }
+    .container { max-width: 1280px; margin: 0 auto; padding: 0 48px; }
+
+    /* ANNOUNCEMENT */
+    #announcement { background: var(--ink); color: var(--bone); text-align: center; padding: 10px 24px; font-size: 12px; letter-spacing: 0.08em; }
+    #announcement a { color: var(--pink); text-decoration: underline; text-underline-offset: 3px; margin-left: 6px; }
+
+    /* NAV */
+    nav { background: var(--ink); position: sticky; top: 0; z-index: 100; border-bottom: 1px solid rgba(255,255,255,0.06); }
+    .nav-inner { display: flex; align-items: center; justify-content: space-between; height: 64px; max-width: 1280px; margin: 0 auto; padding: 0 48px; }
+    .nav-logo { font-size: 18px; font-weight: 500; letter-spacing: 0.22em; color: var(--bone); text-transform: uppercase; }
+    .nav-links { display: flex; gap: 36px; list-style: none; }
+    .nav-links a { font-size: 11px; letter-spacing: 0.10em; text-transform: uppercase; color: rgba(242,238,232,0.5); transition: color 0.2s; }
+    .nav-links a:hover { color: var(--bone); }
+    .nav-links a.active { color: var(--pink); }
+    .nav-cta { font-size: 11px; font-weight: 500; letter-spacing: 0.10em; text-transform: uppercase; color: var(--bone); border: 0.5px solid rgba(242,238,232,0.3); padding: 8px 18px; transition: all 0.2s; }
+    .nav-cta:hover { background: var(--bone); color: var(--ink); }
+    .hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; }
+    .hamburger span { display: block; width: 22px; height: 1.5px; background: var(--bone); }
+
+    /* OPENING STATEMENT */
+    .opening {
+      background: var(--primary);
+      padding: 120px 0 100px;
+      position: relative;
+      overflow: hidden;
+    }
+    .opening-inner { max-width: 900px; }
+    .eyebrow { font-size: 11px; font-weight: 500; letter-spacing: 0.16em; text-transform: uppercase; color: var(--muted); margin-bottom: 32px; display: flex; align-items: center; gap: 10px; }
+    .eyebrow::before { content: ''; display: block; width: 20px; height: 1px; background: var(--muted); }
+    .opening-statement {
+      font-size: clamp(32px, 5vw, 62px);
+      font-weight: 300;
+      color: var(--bone);
+      line-height: 1.15;
+      letter-spacing: -0.02em;
+      margin-bottom: 48px;
+    }
+    .opening-statement em { font-style: normal; color: var(--pink); }
+    .opening-sub {
+      font-size: 18px;
+      font-weight: 300;
+      color: rgba(242,238,232,0.55);
+      max-width: 580px;
+      line-height: 1.85;
+    }
+
+    /* DIVIDER LINE */
+    .divider-section { background: var(--primary); padding: 0 0 80px; }
+    .divider-line { width: 1px; height: 80px; background: rgba(242,238,232,0.15); margin: 0 48px; }
+
+    /* MANIFESTO BODY */
+    .manifesto { background: var(--bone); padding: 96px 0; }
+    .manifesto-grid { display: grid; grid-template-columns: 280px 1fr; gap: 80px; align-items: start; }
+    .manifesto-nav { position: sticky; top: 96px; }
+    .manifesto-nav-item { display: block; font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); padding: 10px 0; border-top: 0.5px solid var(--border); transition: color 0.2s; cursor: pointer; }
+    .manifesto-nav-item:hover, .manifesto-nav-item.active { color: var(--primary); }
+    .manifesto-nav-item:first-child { border-top: none; }
+    .manifesto-body { max-width: 680px; }
+
+    /* MANIFESTO SECTIONS */
+    .m-section { margin-bottom: 80px; padding-bottom: 80px; border-bottom: 1px solid var(--border); }
+    .m-section:last-child { border-bottom: none; margin-bottom: 0; padding-bottom: 0; }
+    .m-number { font-size: 11px; font-weight: 500; letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted); margin-bottom: 16px; }
+    .m-title { font-size: 28px; font-weight: 300; color: var(--ink); line-height: 1.2; margin-bottom: 28px; }
+    .m-title em { font-style: normal; color: var(--pink); }
+    .m-body p { font-size: 16px; color: var(--slate); line-height: 1.9; margin-bottom: 20px; }
+    .m-body p:last-child { margin-bottom: 0; }
+    .m-body strong { color: var(--ink); font-weight: 500; }
+    .m-pull { font-size: 22px; font-weight: 300; color: var(--ink); line-height: 1.5; border-left: 2px solid var(--pink); padding: 20px 28px; margin: 36px 0; letter-spacing: -0.01em; }
+    .m-stat { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; border: 1px solid var(--border); margin: 40px 0; background: var(--border); }
+    .m-stat-item { background: #fff; padding: 28px 24px; }
+    .m-stat-num { font-size: 36px; font-weight: 300; color: var(--primary); line-height: 1; margin-bottom: 6px; }
+    .m-stat-label { font-size: 12px; color: var(--slate); line-height: 1.5; }
+
+    /* TIMELINE OF ATTEMPTS */
+    .attempts { background: #fff; padding: 80px 0; border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
+    .attempts-inner { display: grid; grid-template-columns: 1fr 2fr; gap: 80px; align-items: start; }
+    .attempts-label { position: sticky; top: 96px; }
+    .attempts-title { font-size: 28px; font-weight: 300; color: var(--ink); line-height: 1.2; margin-bottom: 16px; }
+    .attempts-body { font-size: 15px; color: var(--slate); line-height: 1.8; }
+    .patent-list { display: flex; flex-direction: column; gap: 1px; }
+    .patent-item { background: var(--bone); border: 0.5px solid var(--border); padding: 20px 24px; display: grid; grid-template-columns: 72px 1fr; gap: 20px; align-items: start; }
+    .patent-year { font-size: 22px; font-weight: 300; color: var(--primary); line-height: 1; }
+    .patent-desc { font-size: 14px; color: var(--slate); line-height: 1.7; }
+    .patent-desc strong { color: var(--ink); font-weight: 500; display: block; margin-bottom: 4px; font-size: 15px; }
+    .patent-note { font-size: 11px; color: var(--muted); margin-top: 6px; letter-spacing: 0.04em; }
+
+    /* OPEN SOURCE SECTION */
+    .open-section { background: var(--primary); padding: 80px 0; }
+    .open-inner { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center; }
+    .open-title { font-size: 34px; font-weight: 300; color: var(--bone); line-height: 1.2; margin-bottom: 20px; }
+    .open-title em { font-style: normal; color: var(--pink); }
+    .open-body { font-size: 15px; color: rgba(242,238,232,0.6); line-height: 1.9; margin-bottom: 32px; }
+    .open-body p { margin-bottom: 18px; }
+    .open-body p:last-child { margin-bottom: 0; }
+    .btn-bone { display: inline-block; background: var(--bone); color: var(--primary); font-size: 12px; font-weight: 500; letter-spacing: 0.10em; text-transform: uppercase; padding: 14px 28px; transition: all 0.2s; }
+    .btn-bone:hover { background: #fff; }
+    .open-quote { border: 0.5px solid rgba(242,238,232,0.12); padding: 40px; }
+    .open-quote-text { font-size: 20px; font-weight: 300; color: var(--bone); line-height: 1.5; margin-bottom: 20px; letter-spacing: -0.01em; }
+    .open-quote-attr { font-size: 12px; color: var(--muted); letter-spacing: 0.08em; text-transform: uppercase; }
+
+    /* ENGINEERING + DESIGN SECTION */
+    .engineering { background: var(--bone); padding: 80px 0; border-bottom: 1px solid var(--border); }
+    .engineering-inner { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: start; }
+    .eng-title { font-size: 28px; font-weight: 300; color: var(--ink); line-height: 1.2; margin-bottom: 20px; }
+    .eng-body { font-size: 15px; color: var(--slate); line-height: 1.9; }
+    .eng-body p { margin-bottom: 18px; }
+    .eng-body p:last-child { margin-bottom: 0; }
+    .eng-diagram { background: #fff; border: 0.5px solid var(--border); padding: 40px; display: flex; flex-direction: column; gap: 1px; }
+    .eng-row { display: flex; align-items: center; gap: 16px; padding: 16px 0; border-bottom: 0.5px solid var(--border); }
+    .eng-row:last-child { border-bottom: none; }
+    .eng-icon { width: 40px; height: 40px; background: var(--bone); display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+    .eng-row-title { font-size: 14px; font-weight: 500; color: var(--ink); margin-bottom: 2px; }
+    .eng-row-desc { font-size: 12px; color: var(--slate); line-height: 1.5; }
+
+    /* CTA FOOTER SECTION */
+    .shift-cta { background: var(--ink); padding: 80px 0; }
+    .shift-cta-inner { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center; }
+    .cta-title { font-size: 34px; font-weight: 300; color: var(--bone); line-height: 1.2; margin-bottom: 16px; }
+    .cta-body { font-size: 15px; color: rgba(242,238,232,0.55); line-height: 1.8; margin-bottom: 32px; }
+    .cta-actions { display: flex; gap: 12px; flex-wrap: wrap; }
+    .btn-ghost { display: inline-block; border: 0.5px solid rgba(242,238,232,0.3); color: rgba(242,238,232,0.7); font-size: 12px; letter-spacing: 0.10em; text-transform: uppercase; padding: 14px 28px; transition: all 0.2s; }
+    .btn-ghost:hover { border-color: var(--bone); color: var(--bone); }
+    .cta-quote { border-left: 2px solid var(--pink); padding: 24px 28px; }
+    .cta-quote-text { font-size: 18px; font-weight: 300; color: var(--bone); line-height: 1.6; margin-bottom: 12px; font-style: italic; }
+    .cta-quote-attr { font-size: 12px; color: var(--muted); letter-spacing: 0.06em; }
+
+    /* FOOTER */
+    footer { background: var(--ink); color: var(--bone); padding: 64px 0 32px; border-top: 1px solid rgba(255,255,255,0.06); }
+    .footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 48px; padding-bottom: 48px; border-bottom: 1px solid rgba(242,238,232,0.07); margin-bottom: 28px; }
+    .footer-brand { font-size: 16px; font-weight: 500; letter-spacing: 0.22em; text-transform: uppercase; margin-bottom: 10px; }
+    .footer-tagline { font-size: 13px; color: rgba(242,238,232,0.35); line-height: 1.7; margin-bottom: 22px; max-width: 210px; }
+    .footer-social { display: flex; gap: 14px; }
+    .footer-social a { font-size: 11px; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; color: rgba(242,238,232,0.35); transition: color 0.2s; }
+    .footer-social a:hover { color: var(--bone); }
+    .footer-col-title { font-size: 10px; font-weight: 500; letter-spacing: 0.14em; text-transform: uppercase; color: rgba(242,238,232,0.35); margin-bottom: 18px; }
+    .footer-links { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+    .footer-links a { font-size: 14px; color: rgba(242,238,232,0.5); transition: color 0.2s; }
+    .footer-links a:hover { color: var(--bone); }
+    .footer-links a.hl { color: var(--pink); }
+    .footer-bottom { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px; }
+    .footer-copy { font-size: 12px; color: rgba(242,238,232,0.2); }
+    .footer-legal { display: flex; gap: 18px; list-style: none; }
+    .footer-legal a { font-size: 12px; color: rgba(242,238,232,0.2); transition: color 0.2s; }
+    .footer-legal a:hover { color: rgba(242,238,232,0.5); }
+
+    /* FADE */
+    .fade-up { opacity: 0; transform: translateY(20px); transition: opacity 0.6s ease, transform 0.6s ease; }
+    .fade-up.visible { opacity: 1; transform: translateY(0); }
+    .d1 { transition-delay: 0.1s; } .d2 { transition-delay: 0.2s; } .d3 { transition-delay: 0.3s; }
+
+    @media (max-width: 1024px) {
+      .container, .nav-inner { padding: 0 32px; }
+      .manifesto-grid { grid-template-columns: 1fr; gap: 48px; }
+      .manifesto-nav { display: none; }
+      .attempts-inner { grid-template-columns: 1fr; gap: 40px; }
+      .attempts-label { position: static; }
+      .open-inner, .engineering-inner, .shift-cta-inner { grid-template-columns: 1fr; gap: 48px; }
+      .footer-grid { grid-template-columns: 1fr 1fr; }
+    }
+    @media (max-width: 768px) {
+      .container, .nav-inner { padding: 0 24px; }
+      .nav-links, .nav-cta { display: none; }
+      .hamburger { display: flex; }
+      .opening { padding: 72px 0 64px; }
+      .m-stat { grid-template-columns: 1fr; }
+      .footer-grid { grid-template-columns: 1fr 1fr; gap: 28px; }
+    }
+  </style>
+</head>
+<body>
+
+<div id="announcement">
+  Rebuilding with purpose. Launching November 1, 2026.
+  <a href="where-we-are.html">Read our update &rarr;</a>
+</div>
+
+<nav>
+  <div class="nav-inner">
+    <a href="home.html" class="nav-logo">Mestrae</a>
+    <ul class="nav-links">
+      <li><a href="shop.html">Shop</a></li>
+      <li><a href="shift.html" class="active">The Shift</a></li>
+      <li><a href="tools.html">Tools</a></li>
+      <li><a href="about.html">About</a></li>
+      <li><a href="where-we-are.html">Where We Are</a></li>
+    </ul>
+    <a href="shop.html" class="nav-cta">Shop now</a>
+    <div class="hamburger" onclick="toggleMenu()"><span></span><span></span><span></span></div>
+  </div>
+</nav>
+
+<!-- OPENING STATEMENT -->
+<section class="opening">
+  <div class="container">
+    <div class="opening-inner fade-up">
+      <p class="eyebrow">The Shift</p>
+      <h1 class="opening-statement">
+        Footwear hasn&rsquo;t evolved<br>
+        as far as <em>women have.</em>
+      </h1>
+      <p class="opening-sub">Beauty doesn&rsquo;t have to be painful. Comfort doesn&rsquo;t have to be boring. And with the right engineering, anyone can build something better. This is what we believe and why Mestrae exists.</p>
+    </div>
+  </div>
+</section>
+
+<!-- MANIFESTO BODY -->
+<section class="manifesto" id="manifesto">
+  <div class="container">
+    <div class="manifesto-grid">
+
+      <nav class="manifesto-nav" aria-label="Manifesto sections">
+        <a class="manifesto-nav-item active" onclick="scrollTo('beauty')">Beauty is pain is a lie</a>
+        <a class="manifesto-nav-item" onclick="scrollTo('problem')">The real problem</a>
+        <a class="manifesto-nav-item" onclick="scrollTo('engineering')">Engineering meets design</a>
+        <a class="manifesto-nav-item" onclick="scrollTo('patents')">A century of trying</a>
+        <a class="manifesto-nav-item" onclick="scrollTo('open')">Why we&rsquo;re opening it up</a>
+        <a class="manifesto-nav-item" onclick="scrollTo('invitation')">An open invitation</a>
+        <a class="manifesto-nav-item" onclick="scrollTo('aicompany')">Mestrae as a tech company</a>
+      </nav>
+
+      <div class="manifesto-body">
+
+        <!-- SECTION 1 -->
+        <div class="m-section" id="beauty">
+          <div class="m-number">01</div>
+          <h2 class="m-title">&ldquo;Beauty is pain&rdquo;<br>is a <em>lie told for profit.</em></h2>
+          <div class="m-body">
+            <p>For as long as most of us can remember, the fashion industry has justified uncomfortable shoes with a phrase so repeated it started to sound like wisdom. Beauty is pain. Wear it anyway. The heel breaks you in.</p>
+            <p>But look at it honestly and the phrase has never been about women&rsquo;s wellbeing. It is an excuse to charge more for less. It is a way to sell a product that causes real physical harm by dressing the harm up as glamour. It keeps the industry from ever having to solve the actual problem.</p>
+            <p>The problem is not that women can&rsquo;t handle heels. The problem is that nobody with serious engineering capability ever bothered to make heels that work properly for real life. The beauty industry found it easier to change women&rsquo;s expectations than to change the shoe.</p>
+          </div>
+
+          <div class="m-pull">
+            Nobody with serious engineering capability ever sat down and asked what a heel actually needs to do across a full day.
+          </div>
+
+          <div class="m-body">
+            <p>Mestrae was built on a simple refusal to accept that framing. Not because comfort and style are opposites that need to be balanced, but because with enough engineering rigour, they were never actually in conflict. The conflict was manufactured.</p>
+          </div>
+        </div>
+
+        <!-- SECTION 2 -->
+        <div class="m-section" id="problem">
+          <div class="m-number">02</div>
+          <h2 class="m-title">The real problem is<br>not the heel. It&rsquo;s <em>the system.</em></h2>
+          <div class="m-body">
+            <p>Interchangeable heels are not a new idea. The first patents for detachable shoe heels were filed in the United States in the 1860s. For over 150 years, inventors kept arriving at the same insight: a woman should not need to own three pairs of shoes to move through a single day. A mother dropping her children at school, presenting in a boardroom, and meeting friends for dinner should not have to carry a bag full of shoes.</p>
+            <p>The concept was obvious. The execution, it turned out, was not.</p>
+
+            <div class="m-stat">
+              <div class="m-stat-item">
+                <div class="m-stat-num">150+</div>
+                <div class="m-stat-label">years of interchangeable heel patents, starting in 1867</div>
+              </div>
+              <div class="m-stat-item">
+                <div class="m-stat-num">100s</div>
+                <div class="m-stat-label">of patent filings that were never brought to market</div>
+              </div>
+              <div class="m-stat-item">
+                <div class="m-stat-num">&lt;10</div>
+                <div class="m-stat-label">brands globally have ever sold interchangeable heels at scale</div>
+              </div>
+            </div>
+
+            <p>Making interchangeable heels is categorically different from making regular shoes. Every component of the connection mechanism is custom. The moulds required to produce each part are expensive to make and need to be remade every few years as they wear. The supply chain is layered and non-standard because interchangeable heel technology does not exist off the shelf. You cannot simply source a component from a supplier who makes it for someone else, because in most cases, nobody else is making it at all.</p>
+            <p>The result is a product that is structurally more expensive to manufacture than a conventional shoe, in a market that has been trained by fast fashion to expect shoes to be cheap. That gap has kept interchangeable heels niche for more than a century despite the obvious demand.</p>
+          </div>
+        </div>
+
+        <!-- SECTION 3 -->
+        <div class="m-section" id="engineering">
+          <div class="m-number">03</div>
+          <h2 class="m-title">You cannot design this shoe<br>without <em>engineering it first.</em></h2>
+          <div class="m-body">
+            <p>This is something the footwear industry often gets backwards. In conventional shoe design, the creative leads and the technical follows. A designer sketches a heel, and the factory figures out how to make it. That process works because conventional heels are structurally simple. A heel is glued or nailed to a last, and the tolerances do not need to be precise.</p>
+            <p>Interchangeable heels are a different problem entirely. The connection between the base shoe and the detachable heel has to be engineered to bear the full weight of a person in motion, withstand lateral force when the wearer turns, resist the repeated micro-impacts of walking across different surfaces, and still release cleanly at the press of a button. That is not a design problem. It is a mechanical engineering problem dressed in leather.</p>
+
+            <div class="m-pull">
+              A designer without engineering cannot build this shoe. An engineer without design sense will build one nobody wants to wear. Both are necessary and neither alone is sufficient.
+            </div>
+
+            <p>This is why so many interchangeable heel concepts have failed to reach the market, or reached it and failed there. The mechanism was clunky, or the release required a tool, or the heel wobbled slightly but enough to erode trust. Each of these is an engineering failure, not a design failure. But the resulting shoe still looked like a design failure to the customer, which is why perception of the whole category suffered.</p>
+            <p>Mestrae was founded by an engineer who understood design, which is the only order in which it makes sense to approach this problem. The engineering constraints define what is possible. The design work determines whether anyone wants it.</p>
+          </div>
+        </div>
+
+        <!-- SECTION 4 -->
+        <div class="m-section" id="patents">
+          <div class="m-number">04</div>
+          <h2 class="m-title">A century of inventors<br>who never got <em>to build.</em></h2>
+          <div class="m-body">
+            <p>One of the quieter reasons interchangeable heels have never become mainstream is the patent landscape. The concept has been patented so many times, in so many variations, that navigating it requires legal resources most small innovators do not have. Patents that are filed and never commercialised effectively block others from building in the same space, even when the patent holder has no intention of ever bringing a product to market.</p>
+            <p>This is not unique to footwear, but the effect in this category has been particularly damaging. Each time an inventor arrives at a workable mechanism, there is a reasonable chance that some aspect of it sits within the claims of an earlier patent that was never manufactured. The cost of finding out, through freedom-to-operate searches and legal opinions, is often more than an early-stage company can absorb.</p>
+            <p>The outcome is a category where the barrier to entry is not the engineering difficulty, which is surmountable with time and capability, but the accumulated intellectual property of a century of attempts that went nowhere.</p>
+          </div>
+        </div>
+
+        <!-- SECTION 5 -->
+        <div class="m-section" id="open">
+          <div class="m-number">05</div>
+          <h2 class="m-title">Why we are releasing<br>our designs <em>for free.</em></h2>
+          <div class="m-body">
+            <p>When Mestrae releases Prototype 1 and Prototype 2 as open source in August 2026, it will be the first time working interchangeable heel engineering has been made freely available to any builder, anywhere in the world.</p>
+            <p>The reasoning is straightforward. Interchangeable heels are not yet a mainstream product category. For them to become one, more people need to be building them. More variation needs to exist, at more price points, in more styles, in more markets. That cannot happen if every new entrant to the space has to solve the same fundamental engineering problem from scratch while also navigating a minefield of dormant patents.</p>
+            <p>We are not doing this because we have given up on Mestrae as a commercial product. We are doing this because we believe the category needs an ecosystem to grow, and Mestrae can be a better business in a world where interchangeable heels are normal than in a world where they remain a curiosity. The builders who emerge from an open-source foundation are not our competitors. They are proof that the idea works.</p>
+            <p>Prototype 3, which we are developing for our November 2026 relaunch, will incorporate everything we have learned across ten years of building and will not be part of the open-source release. That is what we will sell. The foundation is what we are giving away.</p>
+          </div>
+        </div>
+
+        <!-- SECTION 6 -->
+        <div class="m-section" id="invitation">
+          <div class="m-number">06</div>
+          <h2 class="m-title">An open invitation<br>to <em>anyone who builds.</em></h2>
+          <div class="m-body">
+            <p>If you are an engineer, a designer, a maker, or someone who has simply been convinced for years that footwear could work better than it does, this is for you.</p>
+            <p>The designs will be available, documented, and free. You will be able to understand the mechanism, modify it, improve it, and build something from it. We ask only that if you build something meaningful from the foundation we share, you share what you learn.</p>
+            <p>The goal is a world where a woman does not have to choose between looking the way she wants to look and being able to move the way she needs to move. That world does not get built by one company. It gets built by many people who all decide, around the same time, that the current answer is not good enough.</p>
+            <p>We decided that a long time ago. We are glad you are here.</p>
+          </div>
+        </div>
+
+        <!-- SECTION 7 -->
+        <div class="m-section" id="aicompany">
+          <div class="m-number">07</div>
+          <h2 class="m-title">Mestrae is not just<br>a shoe company. <em>It never was.</em></h2>
+          <div class="m-body">
+            <p>The fashion industry has spent the last decade talking about technology. Most of it has been surface-level: better photography, faster checkout, a chatbot that answers sizing questions. The actual making of shoes, the engineering, the iteration, the supply chain, has largely stayed the same for a generation.</p>
+            <p>What is happening now is different. Digital twin technology is compressing design-to-manufacturing timelines from thirty days to under forty-eight hours. Generative AI is allowing designers and engineers to explore hundreds of variations of a mechanism or an upper in the time it previously took to sketch ten. Additive manufacturing is making it viable to prototype physical components at a fraction of the cost of traditional tooling. And sustainable materials science is catching up quickly, with recycled plastics and bio-based polymers reaching the structural performance required for components that bear real load.</p>
+            <p>For most shoe brands, these are future opportunities to track. For Mestrae, they are the specific answers to the specific problems that nearly ended us.</p>
+          </div>
+
+          <div class="m-pull">
+            The moulds that cost a fortune and need replacing every few years. The supply chain that required every component to be custom-made from scratch. The iteration cycles that made each design change expensive and slow. Technology is solving all of these, and we intend to use all of it.
+          </div>
+
+          <div class="m-body">
+            <p>Prototype 3 will be developed using digital twin methodology from the first iteration. The mechanism will be stress-tested and adjusted virtually before a single physical part is made. Rapid prototyping will replace the traditional mould-first approach that has historically made interchangeable heel development so expensive. Recyclable engineering plastics will replace materials that have no end-of-life pathway. The aim is a shoe that is better engineered, cheaper to iterate, and more honestly made than anything we have produced before.</p>
+            <p>But the technology does not stop at how we make the product. It changes how we operate as a company entirely.</p>
+            <p>The style quiz, the heel height calculator, the comfort timer, the closet tool on this site are not just features. They are the beginning of a data relationship with our customers that most shoe companies do not have. Every interaction tells us something about how women actually wear shoes, what they switch between and when, how long they stay in heels before switching to flats, which heel styles work for which occasions. That data, built up over time and treated with care and consent, informs better engineering decisions than any focus group ever could.</p>
+            <p>And the AI chatbot that answers your questions at midnight when you are wondering whether a 3.5 inch heel makes sense for a day of airport walking is not a cost-cutting measure. It is an attempt to give every customer the kind of thoughtful, knowledgeable guidance that a good shoe fitter used to provide in person, at any hour, without making you feel judged for not already knowing.</p>
+          </div>
+
+          <div class="m-stat">
+            <div class="m-stat-item">
+              <div class="m-stat-num">48h</div>
+              <div class="m-stat-label">design-to-prototype turnaround with digital twin vs 30 days traditionally</div>
+            </div>
+            <div class="m-stat-item">
+              <div class="m-stat-num">30%</div>
+              <div class="m-stat-label">reduction in planning cycles when digital twins are used across manufacturing</div>
+            </div>
+            <div class="m-stat-item">
+              <div class="m-stat-num">26%</div>
+              <div class="m-stat-label">average online return rate for clothing and footwear — AI fit tools cut this significantly</div>
+            </div>
+          </div>
+
+          <div class="m-body">
+            <p>None of this makes Mestrae a technology company in the sense of a software platform. We make physical shoes that women put on their feet and walk through real days in. That is the product and it always will be. But the way we design them, the way we make them, the way we learn from how they are used, and the way we build a relationship with the people who wear them is going to look more like a technology company than a traditional shoe brand.</p>
+
+          <div class="m-pull" style="font-size:26px; letter-spacing:-0.02em; color:var(--ink);">
+            The way we design, make, learn from, and build a relationship with the women who wear our shoes is going to look more like a technology company than a traditional shoe brand.
+          </div>
+            <p>Partly this is because Mestrae was founded by an engineer who never stopped thinking like one. Partly it is because the problems of interchangeable heels are fundamentally engineering problems, not fashion problems. And partly it is because we have spent ten years learning what happens when you try to build something genuinely new inside a very old industry, and we have concluded that the only sustainable advantage available to a company our size is to move faster, iterate smarter, and know our customer more deeply than anyone larger than us is willing to bother doing.</p>
+            <p>Technology is how we do that. It is not what we sell. But it is a large part of why what we sell will be worth buying.</p>
+          </div>
+        </div>
+
+
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- A CENTURY OF TRYING -->
+<section class="attempts" id="attempts">
+  <div class="container">
+    <div class="attempts-inner">
+      <div class="attempts-label fade-up">
+        <p class="eyebrow" style="margin-bottom:16px;">The record</p>
+        <h2 class="attempts-title">150 years of the same idea</h2>
+        <p class="attempts-body">Interchangeable heels have been patented, attempted, and abandoned repeatedly since the 1860s. This is not a story of an idea whose time has not come. It is a story of an idea that has always been right, waiting for the right conditions to become real.</p>
+      </div>
+      <div class="patent-list fade-up d1">
+        <div class="patent-item">
+          <div class="patent-year">1867</div>
+          <div class="patent-desc">
+            <strong>First known US patent for a detachable heel</strong>
+            US Patent 65,247 filed by Loveland. The concept of separating the heel from the shoe upper is not new. It predates electricity becoming widespread.
+            <div class="patent-note">USPTO patent class 36/42 — detachable heels</div>
+          </div>
+        </div>
+        <div class="patent-item">
+          <div class="patent-year">1927&ndash;42</div>
+          <div class="patent-desc">
+            <strong>A wave of attempts between the wars</strong>
+            Multiple US patents filed through the 1920s and 1930s for interchangeable and replaceable heel mechanisms. None achieved commercial scale. The manufacturing infrastructure of the era could not match the precision the mechanism required.
+          </div>
+        </div>
+        <div class="patent-item">
+          <div class="patent-year">1957</div>
+          <div class="patent-desc">
+            <strong>Perugia patents a sliding tenon mechanism</strong>
+            Andre Perugia, one of the 20th century&rsquo;s most celebrated shoe designers, files a patent for a ladies&rsquo; shoe with a replaceable heel using a curved metal tenon and mortise slide. Beautiful in concept. Never commercialised at scale.
+          </div>
+        </div>
+        <div class="patent-item">
+          <div class="patent-year">1960&ndash;72</div>
+          <div class="patent-desc">
+            <strong>Post-war iteration continues</strong>
+            Further patents filed through the 1960s and early 1970s, each improving on the last in some dimension while introducing new tradeoffs. The gap between what can be patented and what can be manufactured profitably remains.
+          </div>
+        </div>
+        <div class="patent-item">
+          <div class="patent-year">1994&ndash;96</div>
+          <div class="patent-desc">
+            <strong>The bolt-through approach</strong>
+            US Patent 5,675,916 proposes a large bolt running through the outsole to attach the heel. Referenced eleven prior art patents in the same field. The accumulated complexity of prior claims becomes visible for the first time.
+          </div>
+        </div>
+        <div class="patent-item">
+          <div class="patent-year">2011&ndash;15</div>
+          <div class="patent-desc">
+            <strong>The modern era begins</strong>
+            New patents emerge using locking pin mechanisms, quick-disconnect latches, and tapered grooves. Tanya Heath launches in Paris in 2015 as the first brand to successfully commercialise interchangeable heels internationally. The category becomes real.
+          </div>
+        </div>
+        <div class="patent-item">
+          <div class="patent-year">2016&ndash;now</div>
+          <div class="patent-desc">
+            <strong>A small global field forms</strong>
+            Mestrae, Mime et Moi, Pashion, My Choupi Chouz, and a handful of others each build their own proprietary mechanisms. Each company solves the same core problem differently. The category remains fragmented, expensive, and niche. Which is exactly the problem open source is designed to fix.
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- OPEN SOURCE SECTION -->
+<section class="open-section" id="ownit">
+  <div class="container">
+    <div class="open-inner">
+      <div class="fade-up">
+        <p class="eyebrow" style="color:var(--muted);">OwnIt by Rangkai</p>
+        <h2 class="open-title">The open-source<br>heel technology <em>platform.</em></h2>
+        <div class="open-body">
+          <p>In August 2026, Mestrae will release the complete engineering documentation for Prototype 1 and Prototype 2 — our working interchangeable heel mechanisms — as free open-source designs through OwnIt by Rangkai.</p>
+          <p>Anyone will be able to download the files, understand the mechanism, modify the design, and build from it. The only ask is that meaningful improvements find their way back to the community.</p>
+          <p>If you are a builder, a maker, a footwear designer, or an engineer who has been sitting on a better idea, the foundation will be ready in August.</p>
+        </div>
+        <a href="where-we-are.html" class="btn-bone">Follow our progress</a>
+      </div>
+      <div class="fade-up d2">
+        <div class="open-quote">
+          <p class="open-quote-text">&ldquo;The builders who emerge from an open-source foundation are not our competitors. They are proof that the idea works.&rdquo;</p>
+          <p class="open-quote-attr">Pam Chandrakasan, Founder &mdash; Mestrae</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA SECTION -->
+<section class="shift-cta">
+  <div class="container">
+    <div class="shift-cta-inner">
+      <div class="fade-up">
+        <h2 class="cta-title">The shop reopens<br>November 1, 2026.</h2>
+        <p class="cta-body">Mestrae relaunches with Prototype 3, a completely redesigned interchangeable heel system built on everything we have learned. Early adopters will be invited first. If you want to be among them, join the list.</p>
+        <div class="cta-actions">
+          <a href="home.html#newsletter" class="btn-bone">Join the early access list</a>
+          <a href="where-we-are.html" class="btn-ghost">Read our full update</a>
+        </div>
+      </div>
+      <div class="fade-up d2">
+        <div class="cta-quote">
+          <p class="cta-quote-text">&ldquo;Elegance is the only beauty that never fades.&rdquo;</p>
+          <p class="cta-quote-attr">Audrey Hepburn &mdash; and the spirit Mestrae was built in</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="container">
+    <div class="footer-grid">
+      <div>
+        <div class="footer-brand">Mestrae</div>
+        <p class="footer-tagline">Interchangeable heels built for the way women actually live. Est. 2016, Kuala Lumpur.</p>
+        <div class="footer-social">
+          <a href="https://instagram.com" target="_blank">Instagram</a>
+          <a href="https://mestrae.substack.com" target="_blank">Substack</a>
+          <a href="https://www.youtube.com/channel/UCxHOxnBYmGdhOZ-XzTzIYOQ" target="_blank">YouTube</a>
+        </div>
+      </div>
+      <div>
+        <div class="footer-col-title">Shop</div>
+        <ul class="footer-links">
+          <li><a href="shop.html">All styles</a></li>
+          <li><a href="shop.html?filter=heels">Heel sets</a></li>
+          <li><a href="size-guide.html">Size guide</a></li>
+          <li><a href="shipping.html">Shipping</a></li>
+        </ul>
+      </div>
+      <div>
+        <div class="footer-col-title">Company</div>
+        <ul class="footer-links">
+          <li><a href="about.html">About</a></li>
+          <li><a href="shift.html" class="hl">The Shift</a></li>
+          <li><a href="where-we-are.html">Where we are</a></li>
+          <li><a href="https://mestrae.substack.com" target="_blank">Substack</a></li>
+        </ul>
+      </div>
+      <div>
+        <div class="footer-col-title">Support</div>
+        <ul class="footer-links">
+          <li><a href="contact.html">Contact us</a></li>
+          <li><a href="contact.html#faq">FAQ</a></li>
+          <li><a href="care.html">Care guide</a></li>
+          <li><a href="mailto:info@mestrae.com">info@mestrae.com</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p class="footer-copy">&copy; 2026 Mestrae. All rights reserved.</p>
+      <ul class="footer-legal">
+        <li><a href="privacy.html">Privacy</a></li>
+        <li><a href="terms.html">Terms</a></li>
+        <li><a href="shipping.html">Shipping &amp; Returns</a></li>
+      </ul>
+    </div>
+  </div>
+</footer>
+
+<script>
+  const obs = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); obs.unobserve(e.target); } });
+  }, { threshold: 0.08 });
+  document.querySelectorAll('.fade-up').forEach(el => obs.observe(el));
+
+  function toggleMenu() {
+    const links = document.querySelector('.nav-links');
+    const open = links.style.display === 'flex';
+    Object.assign(links.style, { display: open ? 'none' : 'flex', flexDirection: 'column', position: 'absolute', top: '100%', left: '0', right: '0', background: '#1A1A1A', padding: '16px 24px', gap: '20px', zIndex: '99' });
+  }
+
+  function scrollTo(id) {
+    const el = document.getElementById(id);
+    if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    document.querySelectorAll('.manifesto-nav-item').forEach(i => i.classList.remove('active'));
+    event.target.classList.add('active');
+  }
+</script>
+</body>
+</html>
