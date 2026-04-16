@@ -1,0 +1,602 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Where We Are — Mestrae</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Source+Sans+3:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary:  #1E2B2C;
+      --bone:     #F2EEE8;
+      --bone-mid: #E8E3DC;
+      --ink:      #1A1A1A;
+      --pink:     #C9A8B2;
+      --slate:    #5C6B6E;
+      --muted:    #7A8F87;
+      --border:   #E0DBD4;
+      --font:     'Source Sans 3', sans-serif;
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body { font-family: var(--font); background: var(--bone); color: var(--ink); font-size: 16px; line-height: 1.7; -webkit-font-smoothing: antialiased; }
+    a { text-decoration: none; color: inherit; }
+    img { display: block; max-width: 100%; }
+    .container { max-width: 1280px; margin: 0 auto; padding: 0 48px; }
+    .container-narrow { max-width: 720px; margin: 0 auto; padding: 0 48px; }
+
+    /* ANNOUNCEMENT */
+    #announcement { background: var(--ink); color: var(--bone); text-align: center; padding: 10px 24px; font-size: 12px; letter-spacing: 0.08em; }
+    #announcement a { color: var(--pink); text-decoration: underline; text-underline-offset: 3px; margin-left: 6px; }
+
+    /* NAV */
+    nav { background: var(--ink); position: sticky; top: 0; z-index: 100; border-bottom: 1px solid rgba(255,255,255,0.06); }
+    .nav-inner { display: flex; align-items: center; justify-content: space-between; height: 64px; max-width: 1280px; margin: 0 auto; padding: 0 48px; }
+    .nav-logo { font-size: 18px; font-weight: 500; letter-spacing: 0.22em; color: var(--bone); text-transform: uppercase; }
+    .nav-links { display: flex; gap: 36px; list-style: none; }
+    .nav-links a { font-size: 11px; letter-spacing: 0.10em; text-transform: uppercase; color: rgba(242,238,232,0.5); transition: color 0.2s; }
+    .nav-links a:hover { color: var(--bone); }
+    .nav-links a.active { color: var(--pink); }
+    .nav-cta { font-size: 11px; font-weight: 500; letter-spacing: 0.10em; text-transform: uppercase; color: var(--bone); border: 0.5px solid rgba(242,238,232,0.3); padding: 8px 18px; transition: all 0.2s; }
+    .nav-cta:hover { background: var(--bone); color: var(--ink); }
+    .hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; }
+    .hamburger span { display: block; width: 22px; height: 1.5px; background: var(--bone); }
+
+    /* PAGE HERO */
+    .page-hero { background: var(--primary); padding: 80px 0 72px; }
+    .eyebrow { font-size: 11px; font-weight: 500; letter-spacing: 0.16em; text-transform: uppercase; color: var(--muted); margin-bottom: 20px; display: flex; align-items: center; gap: 10px; }
+    .eyebrow::before { content: ''; display: block; width: 20px; height: 1px; background: var(--muted); }
+    .page-title { font-size: clamp(36px, 5vw, 64px); font-weight: 300; color: var(--bone); line-height: 1.1; letter-spacing: -0.01em; margin-bottom: 24px; }
+    .page-title em { font-style: normal; color: var(--pink); }
+    .page-subtitle { font-size: 17px; font-weight: 300; color: rgba(242,238,232,0.6); max-width: 560px; line-height: 1.8; }
+    .last-updated { font-size: 12px; color: rgba(242,238,232,0.3); margin-top: 32px; letter-spacing: 0.06em; }
+
+    /* PROGRESS DASHBOARD */
+    .progress-section { background: var(--bone); padding: 72px 0; border-bottom: 1px solid var(--border); }
+    .progress-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1px; border: 1px solid var(--border); margin-top: 48px; background: var(--border); }
+    .progress-card { background: #fff; padding: 32px 28px; }
+    .progress-card-label { font-size: 10px; font-weight: 500; letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted); margin-bottom: 16px; }
+    .progress-card-title { font-size: 16px; font-weight: 500; color: var(--ink); margin-bottom: 20px; line-height: 1.3; }
+    .progress-track { height: 3px; background: var(--bone-mid); margin-bottom: 10px; }
+    .progress-fill { height: 100%; background: var(--primary); transition: width 1.4s ease; }
+    .progress-fill.pink { background: var(--pink); }
+    .progress-fill.sage { background: var(--muted); }
+    .progress-pct { font-size: 24px; font-weight: 300; color: var(--primary); margin-bottom: 4px; }
+    .progress-pct.pink { color: var(--pink); }
+    .progress-pct.sage { color: var(--muted); }
+    .progress-meta { font-size: 12px; color: var(--slate); line-height: 1.6; }
+    .progress-target { font-size: 11px; font-weight: 500; letter-spacing: 0.06em; color: var(--muted); text-transform: uppercase; margin-top: 12px; }
+
+    /* TIMELINE */
+    .timeline-section { background: #fff; padding: 80px 0; border-bottom: 1px solid var(--border); }
+    .timeline { position: relative; margin-top: 56px; }
+    .timeline::before { content: ''; position: absolute; left: 120px; top: 0; bottom: 0; width: 1px; background: var(--border); }
+    .timeline-item { display: grid; grid-template-columns: 120px 1fr; gap: 0; margin-bottom: 0; position: relative; }
+    .timeline-year { padding: 32px 32px 32px 0; text-align: right; }
+    .tl-year-label { font-size: 13px; font-weight: 500; color: var(--slate); letter-spacing: 0.06em; }
+    .timeline-content { padding: 28px 0 28px 40px; border-top: 1px solid var(--border); }
+    .timeline-item:first-child .timeline-content { border-top: none; }
+    .timeline-dot { position: absolute; left: 116px; top: 36px; width: 9px; height: 9px; border-radius: 50%; background: var(--bone-mid); border: 1.5px solid var(--border); }
+    .timeline-dot.active { background: var(--primary); border-color: var(--primary); }
+    .timeline-dot.crisis { background: var(--pink); border-color: var(--pink); }
+    .timeline-dot.recovery { background: var(--muted); border-color: var(--muted); }
+    .tl-phase { font-size: 10px; font-weight: 500; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); margin-bottom: 6px; }
+    .tl-title { font-size: 18px; font-weight: 400; color: var(--ink); margin-bottom: 10px; }
+    .tl-body { font-size: 14px; color: var(--slate); line-height: 1.8; max-width: 600px; }
+    .tl-tags { display: flex; gap: 6px; margin-top: 12px; flex-wrap: wrap; }
+    .tl-tag { font-size: 10px; padding: 3px 10px; border: 0.5px solid var(--border); color: var(--slate); }
+    .tl-tag.highlight { border-color: var(--primary); color: var(--primary); }
+    .tl-tag.crisis { border-color: var(--pink); color: var(--pink); }
+
+    /* PAM'S LETTER */
+    .letter-section { background: var(--bone); padding: 80px 0; border-bottom: 1px solid var(--border); }
+    .letter-card { background: #fff; border: 0.5px solid var(--border); padding: 56px 64px; max-width: 760px; }
+    .letter-header { margin-bottom: 40px; padding-bottom: 32px; border-bottom: 1px solid var(--border); }
+    .letter-from { font-size: 11px; font-weight: 500; letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted); margin-bottom: 8px; }
+    .letter-title { font-size: 28px; font-weight: 300; color: var(--ink); line-height: 1.2; }
+    .letter-body p { font-size: 15px; color: var(--slate); line-height: 1.9; margin-bottom: 20px; }
+    .letter-body p:last-child { margin-bottom: 0; }
+    .letter-body strong { color: var(--ink); font-weight: 500; }
+    .letter-quote { border-left: 2px solid var(--pink); padding: 16px 24px; margin: 32px 0; background: var(--bone); }
+    .letter-quote p { font-size: 15px; color: var(--ink); font-style: italic; line-height: 1.8; margin: 0; }
+    .letter-sign { margin-top: 40px; padding-top: 32px; border-top: 1px solid var(--border); }
+    .letter-sign-name { font-size: 16px; font-weight: 500; color: var(--ink); }
+    .letter-sign-title { font-size: 13px; color: var(--slate); margin-top: 4px; }
+
+    /* COMMITMENT */
+    .commitment-section { background: var(--primary); padding: 80px 0; }
+    .commit-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: start; margin-top: 48px; }
+    .commit-title { font-size: 32px; font-weight: 300; color: var(--bone); line-height: 1.2; margin-bottom: 20px; }
+    .commit-body { font-size: 15px; color: rgba(242,238,232,0.6); line-height: 1.85; margin-bottom: 28px; }
+    .commit-list { list-style: none; display: flex; flex-direction: column; gap: 16px; }
+    .commit-list li { display: flex; align-items: flex-start; gap: 14px; font-size: 14px; color: rgba(242,238,232,0.7); line-height: 1.6; }
+    .commit-check { width: 20px; height: 20px; border: 0.5px solid rgba(242,238,232,0.2); flex-shrink: 0; display: flex; align-items: center; justify-content: center; margin-top: 2px; }
+    .commit-check.done { background: var(--muted); border-color: var(--muted); }
+    .commit-check svg { width: 10px; height: 10px; }
+    .commit-dates { display: flex; flex-direction: column; gap: 1px; }
+    .commit-date-item { background: rgba(242,238,232,0.04); border: 0.5px solid rgba(242,238,232,0.08); padding: 20px 24px; }
+    .commit-date-item:hover { background: rgba(242,238,232,0.07); }
+    .cd-month { font-size: 10px; font-weight: 500; letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted); margin-bottom: 6px; }
+    .cd-action { font-size: 15px; font-weight: 400; color: var(--bone); margin-bottom: 4px; }
+    .cd-detail { font-size: 12px; color: rgba(242,238,232,0.45); line-height: 1.6; }
+    .cd-status { display: inline-block; font-size: 10px; padding: 2px 8px; margin-top: 8px; letter-spacing: 0.06em; text-transform: uppercase; }
+    .cd-status.in-progress { background: rgba(201,168,178,0.15); color: var(--pink); }
+    .cd-status.upcoming { background: rgba(122,143,135,0.15); color: var(--muted); }
+    .cd-status.complete { background: rgba(242,238,232,0.1); color: rgba(242,238,232,0.4); }
+
+    /* CONTACT STRIP */
+    .contact-section { background: var(--bone); padding: 64px 0; border-top: 1px solid var(--border); }
+    .contact-inner { display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: center; }
+    .contact-title { font-size: 28px; font-weight: 300; color: var(--ink); margin-bottom: 12px; }
+    .contact-body { font-size: 15px; color: var(--slate); line-height: 1.8; margin-bottom: 24px; }
+    .btn-outline { display: inline-block; border: 0.5px solid var(--ink); color: var(--ink); font-size: 11px; font-weight: 500; letter-spacing: 0.10em; text-transform: uppercase; padding: 12px 24px; transition: all 0.2s; }
+    .btn-outline:hover { background: var(--ink); color: var(--bone); }
+    .nl-form { display: flex; }
+    .nl-input { flex: 1; border: 1px solid var(--border); border-right: none; background: #fff; padding: 13px 16px; font-family: var(--font); font-size: 14px; color: var(--ink); outline: none; transition: border-color 0.2s; }
+    .nl-input:focus { border-color: var(--primary); }
+    .nl-btn { background: var(--primary); color: var(--bone); border: 1px solid var(--primary); font-family: var(--font); font-size: 11px; font-weight: 500; letter-spacing: 0.10em; text-transform: uppercase; padding: 13px 22px; cursor: pointer; white-space: nowrap; }
+    .nl-note { font-size: 11px; color: var(--muted); margin-top: 10px; }
+
+    /* FOOTER */
+    footer { background: var(--ink); color: var(--bone); padding: 64px 0 32px; }
+    .footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 48px; padding-bottom: 48px; border-bottom: 1px solid rgba(242,238,232,0.07); margin-bottom: 28px; }
+    .footer-brand { font-size: 16px; font-weight: 500; letter-spacing: 0.22em; text-transform: uppercase; margin-bottom: 10px; }
+    .footer-tagline { font-size: 13px; color: rgba(242,238,232,0.35); line-height: 1.7; margin-bottom: 22px; max-width: 210px; }
+    .footer-social { display: flex; gap: 14px; }
+    .footer-social a { font-size: 11px; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; color: rgba(242,238,232,0.35); transition: color 0.2s; }
+    .footer-social a:hover { color: var(--bone); }
+    .footer-col-title { font-size: 10px; font-weight: 500; letter-spacing: 0.14em; text-transform: uppercase; color: rgba(242,238,232,0.35); margin-bottom: 18px; }
+    .footer-links { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+    .footer-links a { font-size: 14px; color: rgba(242,238,232,0.5); transition: color 0.2s; }
+    .footer-links a:hover { color: var(--bone); }
+    .footer-links a.hl { color: var(--pink); }
+    .footer-bottom { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px; }
+    .footer-copy { font-size: 12px; color: rgba(242,238,232,0.2); }
+    .footer-legal { display: flex; gap: 18px; list-style: none; }
+    .footer-legal a { font-size: 12px; color: rgba(242,238,232,0.2); transition: color 0.2s; }
+    .footer-legal a:hover { color: rgba(242,238,232,0.5); }
+
+    /* FADE */
+    .fade-up { opacity: 0; transform: translateY(20px); transition: opacity 0.6s ease, transform 0.6s ease; }
+    .fade-up.visible { opacity: 1; transform: translateY(0); }
+    .d1 { transition-delay: 0.1s; } .d2 { transition-delay: 0.2s; } .d3 { transition-delay: 0.3s; }
+
+    /* RESPONSIVE */
+    @media (max-width: 1024px) {
+      .container, .nav-inner, .container-narrow { padding: 0 32px; }
+      .progress-grid { grid-template-columns: repeat(2, 1fr); }
+      .footer-grid { grid-template-columns: 1fr 1fr; }
+    }
+    @media (max-width: 768px) {
+      .nav-links, .nav-cta { display: none; }
+      .hamburger { display: flex; }
+      .container, .nav-inner, .container-narrow { padding: 0 24px; }
+      .timeline::before { left: 72px; }
+      .timeline-item { grid-template-columns: 72px 1fr; }
+      .timeline-dot { left: 68px; }
+      .timeline-year { padding: 24px 16px 24px 0; }
+      .commit-grid { grid-template-columns: 1fr; gap: 40px; }
+      .contact-inner { grid-template-columns: 1fr; gap: 40px; }
+      .letter-card { padding: 32px 24px; }
+      .footer-grid { grid-template-columns: 1fr 1fr; gap: 28px; }
+      .progress-grid { grid-template-columns: 1fr 1fr; }
+    }
+    @media (max-width: 480px) {
+      .progress-grid { grid-template-columns: 1fr; }
+      .nl-form { flex-direction: column; }
+      .nl-input { border-right: 1px solid var(--border); border-bottom: none; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ANNOUNCEMENT -->
+<div id="announcement">
+  Rebuilding with purpose. Launching November 1, 2026.
+  <a href="where-we-are.html">Read our update &rarr;</a>
+</div>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-inner">
+    <a href="home.html" class="nav-logo">Mestrae</a>
+    <ul class="nav-links">
+      <li><a href="shop.html">Shop</a></li>
+      <li><a href="shift.html">The Shift</a></li>
+      <li><a href="tools.html">Tools</a></li>
+      <li><a href="about.html">About</a></li>
+      <li><a href="where-we-are.html" class="active">Where We Are</a></li>
+    </ul>
+    <a href="shop.html" class="nav-cta">Shop now</a>
+    <div class="hamburger" onclick="toggleMenu()"><span></span><span></span><span></span></div>
+  </div>
+</nav>
+
+<!-- PAGE HERO -->
+<section class="page-hero">
+  <div class="container">
+    <div class="fade-up">
+      <p class="eyebrow">Transparency update</p>
+      <h1 class="page-title">Where we are.<br><em>Honestly.</em></h1>
+      <p class="page-subtitle">This page exists because you deserve to know what happened, where things stand, and what comes next. We update it every month.</p>
+      <p class="last-updated">Last updated: April 2026</p>
+    </div>
+  </div>
+</section>
+
+<!-- PROGRESS DASHBOARD -->
+<section class="progress-section">
+  <div class="container">
+    <div class="fade-up">
+      <p class="eyebrow">Progress at a glance</p>
+      <h2 style="font-size:32px; font-weight:300; color:var(--ink);">Four things we're tracking</h2>
+    </div>
+    <div class="progress-grid fade-up d1">
+
+      <div class="progress-card">
+        <div class="progress-card-label">Customer refunds</div>
+        <div class="progress-card-title">Repaying everyone who waited</div>
+        <div class="progress-track"><div class="progress-fill pink" style="width:30%"></div></div>
+        <div class="progress-pct pink">30%</div>
+        <div class="progress-meta">We are working through all affected orders from 2020 and 2021, starting with those who have waited the longest.</div>
+        <div class="progress-target">Target: June 2026</div>
+      </div>
+
+      <div class="progress-card">
+        <div class="progress-card-label">Website &amp; shop</div>
+        <div class="progress-card-title">New store, tools, and brand</div>
+        <div class="progress-track"><div class="progress-fill" style="width:40%"></div></div>
+        <div class="progress-pct">40%</div>
+        <div class="progress-meta">The home page is live. The shop, checkout flow, tools, and size guide are in progress, with mobile testing running alongside.</div>
+        <div class="progress-target">Live: November 1, 2026</div>
+      </div>
+
+      <div class="progress-card">
+        <div class="progress-card-label">Open source release</div>
+        <div class="progress-card-title">Sharing Prototype 1 &amp; 2 designs</div>
+        <div class="progress-track"><div class="progress-fill sage" style="width:15%"></div></div>
+        <div class="progress-pct sage">15%</div>
+        <div class="progress-meta">Engineering documentation is underway. When ready, the designs will be hosted on OwnIt by Rangkai as a free open-source platform.</div>
+        <div class="progress-target">Release: August 2026</div>
+      </div>
+
+      <div class="progress-card">
+        <div class="progress-card-label">New shoe technology</div>
+        <div class="progress-card-title">Prototype 3, redesigned from scratch</div>
+        <div class="progress-track"><div class="progress-fill sage" style="width:8%"></div></div>
+        <div class="progress-pct sage">8%</div>
+        <div class="progress-meta">Better engineering, better fit, wider size range. Prototyping is far more affordable now than it was a few years ago, and we are making full use of that.</div>
+        <div class="progress-target">Dev begins: October 2026</div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- TIMELINE -->
+<section class="timeline-section">
+  <div class="container">
+    <div class="fade-up">
+      <p class="eyebrow">The full story</p>
+      <h2 style="font-size:32px; font-weight:300; color:var(--ink);">How we got here</h2>
+    </div>
+    <div class="timeline">
+
+      <div class="timeline-item fade-up">
+        <div class="timeline-year"><span class="tl-year-label">2015&ndash;16</span></div>
+        <div class="timeline-dot active"></div>
+        <div class="timeline-content">
+          <div class="tl-phase">The spark</div>
+          <div class="tl-title">Built from nothing, on a porch</div>
+          <div class="tl-body">Pam conceived the idea for interchangeable heels after running to catch a train in heels. No industry precedent. No playbook. Just early prototyping, a Cradle CIP150 grant, and a team of four. Selected for the Stanford Go-To-Market Accelerator. They launched internationally and reached 20 countries in the first wave.</div>
+          <div class="tl-tags">
+            <span class="tl-tag highlight">Stanford accelerator</span>
+            <span class="tl-tag highlight">20 countries</span>
+            <span class="tl-tag highlight">First prototype funded</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="timeline-item fade-up">
+        <div class="timeline-year"><span class="tl-year-label">2017&ndash;18</span></div>
+        <div class="timeline-dot active"></div>
+        <div class="timeline-content">
+          <div class="tl-phase">Scaling up</div>
+          <div class="tl-title">Manufacturing, awards, 31 countries</div>
+          <div class="tl-body">Prototype 2 was completed with improved engineering and aesthetics, funded by the Platcom Commercialisation Fund. Mestrae established its own in-house manufacturing facility, grew the team to eight people, and began global distribution partnerships. Every heel was tested to UK Satra regulatory standards, and the brand won global and national innovation awards.</div>
+          <div class="tl-tags">
+            <span class="tl-tag highlight">31 countries</span>
+            <span class="tl-tag highlight">In-house manufacturing</span>
+            <span class="tl-tag highlight">Satra certified</span>
+            <span class="tl-tag highlight">Global awards</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="timeline-item fade-up">
+        <div class="timeline-year"><span class="tl-year-label">2019</span></div>
+        <div class="timeline-dot crisis"></div>
+        <div class="timeline-content">
+          <div class="tl-phase">First blow</div>
+          <div class="tl-title">The grant that never arrived</div>
+          <div class="tl-body">A reimbursement grant that Mestrae had fulfilled every requirement for, on time and beyond expectation, was never disbursed. The company had already taken on debt to meet those obligations, and after project completion the rules changed. The debt remained, and this became the beginning of years of financial pressure that compounded everything that followed.</div>
+          <div class="tl-tags">
+            <span class="tl-tag crisis">Unpaid grant</span>
+            <span class="tl-tag crisis">Debt begins</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="timeline-item fade-up">
+        <div class="timeline-year"><span class="tl-year-label">2020</span></div>
+        <div class="timeline-dot crisis"></div>
+        <div class="timeline-content">
+          <div class="tl-phase">Second blow</div>
+          <div class="tl-title">Pandemic shuts manufacturing</div>
+          <div class="tl-body">A Kickstarter campaign hit 200% of its funding target, which was genuine validation that the product was wanted. But COVID-19 shut in-house manufacturing before orders could be fulfilled. Pivoting to OEM manufacturing seemed like a solution, but production collapsed before it could deliver. Customers who had paid, especially those from the Kickstarter campaign, never received their shoes.</div>
+          <div class="tl-tags">
+            <span class="tl-tag highlight">Kickstarter: 200% funded</span>
+            <span class="tl-tag crisis">Manufacturing halted</span>
+            <span class="tl-tag crisis">Orders unfulfilled</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="timeline-item fade-up">
+        <div class="timeline-year"><span class="tl-year-label">2021</span></div>
+        <div class="timeline-dot crisis"></div>
+        <div class="timeline-content">
+          <div class="tl-phase">Third blow</div>
+          <div class="tl-title">Floods destroy remaining stock</div>
+          <div class="tl-body">Severe flooding destroyed the remaining inventory and raw materials, bringing operations to a complete halt. What the pandemic hadn't taken, the floods did. This was the point where everything stopped.</div>
+          <div class="tl-tags">
+            <span class="tl-tag crisis">Stock destroyed</span>
+            <span class="tl-tag crisis">Operations halted</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="timeline-item fade-up">
+        <div class="timeline-year"><span class="tl-year-label">2022&ndash;25</span></div>
+        <div class="timeline-dot recovery"></div>
+        <div class="timeline-content">
+          <div class="tl-phase">Survival and rebuilding</div>
+          <div class="tl-title">Consulting, learning, and not giving up</div>
+          <div class="tl-body">Pam took on startup consulting, corporate writing, and freelance work to repay the debt. She pursued graduate studies in business, completed a book on building breakthrough innovations in large companies, and applied the lessons of Mestrae's mistakes to help other founders avoid the same pitfalls. In parallel, she has been quietly redesigning the heel technology to take advantage of cheaper prototyping and better engineering solutions that simply weren't available a few years ago.</div>
+          <div class="tl-tags">
+            <span class="tl-tag">Consulting</span>
+            <span class="tl-tag">Graduate studies</span>
+            <span class="tl-tag">Quietly redesigning</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="timeline-item fade-up">
+        <div class="timeline-year"><span class="tl-year-label">2026</span></div>
+        <div class="timeline-dot active"></div>
+        <div class="timeline-content">
+          <div class="tl-phase">The comeback</div>
+          <div class="tl-title">Refunding, rebuilding, returning</div>
+          <div class="tl-body">Financial struggles are slowly resolving. Refunds are slowly being processed. The new website is in development. The open source release of Prototype 1 and 2 is planned for August, Prototype 3 engineering begins in October, and the shop opens on November 1. This is Mestrae rebuilt properly.</div>
+          <div class="tl-tags">
+            <span class="tl-tag highlight">Refunds by June</span>
+            <span class="tl-tag highlight">Shop opens Nov 1</span>
+            <span class="tl-tag highlight">Open source Aug</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- PAM'S LETTER -->
+<section class="letter-section">
+  <div class="container">
+    <div class="fade-up">
+      <p class="eyebrow">From Pam</p>
+      <h2 style="font-size:32px; font-weight:300; color:var(--ink); margin-bottom:40px;">A personal note</h2>
+    </div>
+    <div class="letter-card fade-up d1">
+      <div class="letter-header">
+        <div class="letter-from">Christine Pamela Founder, Mestrae</div>
+        <div class="letter-title">To everyone who has waited,<br>believed, and stayed.</div>
+      </div>
+      <div class="letter-body">
+        <p>Mestrae has been quite a journey. We started from nothing, learning every step as we went. Building in a system with limited funding access, a collapsing manufacturing ecosystem, and a grant scheme that left us holding debt we hadn't chosen has been harder than I can fully describe.</p>
+        <p>We did everything right. We launched in 31 countries, won awards, passed independent safety testing, and built our own manufacturing facility. Then, in the span of two years, a grant induced financial struggle, pandemic and flooding took nearly all of it.</p>
+        <p>I won't pretend I knew what to do next. The shift from deep engineering expertise to being a founder who has to know everything at once is disorienting in ways nobody warns you about. I made mistakes, took on odd jobs to stay afloat, studied, consulted, and wrote a book. I haven't taken a single day off in years.</p>
+
+        <div class="letter-quote">
+          <p>In Malaysia, there&rsquo;s a saying: <strong>Hutang emas boleh dibayar. Hutang budi dibawa mati.</strong><br>A debt of gold can be repaid. A debt of gratitude lasts until death.</p>
+        </div>
+
+        <p>To our lenders, repayments will be completed this year. To our customers, you are next and you will not be forgotten. Every customer affected during this period will be refunded by June 2026. I would also like to invite you back as early adopters when we release the new Mestrae technology in 2026.</p>
+        <p>For now, communication will be limited as it is just me running things until I can bring one or two people back on board. I appreciate your patience more than I can say.</p>
+        <p>What&rsquo;s ahead is better than what came before. I&rsquo;m certain of it.</p>
+      </div>
+      <div class="letter-sign">
+        <div class="letter-sign-name">Pam Chandrakasan</div>
+        <div class="letter-sign-title">Founder &amp; CEO, Mestrae &middot; Kuala Lumpur</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- COMMITMENT / TIMELINE -->
+<section class="commitment-section">
+  <div class="container">
+    <div class="fade-up">
+      <p class="eyebrow" style="color:var(--muted);">What happens next</p>
+    </div>
+    <div class="commit-grid">
+      <div class="fade-up d1">
+        <h2 class="commit-title">Our commitments<br>for 2026</h2>
+        <p class="commit-body">These are the specific things we are working toward, month by month, in order.</p>
+        <ul class="commit-list">
+          <li>
+            <div class="commit-check done">
+              <svg viewBox="0 0 10 10" fill="none"><path d="M2 5l2.5 2.5L8 3" stroke="#F2EEE8" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </div>
+            Brand guidelines, website architecture, and the home page are complete
+          </li>
+          <li>
+            <div class="commit-check"></div>
+            All affected customers will be refunded by June 2026
+          </li>
+          <li>
+            <div class="commit-check"></div>
+            The engineering designs for Prototype 1 and 2 will be released as open source
+          </li>
+          <li>
+            <div class="commit-check"></div>
+            The shop, checkout flow, and payment system will be live by November 1
+          </li>
+          <li>
+            <div class="commit-check"></div>
+            Prototype 3 development begins in October 2026
+          </li>
+          <li>
+            <div class="commit-check"></div>
+            Returning customers will be invited back as early adopters
+          </li>
+        </ul>
+      </div>
+      <div class="commit-dates fade-up d2">
+        <div class="commit-date-item">
+          <div class="cd-month">Now May 2026</div>
+          <div class="cd-action">Refunds processing &amp; site build</div>
+          <div class="cd-detail">Customer refunds are being processed and the shop, product pages, and checkout are in development.</div>
+          <span class="cd-status in-progress">In progress</span>
+        </div>
+        <div class="commit-date-item">
+          <div class="cd-month">June 2026</div>
+          <div class="cd-action">All refunds complete</div>
+          <div class="cd-detail">Every affected customer from the 2020 to 2021 period repaid in full.</div>
+          <span class="cd-status upcoming">Upcoming</span>
+        </div>
+        <div class="commit-date-item">
+          <div class="cd-month">August 2026</div>
+          <div class="cd-action">Open source release</div>
+          <div class="cd-detail">Prototype 1 and 2 designs released via OwnIt by Rangkai, free for anyone to build from.</div>
+          <span class="cd-status upcoming">Upcoming</span>
+        </div>
+        <div class="commit-date-item">
+          <div class="cd-month">October 2026</div>
+          <div class="cd-action">Prototype 3 begins</div>
+          <div class="cd-detail">New engineering begins for better fit, a wider size range, and an improved mechanism.</div>
+          <span class="cd-status upcoming">Upcoming</span>
+        </div>
+        <div class="commit-date-item">
+          <div class="cd-month">November 1, 2026</div>
+          <div class="cd-action">Shop opens</div>
+          <div class="cd-detail">Mestrae relaunches. Early adopters are invited first, with Christmas orders very welcome.</div>
+          <span class="cd-status upcoming">Launch day</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT STRIP -->
+<section class="contact-section">
+  <div class="container">
+    <div class="contact-inner">
+      <div class="fade-up">
+        <h2 class="contact-title">Questions or feedback?</h2>
+        <p class="contact-body">Pam reads every message. Responses may take a little time as it is a small team right now, but nothing goes unread. You can also follow monthly updates on Substack.</p>
+        <div style="display:flex; gap:12px; flex-wrap:wrap;">
+          <a href="mailto:info@mestrae.com" class="btn-outline">Email us</a>
+          <a href="https://mestrae.substack.com" target="_blank" class="btn-outline">Follow on Substack</a>
+        </div>
+      </div>
+      <div class="fade-up d2">
+        <p style="font-size:13px; font-weight:500; letter-spacing:0.1em; text-transform:uppercase; color:var(--muted); margin-bottom:12px;">Monthly updates</p>
+        <p style="font-size:15px; color:var(--slate); margin-bottom:20px; line-height:1.7;">No noise, just what has changed each month covering refund progress, build updates, and what is coming next.</p>
+        <form onsubmit="handleSub(event)">
+          <div class="nl-form">
+            <input type="email" class="nl-input" placeholder="your@email.com" required>
+            <button type="submit" class="nl-btn">Subscribe</button>
+          </div>
+        </form>
+        <p class="nl-note">No spam. Unsubscribe anytime.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="container">
+    <div class="footer-grid">
+      <div>
+        <div class="footer-brand">Mestrae</div>
+        <p class="footer-tagline">Interchangeable heels built for the way women actually live. Est. 2016, Kuala Lumpur.</p>
+        <div class="footer-social">
+          <a href="https://instagram.com" target="_blank">Instagram</a>
+          <a href="https://mestrae.substack.com" target="_blank">Substack</a>
+          <a href="https://www.youtube.com/channel/UCxHOxnBYmGdhOZ-XzTzIYOQ" target="_blank">YouTube</a>
+        </div>
+      </div>
+      <div>
+        <div class="footer-col-title">Shop</div>
+        <ul class="footer-links">
+          <li><a href="shop.html">All styles</a></li>
+          <li><a href="shop.html?filter=heels">Heel sets</a></li>
+          <li><a href="size-guide.html">Size guide</a></li>
+          <li><a href="shipping.html">Shipping</a></li>
+        </ul>
+      </div>
+      <div>
+        <div class="footer-col-title">Company</div>
+        <ul class="footer-links">
+          <li><a href="about.html">About</a></li>
+          <li><a href="shift.html">The Shift</a></li>
+          <li><a href="where-we-are.html" class="hl">Where we are</a></li>
+          <li><a href="https://mestrae.substack.com" target="_blank">Substack</a></li>
+        </ul>
+      </div>
+      <div>
+        <div class="footer-col-title">Support</div>
+        <ul class="footer-links">
+          <li><a href="contact.html">Contact us</a></li>
+          <li><a href="contact.html#faq">FAQ</a></li>
+          <li><a href="care.html">Care guide</a></li>
+          <li><a href="mailto:info@mestrae.com">info@mestrae.com</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p class="footer-copy">&copy; 2026 Mestrae. All rights reserved.</p>
+      <ul class="footer-legal">
+        <li><a href="privacy.html">Privacy</a></li>
+        <li><a href="terms.html">Terms</a></li>
+        <li><a href="shipping.html">Shipping &amp; Returns</a></li>
+      </ul>
+    </div>
+  </div>
+</footer>
+
+<script>
+  const obs = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); obs.unobserve(e.target); } });
+  }, { threshold: 0.08 });
+  document.querySelectorAll('.fade-up').forEach(el => obs.observe(el));
+
+  function toggleMenu() {
+    const links = document.querySelector('.nav-links');
+    const open = links.style.display === 'flex';
+    Object.assign(links.style, { display: open ? 'none' : 'flex', flexDirection: 'column', position: 'absolute', top: '100%', left: '0', right: '0', background: '#1A1A1A', padding: '16px 24px', gap: '20px', zIndex: '99' });
+  }
+
+  function handleSub(e) {
+    e.preventDefault();
+    const btn = e.target.querySelector('button');
+    btn.textContent = 'Subscribed ✓';
+    btn.style.background = '#7A8F87';
+    e.target.querySelector('input').value = '';
+  }
+</script>
+</body>
+</html>
