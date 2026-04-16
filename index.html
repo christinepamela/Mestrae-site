@@ -3,274 +3,533 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Mestrae</title>
-  <link rel="icon" href="assets/images/Favicon.png" type="image/png" />
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600&family=Inter:wght@300;400;600&display=swap" rel="stylesheet" />
+  <title>Mestrae — Interchangeable Heels</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Source+Sans+3:wght@300;400;500;600&display=swap" rel="stylesheet">
   <style>
+    /*
+      MESTRAE 2026 — v2 with real photos
+      Trying a warmer, less teal direction:
+      Primary surface: Deep Charcoal-Green  #1E2B2C  (darker, less "teal")
+      Canvas:          Warm Bone            #F2EEE8
+      Ink:             Near-Black           #1A1A1A
+      Accent:          Dusty Pink           #C9A8B2
+      Support:         Slate                #5C6B6E
+      Muted:           Grey-Sage            #7A8F87
+    */
     :root {
-      --color-primary: #000000;
-      --color-secondary: #f5f5f5;
-      --color-accent: #e6e2dd;
-      --color-gold: #d4af37;
-      --spacing-unit: 8px;
+      --primary:    #1E2B2C;
+      --bone:       #F2EEE8;
+      --bone-mid:   #E8E3DC;
+      --ink:        #1A1A1A;
+      --pink:       #C9A8B2;
+      --pink-dark:  #4A2535;
+      --slate:      #5C6B6E;
+      --muted:      #7A8F87;
+      --border:     #E0DBD4;
+      --font:       'Source Sans 3', sans-serif;
     }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body { font-family: var(--font); background: var(--bone); color: var(--ink); font-size: 16px; line-height: 1.7; -webkit-font-smoothing: antialiased; }
+    a { text-decoration: none; color: inherit; }
+    img { display: block; max-width: 100%; }
+    .container { max-width: 1280px; margin: 0 auto; padding: 0 48px; }
 
-    html {
-      scroll-behavior: smooth;
+    /* ANNOUNCEMENT */
+    #announcement {
+      background: var(--ink); color: var(--bone);
+      text-align: center; padding: 10px 24px;
+      font-size: 12px; letter-spacing: 0.08em;
     }
+    #announcement a { color: var(--pink); text-decoration: underline; text-underline-offset: 3px; margin-left: 6px; }
 
-    body {
-      margin: 0;
-      font-family: 'Inter', sans-serif;
-      background-color: #fff;
-      color: var(--color-primary);
-      font-size: 14px;
-      line-height: 1.6;
+    /* NAV */
+    nav { background: var(--ink); position: sticky; top: 0; z-index: 100; border-bottom: 1px solid rgba(255,255,255,0.06); }
+    .nav-inner { display: flex; align-items: center; justify-content: space-between; height: 64px; max-width: 1280px; margin: 0 auto; padding: 0 48px; }
+    .nav-logo { font-size: 18px; font-weight: 500; letter-spacing: 0.22em; color: var(--bone); text-transform: uppercase; }
+    .nav-links { display: flex; gap: 36px; list-style: none; }
+    .nav-links a { font-size: 11px; letter-spacing: 0.10em; text-transform: uppercase; color: rgba(242,238,232,0.5); transition: color 0.2s; }
+    .nav-links a:hover { color: var(--bone); }
+    .nav-links a.active { color: var(--pink); }
+    .nav-cta { font-size: 11px; font-weight: 500; letter-spacing: 0.10em; text-transform: uppercase; color: var(--bone); border: 0.5px solid rgba(242,238,232,0.3); padding: 8px 18px; transition: all 0.2s; }
+    .nav-cta:hover { background: var(--bone); color: var(--ink); }
+    .hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; }
+    .hamburger span { display: block; width: 22px; height: 1.5px; background: var(--bone); }
+
+    /* HERO */
+    .hero { position: relative; min-height: 90vh; display: grid; grid-template-columns: 1fr 1fr; overflow: hidden; }
+    .hero-image-wrap { position: relative; overflow: hidden; }
+    .hero-image-wrap img { width: 100%; height: 100%; object-fit: cover; object-position: center 30%; }
+    .hero-content { background: var(--primary); display: flex; flex-direction: column; justify-content: center; padding: 80px 64px 80px 72px; }
+    .hero-eyebrow { font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--muted); margin-bottom: 28px; }
+    .hero-title { font-size: clamp(40px, 4.5vw, 64px); font-weight: 300; line-height: 1.1; color: var(--bone); margin-bottom: 24px; letter-spacing: -0.01em; }
+    .hero-title em { font-style: normal; color: var(--pink); }
+    .hero-body { font-size: 15px; font-weight: 300; color: rgba(242,238,232,0.6); max-width: 360px; line-height: 1.85; margin-bottom: 40px; }
+    .hero-actions { display: flex; gap: 14px; flex-wrap: wrap; }
+    .btn-primary { display: inline-block; background: var(--bone); color: var(--primary); font-size: 12px; font-weight: 500; letter-spacing: 0.10em; text-transform: uppercase; padding: 14px 28px; transition: all 0.2s; }
+    .btn-primary:hover { background: #fff; }
+    .btn-ghost { display: inline-block; border: 0.5px solid rgba(242,238,232,0.3); color: rgba(242,238,232,0.65); font-size: 12px; letter-spacing: 0.10em; text-transform: uppercase; padding: 14px 28px; transition: all 0.2s; }
+    .btn-ghost:hover { border-color: rgba(242,238,232,0.7); color: var(--bone); }
+    .hero-stat { position: absolute; bottom: 36px; right: 36px; background: rgba(30,43,44,0.88); border: 0.5px solid rgba(242,238,232,0.12); padding: 16px 22px; }
+    .hero-stat-num { font-size: 30px; font-weight: 300; color: var(--bone); line-height: 1; }
+    .hero-stat-label { font-size: 11px; color: var(--muted); margin-top: 4px; letter-spacing: 0.06em; }
+
+    /* WHERE WE ARE */
+    .wwa { background: var(--bone); border-bottom: 1px solid var(--border); }
+    .wwa-inner { display: grid; grid-template-columns: 1fr 1fr; gap: 72px; align-items: center; padding: 72px 48px; max-width: 1280px; margin: 0 auto; }
+    .eyebrow { font-size: 11px; font-weight: 500; letter-spacing: 0.16em; text-transform: uppercase; color: var(--muted); margin-bottom: 16px; display: flex; align-items: center; gap: 10px; }
+    .eyebrow::before { content: ''; display: block; width: 20px; height: 1px; background: var(--muted); }
+    .wwa-title { font-size: 34px; font-weight: 300; line-height: 1.2; color: var(--ink); margin-bottom: 18px; }
+    .wwa-body { font-size: 15px; color: var(--slate); line-height: 1.85; margin-bottom: 28px; }
+    .btn-outline { display: inline-block; border: 0.5px solid var(--ink); color: var(--ink); font-size: 11px; font-weight: 500; letter-spacing: 0.10em; text-transform: uppercase; padding: 12px 24px; transition: all 0.2s; }
+    .btn-outline:hover { background: var(--ink); color: var(--bone); }
+    .progress-block { display: flex; flex-direction: column; gap: 22px; }
+    .progress-meta { display: flex; justify-content: space-between; margin-bottom: 8px; }
+    .progress-label { font-size: 13px; font-weight: 500; color: var(--ink); }
+    .progress-date { font-size: 12px; color: var(--slate); }
+    .progress-track { height: 3px; background: var(--bone-mid); overflow: hidden; }
+    .progress-fill { height: 100%; background: var(--primary); }
+    .progress-fill.pink { background: var(--pink); }
+    .progress-fill.sage { background: var(--muted); }
+    .progress-note { font-size: 11px; color: var(--slate); margin-top: 6px; }
+
+    /* PRODUCTS */
+    .products { background: #fff; padding: 80px 0; }
+    .section-header { display: flex; align-items: flex-end; justify-content: space-between; margin-bottom: 48px; }
+    .section-title { font-size: 36px; font-weight: 300; color: var(--ink); line-height: 1.2; }
+    .link-underline { font-size: 12px; font-weight: 500; letter-spacing: 0.10em; text-transform: uppercase; color: var(--slate); border-bottom: 1px solid var(--border); padding-bottom: 2px; transition: all 0.2s; }
+    .link-underline:hover { color: var(--primary); border-color: var(--primary); }
+    .products-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px; }
+    .product-card { cursor: pointer; }
+    .product-image { aspect-ratio: 4/5; overflow: hidden; position: relative; margin-bottom: 16px; background: var(--bone); }
+    .product-image img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s ease; }
+    .product-card:hover .product-image img { transform: scale(1.04); }
+    .product-tag { position: absolute; top: 12px; left: 12px; background: var(--pink); color: var(--pink-dark); font-size: 10px; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; padding: 4px 10px; z-index: 2; }
+    .product-name { font-size: 15px; font-weight: 500; color: var(--ink); margin-bottom: 3px; }
+    .product-type { font-size: 12px; color: var(--slate); margin-bottom: 8px; text-transform: uppercase; letter-spacing: 0.06em; }
+    .product-price { font-size: 14px; color: var(--primary); font-weight: 500; }
+    .product-heights { display: flex; gap: 5px; margin-top: 8px; }
+    .height-pill { font-size: 10px; padding: 3px 9px; border: 0.5px solid var(--border); color: var(--slate); }
+
+    /* HOW IT WORKS */
+    .how { background: var(--bone); padding: 80px 0; border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
+    .how-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2px; margin-top: 48px; }
+    .how-row { display: contents; }
+    .how-step { background: #fff; padding: 40px 36px; }
+    .how-step-img { height: 200px; overflow: hidden; margin-bottom: 24px; background: var(--bone); }
+    .how-step-img img { width: 100%; height: 100%; object-fit: cover; object-position: center 40%; }
+    .how-num { font-size: 13px; font-weight: 500; letter-spacing: 0.14em; color: var(--muted); margin-bottom: 10px; }
+    .how-step-title { font-size: 18px; font-weight: 400; color: var(--ink); margin-bottom: 8px; }
+    .how-step-title em { font-style: normal; color: var(--pink); }
+    .how-step-desc { font-size: 13px; color: var(--slate); line-height: 1.75; }
+
+    /* TOOLS */
+    .tools { background: #fff; padding: 80px 0; }
+    .tools-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 1px; border: 1px solid var(--border); margin-top: 48px; }
+    .tool-card { padding: 40px 36px; background: #fff; border-right: 1px solid var(--border); transition: background 0.2s; }
+    .tool-card:last-child { border-right: none; }
+    .tool-card:hover { background: var(--bone); }
+    .tool-eyebrow { font-size: 10px; font-weight: 500; letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted); margin-bottom: 14px; }
+    .tool-name { font-size: 20px; font-weight: 400; color: var(--ink); margin-bottom: 12px; }
+    .tool-desc { font-size: 14px; color: var(--slate); line-height: 1.75; margin-bottom: 24px; }
+    .tool-cta { font-size: 11px; font-weight: 500; letter-spacing: 0.10em; text-transform: uppercase; color: var(--primary); border-bottom: 1px solid var(--primary); padding-bottom: 2px; display: inline-block; }
+    .tool-soon { font-size: 11px; letter-spacing: 0.10em; text-transform: uppercase; color: var(--border); display: inline-block; }
+
+    /* THE SHIFT */
+    .shift { background: var(--primary); padding: 100px 0; }
+    .shift-inner { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center; }
+    .shift-image { overflow: hidden; }
+    .shift-image img { width: 100%; height: 480px; object-fit: cover; object-position: center 20%; }
+    .shift-quote { font-size: clamp(26px, 3vw, 42px); font-weight: 300; color: var(--bone); line-height: 1.2; letter-spacing: -0.01em; margin-bottom: 28px; }
+    .shift-quote em { font-style: normal; color: var(--pink); }
+    .shift-body { font-size: 15px; font-weight: 300; color: rgba(242,238,232,0.55); line-height: 1.85; margin-bottom: 32px; }
+    .shift-link { font-size: 12px; font-weight: 500; letter-spacing: 0.10em; text-transform: uppercase; color: var(--bone); border-bottom: 1px solid rgba(242,238,232,0.3); padding-bottom: 2px; display: inline-block; transition: border-color 0.2s; }
+    .shift-link:hover { border-color: var(--bone); }
+
+    /* NEWSLETTER */
+    .newsletter { background: var(--bone); padding: 80px 0; border-top: 1px solid var(--border); }
+    .newsletter-inner { max-width: 520px; margin: 0 auto; text-align: center; }
+    .nl-title { font-size: 30px; font-weight: 300; color: var(--ink); margin-bottom: 10px; }
+    .nl-body { font-size: 15px; color: var(--slate); margin-bottom: 28px; line-height: 1.7; }
+    .nl-form { display: flex; max-width: 420px; margin: 0 auto; }
+    .nl-input { flex: 1; border: 1px solid var(--border); border-right: none; background: #fff; padding: 13px 16px; font-family: var(--font); font-size: 14px; color: var(--ink); outline: none; transition: border-color 0.2s; }
+    .nl-input:focus { border-color: var(--primary); }
+    .nl-btn { background: var(--primary); color: var(--bone); border: 1px solid var(--primary); font-family: var(--font); font-size: 11px; font-weight: 500; letter-spacing: 0.10em; text-transform: uppercase; padding: 13px 22px; cursor: pointer; white-space: nowrap; transition: opacity 0.2s; }
+    .nl-btn:hover { opacity: 0.85; }
+    .nl-note { font-size: 11px; color: var(--muted); margin-top: 10px; }
+
+    /* FOOTER */
+    footer { background: var(--ink); color: var(--bone); padding: 64px 0 32px; }
+    .footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 48px; padding-bottom: 48px; border-bottom: 1px solid rgba(242,238,232,0.07); margin-bottom: 28px; }
+    .footer-brand { font-size: 16px; font-weight: 500; letter-spacing: 0.22em; text-transform: uppercase; color: var(--bone); margin-bottom: 10px; }
+    .footer-tagline { font-size: 13px; color: rgba(242,238,232,0.35); line-height: 1.7; margin-bottom: 22px; max-width: 210px; }
+    .footer-social { display: flex; gap: 14px; }
+    .footer-social a { font-size: 11px; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; color: rgba(242,238,232,0.35); transition: color 0.2s; }
+    .footer-social a:hover { color: var(--bone); }
+    .footer-col-title { font-size: 10px; font-weight: 500; letter-spacing: 0.14em; text-transform: uppercase; color: rgba(242,238,232,0.35); margin-bottom: 18px; }
+    .footer-links { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+    .footer-links a { font-size: 14px; color: rgba(242,238,232,0.5); transition: color 0.2s; }
+    .footer-links a:hover { color: var(--bone); }
+    .footer-links a.hl { color: var(--pink); }
+    .footer-bottom { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px; }
+    .footer-copy { font-size: 12px; color: rgba(242,238,232,0.2); }
+    .footer-legal { display: flex; gap: 18px; list-style: none; }
+    .footer-legal a { font-size: 12px; color: rgba(242,238,232,0.2); transition: color 0.2s; }
+    .footer-legal a:hover { color: rgba(242,238,232,0.5); }
+
+    /* FADE */
+    .fade-up { opacity: 0; transform: translateY(20px); transition: opacity 0.6s ease, transform 0.6s ease; }
+    .fade-up.visible { opacity: 1; transform: translateY(0); }
+    .d1 { transition-delay: 0.1s; } .d2 { transition-delay: 0.2s; } .d3 { transition-delay: 0.3s; } .d4 { transition-delay: 0.4s; }
+
+    /* RESPONSIVE */
+    @media (max-width: 1024px) {
+      .container, .nav-inner { padding: 0 32px; }
+      .products-grid { grid-template-columns: repeat(2,1fr); }
+      .footer-grid { grid-template-columns: 1fr 1fr; }
     }
-
-    .nav-container {
-      position: fixed;
-      top: 0;
-      left: 0;
-      right: 0;
-      background: white;
-      z-index: 1000;
-    }
-
-    .top-bar {
-      background-color: var(--color-gold);
-      color: #000;
-      text-align: center;
-      padding: calc(var(--spacing-unit) * 2);
-      font-size: 13px;
-      font-weight: 600;
-      letter-spacing: 1px;
-    }
-
-    header {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      padding: calc(var(--spacing-unit) * 3) 0;
-      border-bottom: 1px solid var(--color-accent);
-    }
-
-    .logo {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 32px;
-      letter-spacing: 3px;
-      font-weight: 400;
-    }
-
-    .hero-section {
-      margin-top: 140px;
-      width: 100%;
-      height: 90vh;
-      position: relative;
-      overflow: hidden;
-    }
-
-    .hero-section img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-    }
-
-    .hero-caption {
-      position: absolute;
-      bottom: 10%;
-      left: 50%;
-      transform: translateX(-50%);
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 48px;
-      color: white;
-      text-align: center;
-      max-width: 800px;
-    }
-
-    .section {
-      padding: calc(var(--spacing-unit) * 12) calc(var(--spacing-unit) * 8);
-      max-width: 1400px;
-      margin: 0 auto;
-    }
-
-    .grid-container {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: calc(var(--spacing-unit) * 8);
-      align-items: center;
-    }
-
-    .section h2 {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 42px;
-      font-weight: 400;
-      margin-bottom: calc(var(--spacing-unit) * 3);
-    }
-
-    .section p {
-      font-size: 16px;
-      line-height: 1.8;
-    }
-
-    .pillars {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: calc(var(--spacing-unit) * 4);
-      padding: calc(var(--spacing-unit) * 8) 0;
-    }
-
-    .pillar {
-      text-align: center;
-      padding: calc(var(--spacing-unit) * 4);
-      background-color: var(--color-secondary);
-    }
-
-    .pillar-title {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 24px;
-      margin-bottom: calc(var(--spacing-unit) * 2);
-    }
-
-    footer {
-      background-color: var(--color-primary);
-      color: white;
-      padding: calc(var(--spacing-unit) * 8) 0;
-      margin-top: calc(var(--spacing-unit) * 8);
-    }
-
-    .footer-content {
-      max-width: 1400px;
-      margin: 0 auto;
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: calc(var(--spacing-unit) * 4);
-      padding: 0 calc(var(--spacing-unit) * 8);
-    }
-
-    .footer-icons {
-      display: flex;
-      gap: calc(var(--spacing-unit) * 2);
-      margin-top: calc(var(--spacing-unit) * 2);
-      flex-wrap: wrap;
-    }
-
-    .footer-icons img {
-      width: 20px;
-      filter: invert(1);
-      transition: opacity 0.3s ease;
-    }
-
-    .footer-icons img:hover {
-      opacity: 0.8;
-    }
-
-    .footer-link {
-      color: white;
-      text-decoration: none;
-      transition: opacity 0.3s ease;
-    }
-
-    .footer-link:hover {
-      opacity: 0.8;
-    }
-
     @media (max-width: 768px) {
-      .grid-container {
-        grid-template-columns: 1fr;
-      }
-
-      .pillars {
-        grid-template-columns: 1fr;
-      }
-
-      .footer-content {
-        grid-template-columns: repeat(2, 1fr);
-        gap: calc(var(--spacing-unit) * 4);
-      }
-
-      .hero-caption {
-        font-size: 32px;
-        padding: 0 var(--spacing-unit);
-      }
-
-      .hero-section {
-        margin-top: 120px;
-      }
+      .nav-links, .nav-cta { display: none; }
+      .hamburger { display: flex; }
+      .hero { grid-template-columns: 1fr; }
+      .hero-image-wrap { min-height: 55vw; order: -1; }
+      .hero-content { padding: 48px 24px; }
+      .hero-stat { bottom: 16px; right: 16px; }
+      .wwa-inner { grid-template-columns: 1fr; gap: 40px; padding: 48px 24px; }
+      .how-grid { grid-template-columns: 1fr; }
+      .tools-grid { grid-template-columns: 1fr; }
+      .tools-grid .tool-card { border-right: none; border-bottom: 1px solid var(--border); }
+      .shift-inner { grid-template-columns: 1fr; gap: 40px; }
+      .footer-grid { grid-template-columns: 1fr 1fr; gap: 28px; }
+    }
+    @media (max-width: 480px) {
+      .products-grid { grid-template-columns: 1fr; }
+      .nl-form { flex-direction: column; }
+      .nl-input { border-right: 1px solid var(--border); border-bottom: none; }
     }
   </style>
 </head>
 <body>
-  <div class="nav-container">
-    <div class="top-bar">
-      ⚠️ SHOP NOT OPEN YET — Rebuilding with style. Launching November 2026.
-    </div>
-    <header>
-      <div class="logo">MESTRAE</div>
-    </header>
-  </div>
 
-  <div class="hero-section">
-    <img src="assets/images/paper-texture(1).png" alt="Hero Image">
-    <div class="hero-caption">Where Fashion Meets Technology</div>
-  </div>
+<!-- ANNOUNCEMENT -->
+<div id="announcement">
+  Rebuilding with purpose. Launching November 1, 2026.
+  <a href="where-we-are.html">Read our update &rarr;</a>
+</div>
 
-  <div class="section">
-    <div class="grid-container">
-      <div>
-        <h2>the Shift</h2>
-        <p>From heels to something far more meaningful. Mestrae began with interchangeable heels, but we're stepping into a bigger purpose. We're bridging fashion and tech for the underserved and for a freer, more open ecosystem.</p>
-      </div>
-      <div>
-        <h2>the Gratitude</h2>
-        <p>We're still here because of you. Thank you for standing by us. Mestrae faced immense systemic challenges. And we also launched too soon, grew too fast, and made mistakes along the way. But your patience and support helped us find our way back. Who are we without our customers?</p>
-      </div>
-    </div>
+<!-- NAV -->
+<nav>
+  <div class="nav-inner">
+    <a href="index.html" class="nav-logo">Mestrae</a>
+    <ul class="nav-links">
+      <li><a href="shop.html">Shop</a></li>
+      <li><a href="shift.html">The Shift</a></li>
+      <li><a href="tools.html">Tools</a></li>
+      <li><a href="about.html">About</a></li>
+      <li><a href="where-we-are.html" class="active">Where We Are</a></li>
+    </ul>
+    <a href="shop.html" class="nav-cta">Shop now</a>
+    <div class="hamburger" onclick="toggleMenu()"><span></span><span></span><span></span></div>
   </div>
+</nav>
 
-  <div class="section" style="background-color: var(--color-accent);">
-    <div class="pillars">
-      <div class="pillar">
-        <div class="pillar-title">Mestrae</div>
-        <div class="pillar-text">for exclusive heels and fashion design</div>
-      </div>
-      <div class="pillar">
-        <div class="pillar-title">Tiga</div>
-        <div class="pillar-text">health-focused wearables for the underserved</div>
-      </div>
-      <div class="pillar">
-        <div class="pillar-title">OwnIt</div>
-        <div class="pillar-text">open-source platform to redefine footwear innovation and ecosystem</div>
-      </div>
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-image-wrap">
+    <img src="assets/images/hero.jpg" alt="Woman changing Mestrae heel against terracotta wall">
+    <div class="hero-stat">
+      <div class="hero-stat-num">31</div>
+      <div class="hero-stat-label">countries · since 2016</div>
     </div>
   </div>
+  <div class="hero-content">
+    <p class="hero-eyebrow">Interchangeable &middot; Engineered &middot; For you</p>
+    <h1 class="hero-title">One shoe.<br><em>Every</em> occasion.</h1>
+    <p class="hero-body">Switch from 3.5&Prime; heels to flats in seconds without taking your shoes off. Built for women who move through the world on their own terms.</p>
+    <div class="hero-actions">
+      <a href="shop.html" class="btn-primary">Shop the collection</a>
+      <a href="shift.html" class="btn-ghost">Our manifesto</a>
+    </div>
+  </div>
+</section>
 
-  <footer>
-    <div class="footer-content">
+<!-- WHERE WE ARE -->
+<section class="wwa" id="where-we-are">
+  <div class="wwa-inner">
+    <div class="fade-up">
+      <p class="eyebrow">Where we are</p>
+      <h2 class="wwa-title">Rebuilding.<br>Refunding.<br>Returning.</h2>
+      <p class="wwa-body">Between 2019 and 2021, Mestrae was hit by an unpaid grant, the pandemic, and severe flooding &mdash; each one compounding the last. We lost our manufacturing facility, our inventory, and years of work. Rebuilding has been slow and personal. But we are still here, and we are doing right by everyone who believed in us. All affected customers will be refunded by June 2026. The shop reopens November 1. Step by step.</p>
+      <a href="where-we-are.html" class="btn-outline">Read the full update</a>
+    </div>
+    <div class="progress-block fade-up d2">
       <div>
-        <h3>Message</h3>
-        <p><a href="message.html" class="footer-link">from Pam</a></p>
+        <div class="progress-meta">
+          <span class="progress-label">Customer refunds</span>
+          <span class="progress-date">June 2026</span>
+        </div>
+        <div class="progress-track"><div class="progress-fill pink" style="width:30%"></div></div>
+        <p class="progress-note">Processing all affected orders from 2020&ndash;2021</p>
       </div>
       <div>
-        <h3>Our History</h3>
-        <p><a href="our-history.html" class="footer-link">learn our story</a></p>
+        <div class="progress-meta">
+          <span class="progress-label">Website rebuild</span>
+          <span class="progress-date">November 1, 2026</span>
+        </div>
+        <div class="progress-track"><div class="progress-fill" style="width:40%"></div></div>
+        <p class="progress-note">New store, new tools &mdash; in progress</p>
       </div>
       <div>
-        <h3>Contact</h3>
-        <p>info@mestrae.com</p>
+        <div class="progress-meta">
+          <span class="progress-label">Open source release</span>
+          <span class="progress-date">August 2026</span>
+        </div>
+        <div class="progress-track"><div class="progress-fill sage" style="width:15%"></div></div>
+        <p class="progress-note">Prototype 1 &amp; 2 designs going open source</p>
       </div>
       <div>
-        <h3>Follow Us</h3>
-        <div class="footer-icons">
-          <a href="https://twitter.com"><img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/twitter.svg" alt="Twitter"></a>
-          <a href="https://instagram.com"><img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/instagram.svg" alt="Instagram"></a>
-          <a href="https://facebook.com"><img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/facebook.svg" alt="Facebook"></a>
-          <a href="https://mestrae.substack.com/"><img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/substack.svg" alt="Substack"></a>
-          <a href="https://www.youtube.com/channel/UCxHOxnBYmGdhOZ-XzTzIYOQ"><img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/youtube.svg" alt="YouTube"></a>
+        <div class="progress-meta">
+          <span class="progress-label">New shoe tech</span>
+          <span class="progress-date">October 2026+</span>
+        </div>
+        <div class="progress-track"><div class="progress-fill sage" style="width:8%"></div></div>
+        <p class="progress-note">Better engineering, better fit, expanded range</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PRODUCTS -->
+<section class="products">
+  <div class="container">
+    <div class="section-header fade-up">
+      <div>
+        <p class="eyebrow">Featured styles</p>
+        <h2 class="section-title">Built to move<br>with you</h2>
+      </div>
+      <a href="shop.html" class="link-underline">View all styles</a>
+    </div>
+    <div class="products-grid">
+      <div class="product-card fade-up d1">
+        <div class="product-image">
+          <img src="assets/images/belinda.png" alt="Belinda — black cross-strap pump">
+        </div>
+        <div class="product-name">Belinda</div>
+        <div class="product-type">Classic Pump</div>
+        <div class="product-price">from $150</div>
+        <div class="product-heights"><span class="height-pill">Flat</span><span class="height-pill">2.5&Prime;</span><span class="height-pill">3.5&Prime;</span></div>
+      </div>
+      <div class="product-card fade-up d2">
+        <div class="product-image">
+          <span class="product-tag">New</span>
+          <img src="assets/images/product-3.jpg" alt="Carrie — red sandal on golden steps">
+        </div>
+        <div class="product-name">Carrie</div>
+        <div class="product-type">Open Sandal</div>
+        <div class="product-price">from $180</div>
+        <div class="product-heights"><span class="height-pill">Flat</span><span class="height-pill">3.5&Prime;</span></div>
+      </div>
+      <div class="product-card fade-up d3">
+        <div class="product-image">
+          <img src="assets/images/agnes.png" alt="Agnes — black cutout sandal">
+        </div>
+        <div class="product-name">Agnes</div>
+        <div class="product-type">Black cutout sandal</div>
+        <div class="product-price">from $150</div>
+        <div class="product-heights"><span class="height-pill">Flat</span><span class="height-pill">2.5&Prime;</span><span class="height-pill">3.5&Prime;</span></div>
+      </div>
+      <div class="product-card fade-up d4">
+        <div class="product-image" style="display:flex;align-items:center;justify-content:center;background:var(--bone);">
+          <img src="assets/images/box.jpg" alt="Mestrae packaging" style="object-fit:cover;width:100%;height:100%;">
+        </div>
+        <div class="product-name">View all styles</div>
+        <div class="product-type">5 base designs</div>
+        <div class="product-price" style="color:var(--slate);">Leather &amp; vegan</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- HOW IT WORKS -->
+<section class="how">
+  <div class="container">
+    <div class="fade-up">
+      <p class="eyebrow">How it works</p>
+      <h2 class="section-title">Designed around<br>the way you live</h2>
+    </div>
+    <div class="how-grid">
+      <div class="how-step fade-up d1">
+        <div class="how-step-img">
+          <img src="assets/images/product-2.jpg" alt="Range of Mestrae heel designs">
+        </div>
+        <div class="how-num">01</div>
+        <h3 class="how-step-title">Choose your base shoe</h3>
+        <p class="how-step-desc">5 designs in leather or vegan. The shoe stays. The heels change.</p>
+      </div>
+      <div class="how-step fade-up d2">
+        <div class="how-step-img">
+          <img src="assets/images/mechanism-1.jpg" alt="The interchangeable heel mechanism">
+        </div>
+        <div class="how-num">02</div>
+        <h3 class="how-step-title">See the mechanism</h3>
+        <p class="how-step-desc">Engineering-grade click system. Tested to UK Satra regulatory standards.</p>
+      </div>
+      <div class="how-step fade-up d3">
+        <div class="how-step-img">
+          <img src="assets/images/mechanism-2.jpg" alt="Changing Mestrae heel on the go">
+        </div>
+        <div class="how-num">03</div>
+        <h3 class="how-step-title"><em>Snap</em> and go</h3>
+        <p class="how-step-desc">Press the button. Slide the heel. Done — without taking your shoes off.</p>
+      </div>
+      <div class="how-step fade-up d4">
+        <div class="how-step-img" style="display:flex;align-items:center;justify-content:center;background:var(--bone-mid);">
+          <div style="text-align:center;">
+            <div style="font-size:48px;font-weight:300;color:var(--primary);line-height:1;">10</div>
+            <div style="font-size:12px;letter-spacing:0.1em;text-transform:uppercase;color:var(--slate);margin-top:6px;">heel designs<br>per height</div>
+          </div>
+        </div>
+        <div class="how-num">04</div>
+        <h3 class="how-step-title">Build your collection</h3>
+        <p class="how-step-desc">Buy heels separately. One base shoe, endless occasions. The more you collect, the more versatile you become.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TOOLS -->
+<section class="tools">
+  <div class="container">
+    <div class="fade-up">
+      <p class="eyebrow">Tools</p>
+      <h2 class="section-title">Built to help you<br>find your fit</h2>
+    </div>
+    <div class="tools-grid">
+      <div class="tool-card">
+        <p class="tool-eyebrow">Choose</p>
+        <h3 class="tool-name">Heel height calculator</h3>
+        <p class="tool-desc">Answer a few questions about your day and we&rsquo;ll tell you the ideal height for you.</p>
+        <a href="calculator.html" class="tool-cta">Try the calculator</a>
+      </div>
+      <div class="tool-card">
+        <p class="tool-eyebrow">Choose</p>
+        <h3 class="tool-name">Style quiz</h3>
+        <p class="tool-desc">5 questions about where you go and how you live &mdash; matched to your perfect Mestrae.</p>
+        <a href="quiz.html" class="tool-cta">Take the quiz</a>
+      </div>
+      <div class="tool-card">
+        <p class="tool-eyebrow">Coming soon</p>
+        <h3 class="tool-name" style="color:var(--slate);">My Mestrae closet</h3>
+        <p class="tool-desc" style="color:var(--border);">Track your collection, get outfit suggestions, know when to care for your shoes.</p>
+        <span class="tool-soon">Available post-launch</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- THE SHIFT -->
+<section class="shift">
+  <div class="container">
+    <div class="shift-inner">
+      <div class="shift-image fade-up">
+        <img src="assets/images/editorial.jpg" alt="Mestrae editorial — Audrey Hepburn book and red shoes">
+      </div>
+      <div class="fade-up d2">
+        <p class="eyebrow" style="color:var(--muted);">The Shift</p>
+        <blockquote class="shift-quote">&ldquo;Footwear hasn&rsquo;t evolved as far as <em>women have.</em>&rdquo;</blockquote>
+        <p class="shift-body">Beauty doesn&rsquo;t have to be painful. Comfort doesn&rsquo;t have to be boring. Mestrae was built on the belief that with engineering, anyone can build better. This is our manifesto &mdash; and an open invitation.</p>
+        <a href="shift.html" class="shift-link">Read the manifesto</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- NEWSLETTER -->
+<section class="newsletter">
+  <div class="newsletter-inner fade-up">
+    <p class="eyebrow" style="justify-content:center;">Stay in the loop</p>
+    <h2 class="nl-title">Monthly updates.</h2>
+    <p class="nl-body">Join 3,000+ women following the Mestrae rebuild &mdash; launch news, behind-the-scenes, and early access.</p>
+    <form class="nl-form" onsubmit="handleSub(event)">
+      <input type="email" class="nl-input" placeholder="your@email.com" required>
+      <button type="submit" class="nl-btn">Subscribe</button>
+    </form>
+    <p class="nl-note">No spam, ever. Unsubscribe anytime.</p>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="container">
+    <div class="footer-grid">
+      <div>
+        <div class="footer-brand">Mestrae</div>
+        <p class="footer-tagline">Interchangeable heels built for the way women actually live. Est. 2016, Kuala Lumpur.</p>
+        <div class="footer-social">
+          <a href="https://instagram.com" target="_blank">Instagram</a>
+          <a href="https://mestrae.substack.com" target="_blank">Substack</a>
+          <a href="https://www.youtube.com/channel/UCxHOxnBYmGdhOZ-XzTzIYOQ" target="_blank">YouTube</a>
         </div>
       </div>
+      <div>
+        <div class="footer-col-title">Shop</div>
+        <ul class="footer-links">
+          <li><a href="shop.html">All styles</a></li>
+          <li><a href="shop.html?filter=heels">Heel sets</a></li>
+          <li><a href="size-guide.html">Size guide</a></li>
+          <li><a href="shipping.html">Shipping</a></li>
+        </ul>
+      </div>
+      <div>
+        <div class="footer-col-title">Company</div>
+        <ul class="footer-links">
+          <li><a href="about.html">About</a></li>
+          <li><a href="shift.html">The Shift</a></li>
+          <li><a href="where-we-are.html" class="hl">Where we are</a></li>
+          <li><a href="https://mestrae.substack.com" target="_blank">Substack</a></li>
+        </ul>
+      </div>
+      <div>
+        <div class="footer-col-title">Support</div>
+        <ul class="footer-links">
+          <li><a href="contact.html">Contact us</a></li>
+          <li><a href="contact.html#faq">FAQ</a></li>
+          <li><a href="care.html">Care guide</a></li>
+          <li><a href="mailto:info@mestrae.com">info@mestrae.com</a></li>
+        </ul>
+      </div>
     </div>
-  </footer>
+    <div class="footer-bottom">
+      <p class="footer-copy">&copy; 2026 Mestrae. All rights reserved.</p>
+      <ul class="footer-legal">
+        <li><a href="privacy.html">Privacy</a></li>
+        <li><a href="terms.html">Terms</a></li>
+        <li><a href="shipping.html">Shipping &amp; Returns</a></li>
+      </ul>
+    </div>
+  </div>
+</footer>
+
+<script>
+  const obs = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); obs.unobserve(e.target); } });
+  }, { threshold: 0.1 });
+  document.querySelectorAll('.fade-up').forEach(el => obs.observe(el));
+
+  function toggleMenu() {
+    const links = document.querySelector('.nav-links');
+    const open = links.style.display === 'flex';
+    Object.assign(links.style, { display: open ? 'none' : 'flex', flexDirection: 'column', position: 'absolute', top: '100%', left: '0', right: '0', background: '#1A1A1A', padding: '16px 24px', gap: '20px', zIndex: '99' });
+  }
+
+  function handleSub(e) {
+    e.preventDefault();
+    const btn = e.target.querySelector('button');
+    btn.textContent = 'Subscribed ✓';
+    btn.style.background = '#7A8F87';
+    e.target.querySelector('input').value = '';
+  }
+</script>
 </body>
 </html>
-
