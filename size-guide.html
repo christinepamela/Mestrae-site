@@ -1,0 +1,610 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Size Guide — Mestrae</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Source+Sans+3:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary:  #1E2B2C;
+      --bone:     #F2EEE8;
+      --bone-mid: #E8E3DC;
+      --ink:      #1A1A1A;
+      --pink:     #C9A8B2;
+      --pink-bg:  #F5EFF1;
+      --slate:    #5C6B6E;
+      --muted:    #7A8F87;
+      --border:   #E0DBD4;
+      --white:    #ffffff;
+      --font:     'Source Sans 3', sans-serif;
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body { font-family: var(--font); background: var(--bone); color: var(--ink); font-size: 16px; line-height: 1.7; -webkit-font-smoothing: antialiased; }
+    a { text-decoration: none; color: inherit; }
+    .container { max-width: 1280px; margin: 0 auto; padding: 0 48px; }
+    .container-mid { max-width: 900px; margin: 0 auto; padding: 0 48px; }
+
+    #announcement { background: var(--ink); color: var(--bone); text-align: center; padding: 10px 24px; font-size: 12px; letter-spacing: 0.08em; }
+    #announcement a { color: var(--pink); text-decoration: underline; text-underline-offset: 3px; margin-left: 6px; }
+
+    nav { background: var(--ink); position: sticky; top: 0; z-index: 100; border-bottom: 1px solid rgba(255,255,255,0.06); }
+    .nav-inner { display: flex; align-items: center; justify-content: space-between; height: 64px; max-width: 1280px; margin: 0 auto; padding: 0 48px; }
+    .nav-logo { font-size: 18px; font-weight: 500; letter-spacing: 0.22em; color: var(--bone); text-transform: uppercase; }
+    .nav-links { display: flex; gap: 36px; list-style: none; }
+    .nav-links a { font-size: 11px; letter-spacing: 0.10em; text-transform: uppercase; color: rgba(242,238,232,0.5); transition: color 0.2s; }
+    .nav-links a:hover { color: var(--bone); }
+    .nav-links a.active { color: var(--pink); }
+    .nav-cta { font-size: 11px; font-weight: 500; letter-spacing: 0.10em; text-transform: uppercase; color: var(--bone); border: 0.5px solid rgba(242,238,232,0.3); padding: 8px 18px; transition: all 0.2s; }
+    .nav-cta:hover { background: var(--bone); color: var(--ink); }
+    .hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; }
+    .hamburger span { display: block; width: 22px; height: 1.5px; background: var(--bone); }
+
+    .page-hero { background: var(--primary); padding: 72px 0 64px; }
+    .eyebrow { font-size: 11px; font-weight: 500; letter-spacing: 0.16em; text-transform: uppercase; color: var(--muted); margin-bottom: 20px; display: flex; align-items: center; gap: 10px; }
+    .eyebrow::before { content: ''; display: block; width: 20px; height: 1px; background: var(--muted); }
+    .page-title { font-size: clamp(32px, 4vw, 52px); font-weight: 300; color: var(--bone); line-height: 1.15; margin-bottom: 16px; }
+    .page-subtitle { font-size: 16px; font-weight: 300; color: rgba(242,238,232,0.6); max-width: 520px; line-height: 1.8; }
+
+    .fit-alert { background: var(--pink-bg); border-left: 3px solid var(--pink); padding: 20px 24px; margin: 0; }
+    .fit-alert-label { font-size: 10px; font-weight: 500; letter-spacing: 0.14em; text-transform: uppercase; color: var(--pink); margin-bottom: 8px; }
+    .fit-alert-title { font-size: 17px; font-weight: 500; color: var(--ink); margin-bottom: 8px; line-height: 1.3; }
+    .fit-alert-body { font-size: 14px; color: var(--slate); line-height: 1.7; }
+    .fit-alert-body strong { color: var(--ink); font-weight: 500; }
+
+    .section { padding: 72px 0; border-bottom: 1px solid var(--border); }
+    .section:last-of-type { border-bottom: none; }
+    .section-bg-white { background: var(--white); }
+    .section-bg-bone { background: var(--bone); }
+    .section-title { font-size: 26px; font-weight: 300; color: var(--ink); margin-bottom: 8px; }
+    .section-desc { font-size: 15px; color: var(--slate); line-height: 1.8; margin-bottom: 40px; max-width: 600px; }
+
+    /* CALCULATOR */
+    .calc-wrap { background: var(--white); border: 0.5px solid var(--border); padding: 40px; max-width: 640px; }
+    .calc-row { margin-bottom: 28px; }
+    .calc-label { font-size: 13px; font-weight: 500; color: var(--ink); margin-bottom: 8px; display: block; }
+    .calc-hint { font-size: 12px; color: var(--slate); margin-bottom: 10px; }
+    .calc-input { width: 100%; border: 1px solid var(--border); background: var(--bone); padding: 12px 16px; font-family: var(--font); font-size: 15px; color: var(--ink); outline: none; transition: border-color 0.2s; appearance: none; -webkit-appearance: none; }
+    .calc-input:focus { border-color: var(--primary); }
+    select.calc-input { cursor: pointer; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%235C6B6E' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 14px center; padding-right: 36px; }
+    .calc-btn { background: var(--primary); color: var(--bone); border: none; font-family: var(--font); font-size: 12px; font-weight: 500; letter-spacing: 0.10em; text-transform: uppercase; padding: 14px 32px; cursor: pointer; transition: opacity 0.2s; width: 100%; margin-top: 4px; }
+    .calc-btn:hover { opacity: 0.85; }
+    .calc-result { margin-top: 28px; padding: 24px; background: var(--bone); border: 0.5px solid var(--border); display: none; }
+    .calc-result.show { display: block; }
+    .result-label { font-size: 10px; font-weight: 500; letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted); margin-bottom: 8px; }
+    .result-size { font-size: 36px; font-weight: 300; color: var(--primary); line-height: 1; margin-bottom: 6px; }
+    .result-note { font-size: 14px; color: var(--slate); line-height: 1.7; margin-top: 12px; }
+    .result-shop { display: inline-block; margin-top: 16px; background: var(--ink); color: var(--bone); font-size: 11px; font-weight: 500; letter-spacing: 0.10em; text-transform: uppercase; padding: 12px 24px; transition: opacity 0.2s; }
+    .result-shop:hover { opacity: 0.8; }
+
+    /* CONVERSION TABLE */
+    .table-wrap { overflow-x: auto; }
+    table { width: 100%; border-collapse: collapse; font-size: 14px; }
+    thead th { background: var(--primary); color: var(--bone); font-size: 11px; font-weight: 500; letter-spacing: 0.10em; text-transform: uppercase; padding: 14px 16px; text-align: center; }
+    thead th:first-child { text-align: left; }
+    tbody tr { border-bottom: 0.5px solid var(--border); }
+    tbody tr:last-child { border-bottom: none; }
+    tbody tr:nth-child(even) { background: var(--bone); }
+    tbody tr:nth-child(odd) { background: var(--white); }
+    tbody td { padding: 12px 16px; text-align: center; color: var(--slate); }
+    tbody td:first-child { text-align: left; font-weight: 500; color: var(--ink); }
+    tbody td.highlight { color: var(--primary); font-weight: 500; }
+    .table-note { font-size: 12px; color: var(--slate); margin-top: 14px; font-style: italic; }
+
+    /* HOW TO MEASURE */
+    .measure-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; align-items: start; }
+    .measure-steps { display: flex; flex-direction: column; gap: 1px; }
+    .measure-step { background: var(--white); border: 0.5px solid var(--border); padding: 20px 24px; display: grid; grid-template-columns: 36px 1fr; gap: 16px; align-items: start; }
+    .step-num { font-size: 20px; font-weight: 300; color: var(--primary); line-height: 1; padding-top: 2px; }
+    .step-title { font-size: 14px; font-weight: 500; color: var(--ink); margin-bottom: 4px; }
+    .step-body { font-size: 13px; color: var(--slate); line-height: 1.65; }
+    .measure-tips { background: var(--white); border: 0.5px solid var(--border); padding: 28px; }
+    .tips-title { font-size: 14px; font-weight: 500; color: var(--ink); margin-bottom: 16px; }
+    .tip-item { display: flex; gap: 10px; margin-bottom: 14px; font-size: 13px; color: var(--slate); line-height: 1.6; align-items: flex-start; }
+    .tip-item:last-child { margin-bottom: 0; }
+    .tip-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--pink); flex-shrink: 0; margin-top: 6px; }
+
+    /* BETWEEN SIZES */
+    .between-wrap { background: var(--white); border: 0.5px solid var(--border); padding: 36px 40px; max-width: 680px; }
+    .between-title { font-size: 20px; font-weight: 300; color: var(--ink); margin-bottom: 20px; }
+    .between-option { padding: 20px 0; border-bottom: 0.5px solid var(--border); display: grid; grid-template-columns: 120px 1fr; gap: 20px; align-items: start; }
+    .between-option:last-child { border-bottom: none; padding-bottom: 0; }
+    .between-label { font-size: 12px; font-weight: 500; letter-spacing: 0.06em; text-transform: uppercase; color: var(--muted); padding-top: 2px; }
+    .between-text { font-size: 14px; color: var(--slate); line-height: 1.7; }
+    .between-text strong { color: var(--ink); font-weight: 500; }
+
+    /* FAQ */
+    .faq-item { border-bottom: 0.5px solid var(--border); }
+    .faq-item:first-child { border-top: 0.5px solid var(--border); }
+    .faq-q { padding: 20px 0; font-size: 15px; font-weight: 500; color: var(--ink); cursor: pointer; display: flex; justify-content: space-between; align-items: center; gap: 16px; }
+    .faq-q:hover { color: var(--primary); }
+    .faq-icon { width: 20px; height: 20px; flex-shrink: 0; position: relative; }
+    .faq-icon::before, .faq-icon::after { content: ''; position: absolute; background: var(--slate); border-radius: 1px; transition: transform 0.2s; }
+    .faq-icon::before { width: 12px; height: 1.5px; top: 9px; left: 4px; }
+    .faq-icon::after { width: 1.5px; height: 12px; top: 4px; left: 9px; }
+    .faq-item.open .faq-icon::after { transform: rotate(90deg); opacity: 0; }
+    .faq-a { display: none; padding-bottom: 20px; font-size: 14px; color: var(--slate); line-height: 1.8; }
+    .faq-item.open .faq-a { display: block; }
+
+    /* CONTACT STRIP */
+    .contact-strip { background: var(--primary); padding: 48px 0; }
+    .contact-strip-inner { display: flex; align-items: center; justify-content: space-between; gap: 32px; flex-wrap: wrap; }
+    .contact-strip-text { font-size: 18px; font-weight: 300; color: var(--bone); }
+    .contact-strip-sub { font-size: 14px; color: rgba(242,238,232,0.55); margin-top: 6px; }
+    .btn-bone { display: inline-block; background: var(--bone); color: var(--primary); font-size: 12px; font-weight: 500; letter-spacing: 0.10em; text-transform: uppercase; padding: 13px 28px; transition: all 0.2s; white-space: nowrap; }
+    .btn-bone:hover { background: var(--white); }
+
+    footer { background: var(--ink); color: var(--bone); padding: 64px 0 32px; }
+    .footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 48px; padding-bottom: 48px; border-bottom: 1px solid rgba(242,238,232,0.07); margin-bottom: 28px; }
+    .footer-brand { font-size: 16px; font-weight: 500; letter-spacing: 0.22em; text-transform: uppercase; margin-bottom: 10px; }
+    .footer-tagline { font-size: 13px; color: rgba(242,238,232,0.35); line-height: 1.7; margin-bottom: 22px; max-width: 210px; }
+    .footer-social { display: flex; gap: 14px; }
+    .footer-social a { font-size: 11px; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; color: rgba(242,238,232,0.35); transition: color 0.2s; }
+    .footer-social a:hover { color: var(--bone); }
+    .footer-col-title { font-size: 10px; font-weight: 500; letter-spacing: 0.14em; text-transform: uppercase; color: rgba(242,238,232,0.35); margin-bottom: 18px; }
+    .footer-links { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+    .footer-links a { font-size: 14px; color: rgba(242,238,232,0.5); transition: color 0.2s; }
+    .footer-links a:hover { color: var(--bone); }
+    .footer-links a.hl { color: var(--pink); }
+    .footer-bottom { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px; }
+    .footer-copy { font-size: 12px; color: rgba(242,238,232,0.2); }
+    .footer-legal { display: flex; gap: 18px; list-style: none; }
+    .footer-legal a { font-size: 12px; color: rgba(242,238,232,0.2); transition: color 0.2s; }
+    .footer-legal a:hover { color: rgba(242,238,232,0.5); }
+
+    .fade-up { opacity: 0; transform: translateY(20px); transition: opacity 0.6s ease, transform 0.6s ease; }
+    .fade-up.visible { opacity: 1; transform: translateY(0); }
+    .d1 { transition-delay: 0.1s; } .d2 { transition-delay: 0.2s; }
+
+    @media (max-width: 1024px) {
+      .container, .container-mid, .nav-inner { padding: 0 32px; }
+      .footer-grid { grid-template-columns: 1fr 1fr; }
+    }
+    @media (max-width: 768px) {
+      .container, .container-mid, .nav-inner { padding: 0 24px; }
+      .nav-links, .nav-cta { display: none; }
+      .hamburger { display: flex; }
+      .measure-grid { grid-template-columns: 1fr; }
+      .between-option { grid-template-columns: 1fr; gap: 6px; }
+      .contact-strip-inner { flex-direction: column; align-items: flex-start; }
+      .footer-grid { grid-template-columns: 1fr 1fr; gap: 28px; }
+    }
+  </style>
+</head>
+<body>
+
+<div id="announcement">
+  Rebuilding with purpose. Launching November 1, 2026.
+  <a href="where-we-are.html">Read our update &rarr;</a>
+</div>
+
+<nav>
+  <div class="nav-inner">
+    <a href="home.html" class="nav-logo">Mestrae</a>
+    <ul class="nav-links">
+      <li><a href="shop.html">Shop</a></li>
+      <li><a href="shift.html">The Shift</a></li>
+      <li><a href="tools.html" class="active">Tools</a></li>
+      <li><a href="about.html">About</a></li>
+      <li><a href="where-we-are.html">Where We Are</a></li>
+    </ul>
+    <a href="shop.html" class="nav-cta">Shop now</a>
+    <div class="hamburger" onclick="toggleMenu()"><span></span><span></span><span></span></div>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="page-hero">
+  <div class="container">
+    <div class="fade-up">
+      <p class="eyebrow">Tools</p>
+      <h1 class="page-title">Find your size</h1>
+      <p class="page-subtitle">Mestrae shoes are sized in UK. Use the guide below to find your fit and understand one important thing about how interchangeable heels size differently.</p>
+    </div>
+  </div>
+</section>
+
+<!-- FIT ALERT — the most important thing on this page -->
+<div class="fit-alert">
+  <div class="container-mid">
+    <div class="fit-alert-label">Important — read this first</div>
+    <div class="fit-alert-title">Interchangeable heels size a little differently. Here is why.</div>
+    <div class="fit-alert-body">
+      When you buy a Mestrae shoe, you are buying it designed for heel height. When you switch to flats, your foot sits slightly further forward in the shoe and the fit becomes slightly roomier. For this reason, <strong>we recommend sizing down by half a size, or choosing your exact size if you are between sizes.</strong> If you are a true half size, go to the smaller whole size. If you normally size up for comfort, stay at your true size.
+    </div>
+  </div>
+</div>
+
+<!-- CALCULATOR -->
+<section class="section section-bg-bone">
+  <div class="container-mid">
+    <div class="fade-up">
+      <p class="eyebrow">Size finder</p>
+      <h2 class="section-title">Find your Mestrae size</h2>
+      <p class="section-desc">Enter your measurements or your size in another system and we will tell you the right EU size for Mestrae.</p>
+    </div>
+    <div class="calc-wrap fade-up d1">
+      <div class="calc-row">
+        <label class="calc-label" for="method">How would you like to find your size?</label>
+        <select class="calc-input" id="method" onchange="updateMethod()">
+          <option value="">Select a method</option>
+          <option value="measure">I have measured my foot in cm</option>
+          <option value="uk">I know my UK size</option>
+          <option value="us">I know my US size</option>
+          <option value="eu">I know my EU size</option>
+          <option value="my">I know my Malaysian size</option>
+        </select>
+      </div>
+
+      <div class="calc-row" id="input-row" style="display:none;">
+        <label class="calc-label" id="input-label">Your measurement</label>
+        <div class="calc-hint" id="input-hint"></div>
+        <input class="calc-input" type="number" id="size-input" step="0.5" min="1" max="35" placeholder="">
+      </div>
+
+      <button class="calc-btn" onclick="calcSize()">Find my Mestrae size</button>
+
+      <div class="calc-result" id="calc-result">
+        <div class="result-label">Your recommended Mestrae size</div>
+        <div class="result-size" id="result-size">EU 38</div>
+        <div class="result-note" id="result-note"></div>
+        <a href="shop.html" class="result-shop">Shop your size</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONVERSION TABLE -->
+<section class="section section-bg-white">
+  <div class="container-mid">
+    <div class="fade-up">
+      <p class="eyebrow">Conversion chart</p>
+      <h2 class="section-title">Full size chart</h2>
+      <p class="section-desc">Mestrae is available in UK 3 to UK 9. The Mestrae column shows the size we recommend you order — half a size down from your usual, or your exact size if you prefer a slightly roomier fit in flats.</p>
+    </div>
+    <div class="table-wrap fade-up d1">
+      <table>
+        <thead>
+          <tr>
+            <th>UK size</th>
+            <th>Mestrae UK</th>
+            <th>EU equiv.</th>
+            <th>US Women</th>
+            <th>MY</th>
+            <th>Foot length (cm)</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td>3</td><td class="highlight">3</td><td>36</td><td>5.5</td><td>5</td><td>23.0</td></tr>
+          <tr><td>3.5</td><td class="highlight">3</td><td>36.5</td><td>6</td><td>5.5</td><td>23.3</td></tr>
+          <tr><td>4</td><td class="highlight">4</td><td>37</td><td>6.5</td><td>6</td><td>23.5</td></tr>
+          <tr><td>4.5</td><td class="highlight">4</td><td>37.5</td><td>7</td><td>6.5</td><td>23.8</td></tr>
+          <tr><td>5</td><td class="highlight">5</td><td>38</td><td>7.5</td><td>7</td><td>24.0</td></tr>
+          <tr><td>5.5</td><td class="highlight">5</td><td>38.5</td><td>8</td><td>7.5</td><td>24.3</td></tr>
+          <tr><td>6</td><td class="highlight">6</td><td>39</td><td>8.5</td><td>8</td><td>25.0</td></tr>
+          <tr><td>6.5</td><td class="highlight">6</td><td>39.5</td><td>9</td><td>8.5</td><td>25.3</td></tr>
+          <tr><td>7</td><td class="highlight">7</td><td>40</td><td>9.5</td><td>9</td><td>25.5</td></tr>
+          <tr><td>7.5</td><td class="highlight">7</td><td>40.5</td><td>10</td><td>9.5</td><td>25.8</td></tr>
+          <tr><td>8</td><td class="highlight">8</td><td>41</td><td>10.5</td><td>10</td><td>26.0</td></tr>
+          <tr><td>8.5</td><td class="highlight">8</td><td>41.5</td><td>11</td><td>10.5</td><td>26.3</td></tr>
+          <tr><td>9</td><td class="highlight">9</td><td>42</td><td>11.5</td><td>11</td><td>26.5</td></tr>
+        </tbody>
+      </table>
+      <p class="table-note">Half sizes map to the smaller whole UK size for Mestrae. For example, a UK 5.5 should order UK 5. If you usually size up for comfort, stay at your half size rounded up.</p>
+    </div>
+  </div>
+</section>
+
+<!-- HOW TO MEASURE -->
+<section class="section section-bg-bone">
+  <div class="container-mid">
+    <div class="fade-up">
+      <p class="eyebrow">How to measure</p>
+      <h2 class="section-title">Measure your foot at home</h2>
+      <p class="section-desc">You need a piece of paper, a pen, and a ruler. Takes about two minutes and gives you the most accurate fit.</p>
+    </div>
+    <div class="measure-grid fade-up d1">
+      <div class="measure-steps">
+        <div class="measure-step">
+          <div class="step-num">01</div>
+          <div>
+            <div class="step-title">Stand on a piece of paper</div>
+            <div class="step-body">Place the paper on a hard floor, not carpet. Stand with your full weight on the foot you are measuring. Your heel should be flat against a wall or a straight edge.</div>
+          </div>
+        </div>
+        <div class="measure-step">
+          <div class="step-num">02</div>
+          <div>
+            <div class="step-title">Mark the longest point</div>
+            <div class="step-body">Make a mark at the very tip of your longest toe. For most people this is the big toe, but for some it is the second toe. Mark whichever is longer.</div>
+          </div>
+        </div>
+        <div class="measure-step">
+          <div class="step-num">03</div>
+          <div>
+            <div class="step-title">Mark your heel</div>
+            <div class="step-body">Make a second mark at the back of your heel, as far back as the heel extends when standing normally.</div>
+          </div>
+        </div>
+        <div class="measure-step">
+          <div class="step-num">04</div>
+          <div>
+            <div class="step-title">Measure the distance</div>
+            <div class="step-body">Measure in centimetres between the two marks. This is your foot length. Use the chart above to find your EU size, then apply the Mestrae sizing rule: go half a size down, or stay at your exact size.</div>
+          </div>
+        </div>
+        <div class="measure-step">
+          <div class="step-num">05</div>
+          <div>
+            <div class="step-title">Measure both feet</div>
+            <div class="step-body">Most people have one foot slightly larger than the other. Always fit to your larger foot.</div>
+          </div>
+        </div>
+      </div>
+      <div>
+        <div class="measure-tips">
+          <!-- SWAP: add <img src="assets/images/measure-foot.jpg" alt="How to measure your foot" style="width:100%; display:block; margin-bottom:24px;"> here when ready -->
+          <div class="tips-title">Tips for an accurate measurement</div>
+          <div class="tip-item"><div class="tip-dot"></div>Measure in the afternoon or evening. Feet swell slightly throughout the day and are at their largest later on.</div>
+          <div class="tip-item"><div class="tip-dot"></div>Measure while wearing the type of sock or stocking you plan to wear with the shoes, or measure barefoot for strappy styles.</div>
+          <div class="tip-item"><div class="tip-dot"></div>Stand with your weight evenly distributed, not leaning. Pressure changes the measurement.</div>
+          <div class="tip-item"><div class="tip-dot"></div>If you are measuring children, add 10–12mm for growing room.</div>
+          <div class="tip-item"><div class="tip-dot"></div>If your measurement falls exactly between two sizes on the chart, always go to the larger EU size before applying the Mestrae half-size-down rule.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- BETWEEN SIZES -->
+<section class="section section-bg-white">
+  <div class="container-mid">
+    <div class="fade-up">
+      <p class="eyebrow">Between sizes</p>
+      <h2 class="section-title">Not sure which size to choose?</h2>
+      <p class="section-desc">This happens often. Use the guide below based on your situation.</p>
+    </div>
+    <div class="between-wrap fade-up d1">
+      <div class="between-title">My foot length falls exactly between two sizes</div>
+      <div class="between-option">
+        <div class="between-label">If you run narrow</div>
+        <div class="between-text">Go to the <strong>smaller EU size.</strong> A narrower foot fills the shoe better at the smaller size, and the Mestrae fit accounts for some roominess in flats.</div>
+      </div>
+      <div class="between-option">
+        <div class="between-label">If you run standard</div>
+        <div class="between-text">Go to the <strong>smaller EU size</strong> and apply the usual Mestrae rule. If that feels too snug, the larger size with the half-size-down adjustment effectively means your exact measurement size.</div>
+      </div>
+      <div class="between-option">
+        <div class="between-label">If you run wide</div>
+        <div class="between-text">Go to the <strong>larger EU size.</strong> Mestrae is currently standard width only. A wider foot needs the additional length to accommodate natural spread when standing.</div>
+      </div>
+      <div class="between-option">
+        <div class="between-label">Still not sure</div>
+        <div class="between-text">Email us at <a href="mailto:info@mestrae.com" style="color:var(--primary); text-decoration:underline; text-underline-offset:3px;">info@mestrae.com</a> with your foot measurement in centimetres and we will tell you exactly what to order. Pam reads every message.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="section section-bg-bone">
+  <div class="container-mid">
+    <div class="fade-up">
+      <p class="eyebrow">Common questions</p>
+      <h2 class="section-title">Sizing questions we hear often</h2>
+    </div>
+    <div class="fade-up d1" style="max-width:680px; margin-top:32px;">
+
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggleFaq(this)">
+          Why do I need to size down for interchangeable heels?
+          <div class="faq-icon"></div>
+        </div>
+        <div class="faq-a">When you wear the shoe in heel mode, your foot sits at the angle designed for that heel height. When you switch to flats, your foot naturally comes further forward in the shoe and the fit becomes slightly roomier. Sizing down half a step compensates for this so the shoe fits well in both modes rather than feeling loose when flat.</div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggleFaq(this)">
+          I know my US size. How do I convert?
+          <div class="faq-icon"></div>
+        </div>
+        <div class="faq-a">Find your US size in the chart above and note the UK size it maps to. If it maps to a half UK size, round down to the smaller whole number. For example, US 8 maps to UK 6, so you would order UK 6 from Mestrae.</div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggleFaq(this)">
+          I normally size up because I have wide feet. What should I do?
+          <div class="faq-icon"></div>
+        </div>
+        <div class="faq-a">Mestrae is currently standard width only. If you normally size up for width, stay at your true length size rather than applying the half-size-down rule. The additional length gives your foot more room to spread. We are working on extended width options for a future range and would love to hear from you if this is important to your fit.</div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggleFaq(this)">
+          My left and right feet are different sizes. Which do I use?
+          <div class="faq-icon"></div>
+        </div>
+        <div class="faq-a">Always fit to your larger foot. A shoe that fits your larger foot will be comfortable on both. A shoe sized to your smaller foot will be too tight on the larger one.</div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggleFaq(this)">
+          Can I return or exchange if the size is wrong?
+          <div class="faq-icon"></div>
+        </div>
+        <div class="faq-a">Yes. Please see our <a href="shipping.html" style="color:var(--primary); text-decoration:underline; text-underline-offset:3px;">shipping and returns page</a> for full details. We want you to have the right fit and will always work with you to get there.</div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT STRIP -->
+<section class="contact-strip">
+  <div class="container">
+    <div class="contact-strip-inner">
+      <div>
+        <div class="contact-strip-text">Still not sure about your size?</div>
+        <div class="contact-strip-sub">Email your foot measurement in centimetres and we will tell you exactly what to order.</div>
+      </div>
+      <a href="mailto:info@mestrae.com" class="btn-bone">Email us your measurement</a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="container">
+    <div class="footer-grid">
+      <div>
+        <div class="footer-brand">Mestrae</div>
+        <p class="footer-tagline">Interchangeable heels built for the way women actually live. Est. 2016, Kuala Lumpur.</p>
+        <div class="footer-social">
+          <a href="https://instagram.com" target="_blank">Instagram</a>
+          <a href="https://mestrae.substack.com" target="_blank">Substack</a>
+          <a href="https://www.youtube.com/channel/UCxHOxnBYmGdhOZ-XzTzIYOQ" target="_blank">YouTube</a>
+        </div>
+      </div>
+      <div>
+        <div class="footer-col-title">Shop</div>
+        <ul class="footer-links">
+          <li><a href="shop.html">All styles</a></li>
+          <li><a href="shop.html?filter=heels">Heel sets</a></li>
+          <li><a href="size-guide.html" class="hl">Size guide</a></li>
+          <li><a href="shipping.html">Shipping</a></li>
+        </ul>
+      </div>
+      <div>
+        <div class="footer-col-title">Company</div>
+        <ul class="footer-links">
+          <li><a href="about.html">About</a></li>
+          <li><a href="shift.html">The Shift</a></li>
+          <li><a href="where-we-are.html">Where we are</a></li>
+          <li><a href="https://mestrae.substack.com" target="_blank">Substack</a></li>
+        </ul>
+      </div>
+      <div>
+        <div class="footer-col-title">Support</div>
+        <ul class="footer-links">
+          <li><a href="contact.html">Contact us</a></li>
+          <li><a href="contact.html#faq">FAQ</a></li>
+          <li><a href="care.html">Care guide</a></li>
+          <li><a href="mailto:info@mestrae.com">info@mestrae.com</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p class="footer-copy">&copy; 2026 Mestrae. All rights reserved.</p>
+      <ul class="footer-legal">
+        <li><a href="privacy.html">Privacy</a></li>
+        <li><a href="terms.html">Terms</a></li>
+        <li><a href="shipping.html">Shipping &amp; Returns</a></li>
+      </ul>
+    </div>
+  </div>
+</footer>
+
+<script>
+  const obs = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); obs.unobserve(e.target); } });
+  }, { threshold: 0.08 });
+  document.querySelectorAll('.fade-up').forEach(el => obs.observe(el));
+
+  function toggleMenu() {
+    const links = document.querySelector('.nav-links');
+    const open = links.style.display === 'flex';
+    Object.assign(links.style, { display: open ? 'none' : 'flex', flexDirection: 'column', position: 'absolute', top: '100%', left: '0', right: '0', background: '#1A1A1A', padding: '16px 24px', gap: '20px', zIndex: '99' });
+  }
+
+  function toggleFaq(el) {
+    const item = el.parentElement;
+    item.classList.toggle('open');
+  }
+
+  function updateMethod() {
+    const method = document.getElementById('method').value;
+    const row = document.getElementById('input-row');
+    const label = document.getElementById('input-label');
+    const hint = document.getElementById('input-hint');
+    const input = document.getElementById('size-input');
+    document.getElementById('calc-result').classList.remove('show');
+    if (!method || method === 'eu') {
+      row.style.display = method === 'eu' ? 'block' : 'none';
+      if (method === 'eu') {
+        label.textContent = 'Your EU size';
+        hint.textContent = 'Enter your standard EU size (e.g. 38)';
+        input.min = 35; input.max = 45; input.step = 0.5; input.placeholder = '38';
+      }
+      return;
+    }
+    row.style.display = 'block';
+    if (method === 'measure') {
+      label.textContent = 'Your foot length in centimetres';
+      hint.textContent = 'Measure from heel to longest toe. See the measurement guide below.';
+      input.min = 20; input.max = 32; input.step = 0.1; input.placeholder = '24.0';
+    } else if (method === 'us') {
+      label.textContent = 'Your US women\'s size';
+      hint.textContent = 'Enter your usual US size (e.g. 8 or 8.5)';
+      input.min = 4; input.max = 13; input.step = 0.5; input.placeholder = '8';
+    } else if (method === 'uk') {
+      label.textContent = 'Your UK size';
+      hint.textContent = 'Enter your usual UK size (e.g. 5 or 5.5)';
+      input.min = 2; input.max = 11; input.step = 0.5; input.placeholder = '5';
+    } else if (method === 'my') {
+      label.textContent = 'Your Malaysian size';
+      hint.textContent = 'Enter your usual MY size (e.g. 7 or 7.5)';
+      input.min = 3; input.max = 12; input.step = 0.5; input.placeholder = '7';
+    }
+  }
+
+  function calcSize() {
+    const method = document.getElementById('method').value;
+    const val = parseFloat(document.getElementById('size-input').value);
+    if (!method) { alert('Please select a method first.'); return; }
+
+    let ukStandard = null;
+
+    if (method === 'measure') {
+      const cmToUK = [[23.0,3],[23.3,3.5],[23.5,4],[23.8,4.5],[24.0,5],[24.3,5.5],[25.0,6],[25.3,6.5],[25.5,7],[25.8,7.5],[26.0,8],[26.3,8.5],[26.5,9]];
+      for (let i = 0; i < cmToUK.length; i++) {
+        if (val <= cmToUK[i][0] + 0.15) { ukStandard = cmToUK[i][1]; break; }
+      }
+      if (!ukStandard) ukStandard = 9;
+    } else if (method === 'uk') {
+      ukStandard = val;
+    } else if (method === 'us') {
+      ukStandard = val - 2;
+    } else if (method === 'eu') {
+      ukStandard = val - 33;
+    } else if (method === 'my') {
+      ukStandard = val - 1;
+    }
+
+    if (ukStandard === null || isNaN(ukStandard)) { alert('Please enter a valid size.'); return; }
+
+    const mestraeUK = Math.floor(ukStandard);
+    const clamped = Math.min(9, Math.max(3, mestraeUK));
+
+    let note = '';
+    if (ukStandard % 1 !== 0) {
+      note = `Your size converts to UK ${ukStandard}. Because Mestrae interchangeable heels fit slightly roomier in flat mode, we recommend UK ${clamped} — the smaller whole size. This will feel snug in heels and comfortable in flats.`;
+    } else if (method === 'uk') {
+      note = `Because Mestrae shoes are designed for heel height, the fit in flat mode is slightly roomier. We recommend staying at UK ${clamped} if this is your exact size, or going half a size down if you prefer a closer fit in flats.`;
+    } else {
+      note = `Your size converts to UK ${ukStandard}. We recommend ordering UK ${clamped} — this accounts for the slightly roomier flat fit that comes with interchangeable heel technology.`;
+    }
+
+    if (clamped <= 3 || clamped >= 9) {
+      note += ' Note: this size is at the edge of our current range. Please contact us at info@mestrae.com to confirm availability.';
+    }
+
+    document.getElementById('result-size').textContent = `UK ${clamped}`;
+    document.getElementById('result-note').textContent = note;
+    document.getElementById('calc-result').classList.add('show');
+    document.getElementById('calc-result').scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+  }
+</script>
+</body>
+</html>
