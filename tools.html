@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Tools — Mestrae</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Source+Sans+3:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary:  #1E2B2C;
+      --bone:     #F2EEE8;
+      --bone-mid: #E8E3DC;
+      --ink:      #1A1A1A;
+      --pink:     #C9A8B2;
+      --pink-bg:  #F5EFF1;
+      --slate:    #5C6B6E;
+      --muted:    #7A8F87;
+      --border:   #E0DBD4;
+      --white:    #ffffff;
+      --font:     'Source Sans 3', sans-serif;
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body { font-family: var(--font); background: var(--bone); color: var(--ink); font-size: 16px; line-height: 1.7; -webkit-font-smoothing: antialiased; }
+    a { text-decoration: none; color: inherit; }
+    .container { max-width: 1280px; margin: 0 auto; padding: 0 48px; }
+
+    #announcement { background: var(--ink); color: var(--bone); text-align: center; padding: 10px 24px; font-size: 12px; letter-spacing: 0.08em; }
+    #announcement a { color: var(--pink); text-decoration: underline; text-underline-offset: 3px; margin-left: 6px; }
+
+    nav { background: var(--ink); position: sticky; top: 0; z-index: 100; border-bottom: 1px solid rgba(255,255,255,0.06); }
+    .nav-inner { display: flex; align-items: center; justify-content: space-between; height: 64px; max-width: 1280px; margin: 0 auto; padding: 0 48px; }
+    .nav-logo { font-size: 18px; font-weight: 500; letter-spacing: 0.22em; color: var(--bone); text-transform: uppercase; }
+    .nav-links { display: flex; gap: 36px; list-style: none; }
+    .nav-links a { font-size: 11px; letter-spacing: 0.10em; text-transform: uppercase; color: rgba(242,238,232,0.5); transition: color 0.2s; }
+    .nav-links a:hover { color: var(--bone); }
+    .nav-links a.active { color: var(--pink); }
+    .nav-cta { font-size: 11px; font-weight: 500; letter-spacing: 0.10em; text-transform: uppercase; color: var(--bone); border: 0.5px solid rgba(242,238,232,0.3); padding: 8px 18px; transition: all 0.2s; }
+    .nav-cta:hover { background: var(--bone); color: var(--ink); }
+    .hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; }
+    .hamburger span { display: block; width: 22px; height: 1.5px; background: var(--bone); }
+
+    /* HERO */
+    .page-hero { background: var(--primary); padding: 80px 0 72px; }
+    .eyebrow { font-size: 11px; font-weight: 500; letter-spacing: 0.16em; text-transform: uppercase; color: var(--muted); margin-bottom: 20px; display: flex; align-items: center; gap: 10px; }
+    .eyebrow::before { content: ''; display: block; width: 20px; height: 1px; background: var(--muted); }
+    .page-title { font-size: clamp(36px, 5vw, 60px); font-weight: 300; color: var(--bone); line-height: 1.1; margin-bottom: 20px; }
+    .page-title em { font-style: normal; color: var(--pink); }
+    .page-subtitle { font-size: 17px; font-weight: 300; color: rgba(242,238,232,0.6); max-width: 540px; line-height: 1.85; }
+
+    /* CHOOSE SECTION */
+    .choose-section { background: var(--white); padding: 80px 0; border-bottom: 1px solid var(--border); }
+    .section-header { margin-bottom: 48px; }
+    .section-eyebrow { font-size: 11px; font-weight: 500; letter-spacing: 0.16em; text-transform: uppercase; color: var(--muted); margin-bottom: 12px; display: flex; align-items: center; gap: 10px; }
+    .section-eyebrow::before { content: ''; display: block; width: 20px; height: 1px; background: var(--muted); }
+    .section-title { font-size: 28px; font-weight: 300; color: var(--ink); }
+
+    .tool-cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; background: var(--border); border: 1px solid var(--border); }
+    .tool-card { background: var(--white); padding: 40px 36px; display: flex; flex-direction: column; transition: background 0.2s; }
+    .tool-card:hover { background: var(--bone); }
+    .tool-card.available:hover .tool-arrow { transform: translateX(4px); }
+    .tool-phase { font-size: 10px; font-weight: 500; letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted); margin-bottom: 16px; }
+    .tool-icon { width: 48px; height: 48px; margin-bottom: 20px; }
+    .tool-name { font-size: 20px; font-weight: 400; color: var(--ink); margin-bottom: 10px; }
+    .tool-name.muted { color: var(--slate); }
+    .tool-desc { font-size: 14px; color: var(--slate); line-height: 1.75; flex: 1; margin-bottom: 24px; }
+    .tool-link { display: inline-flex; align-items: center; gap: 8px; font-size: 12px; font-weight: 500; letter-spacing: 0.10em; text-transform: uppercase; color: var(--primary); border-bottom: 1px solid var(--primary); padding-bottom: 2px; align-self: flex-start; }
+    .tool-link.soon { color: var(--border); border-color: var(--border); cursor: default; }
+    .tool-arrow { transition: transform 0.2s; }
+
+    /* CARE SECTION */
+    .care-section { background: var(--bone); padding: 80px 0; border-bottom: 1px solid var(--border); }
+    .care-cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; background: var(--border); border: 1px solid var(--border); margin-top: 48px; }
+
+    /* COMING SOON SECTION */
+    .soon-section { background: var(--white); padding: 80px 0; }
+    .soon-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1px; background: var(--border); border: 1px solid var(--border); margin-top: 48px; }
+    .soon-card { background: var(--white); padding: 32px 28px; }
+    .soon-name { font-size: 16px; font-weight: 400; color: var(--slate); margin-bottom: 8px; }
+    .soon-desc { font-size: 13px; color: var(--border); line-height: 1.6; margin-bottom: 14px; }
+    .soon-badge { display: inline-block; font-size: 10px; padding: 3px 10px; background: var(--bone); color: var(--muted); letter-spacing: 0.08em; text-transform: uppercase; }
+
+    /* PHILOSOPHY STRIP */
+    .philosophy { background: var(--primary); padding: 72px 0; }
+    .philosophy-inner { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center; }
+    .phil-title { font-size: 28px; font-weight: 300; color: var(--bone); line-height: 1.3; margin-bottom: 16px; }
+    .phil-title em { font-style: normal; color: var(--pink); }
+    .phil-body { font-size: 15px; color: rgba(242,238,232,0.6); line-height: 1.85; }
+    .phil-list { list-style: none; display: flex; flex-direction: column; gap: 14px; }
+    .phil-list li { display: flex; align-items: flex-start; gap: 12px; font-size: 14px; color: rgba(242,238,232,0.65); line-height: 1.6; }
+    .phil-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--pink); flex-shrink: 0; margin-top: 7px; }
+
+    footer { background: var(--ink); color: var(--bone); padding: 64px 0 32px; }
+    .footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 48px; padding-bottom: 48px; border-bottom: 1px solid rgba(242,238,232,0.07); margin-bottom: 28px; }
+    .footer-brand { font-size: 16px; font-weight: 500; letter-spacing: 0.22em; text-transform: uppercase; margin-bottom: 10px; }
+    .footer-tagline { font-size: 13px; color: rgba(242,238,232,0.35); line-height: 1.7; margin-bottom: 22px; max-width: 210px; }
+    .footer-social { display: flex; gap: 14px; }
+    .footer-social a { font-size: 11px; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; color: rgba(242,238,232,0.35); transition: color 0.2s; }
+    .footer-social a:hover { color: var(--bone); }
+    .footer-col-title { font-size: 10px; font-weight: 500; letter-spacing: 0.14em; text-transform: uppercase; color: rgba(242,238,232,0.35); margin-bottom: 18px; }
+    .footer-links { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+    .footer-links a { font-size: 14px; color: rgba(242,238,232,0.5); transition: color 0.2s; }
+    .footer-links a:hover { color: var(--bone); }
+    .footer-links a.hl { color: var(--pink); }
+    .footer-bottom { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px; }
+    .footer-copy { font-size: 12px; color: rgba(242,238,232,0.2); }
+    .footer-legal { display: flex; gap: 18px; list-style: none; }
+    .footer-legal a { font-size: 12px; color: rgba(242,238,232,0.2); transition: color 0.2s; }
+    .footer-legal a:hover { color: rgba(242,238,232,0.5); }
+
+    .fade-up { opacity: 0; transform: translateY(20px); transition: opacity 0.6s ease, transform 0.6s ease; }
+    .fade-up.visible { opacity: 1; transform: translateY(0); }
+    .d1 { transition-delay: 0.1s; } .d2 { transition-delay: 0.2s; } .d3 { transition-delay: 0.3s; }
+
+    @media (max-width: 1024px) {
+      .container, .nav-inner { padding: 0 32px; }
+      .tool-cards, .care-cards { grid-template-columns: repeat(2, 1fr); }
+      .soon-grid { grid-template-columns: repeat(2, 1fr); }
+      .footer-grid { grid-template-columns: 1fr 1fr; }
+    }
+    @media (max-width: 768px) {
+      .container, .nav-inner { padding: 0 24px; }
+      .nav-links, .nav-cta { display: none; }
+      .hamburger { display: flex; }
+      .tool-cards, .care-cards, .soon-grid { grid-template-columns: 1fr; }
+      .philosophy-inner { grid-template-columns: 1fr; gap: 40px; }
+      .footer-grid { grid-template-columns: 1fr 1fr; gap: 28px; }
+    }
+  </style>
+</head>
+<body>
+
+<div id="announcement">
+  Rebuilding with purpose. Launching November 1, 2026.
+  <a href="where-we-are.html">Read our update &rarr;</a>
+</div>
+
+<nav>
+  <div class="nav-inner">
+    <a href="home.html" class="nav-logo">Mestrae</a>
+    <ul class="nav-links">
+      <li><a href="shop.html">Shop</a></li>
+      <li><a href="shift.html">The Shift</a></li>
+      <li><a href="tools.html" class="active">Tools</a></li>
+      <li><a href="about.html">About</a></li>
+      <li><a href="where-we-are.html">Where We Are</a></li>
+    </ul>
+    <a href="shop.html" class="nav-cta">Shop now</a>
+    <div class="hamburger" onclick="toggleMenu()"><span></span><span></span><span></span></div>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="page-hero">
+  <div class="container">
+    <div class="fade-up">
+      <p class="eyebrow">Tools</p>
+      <h1 class="page-title">Made to help you<br>choose <em>with confidence.</em></h1>
+      <p class="page-subtitle">Most shoe brands give you a photo and a price. We give you tools to find the right fit, the right height, and the right style before you buy — and tools to look after what you own after you do.</p>
+    </div>
+  </div>
+</section>
+
+<!-- CHOOSE: tools that help you buy -->
+<section class="choose-section">
+  <div class="container">
+    <div class="section-header fade-up">
+      <p class="section-eyebrow">Before you buy</p>
+      <h2 class="section-title">Tools to help you choose</h2>
+    </div>
+    <div class="tool-cards fade-up d1">
+
+      <a href="size-guide.html" class="tool-card available">
+        <p class="tool-phase">Fit</p>
+        <svg class="tool-icon" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <rect x="6" y="20" width="36" height="8" rx="1" stroke="#1E2B2C" stroke-width="1.5"/>
+          <line x1="6" y1="20" x2="6" y2="14" stroke="#1E2B2C" stroke-width="1.5" stroke-linecap="round"/>
+          <line x1="42" y1="20" x2="42" y2="14" stroke="#1E2B2C" stroke-width="1.5" stroke-linecap="round"/>
+          <line x1="14" y1="20" x2="14" y2="16" stroke="#1E2B2C" stroke-width="1.2" stroke-linecap="round"/>
+          <line x1="22" y1="20" x2="22" y2="16" stroke="#1E2B2C" stroke-width="1.2" stroke-linecap="round"/>
+          <line x1="30" y1="20" x2="30" y2="16" stroke="#1E2B2C" stroke-width="1.2" stroke-linecap="round"/>
+          <line x1="38" y1="20" x2="38" y2="16" stroke="#1E2B2C" stroke-width="1.2" stroke-linecap="round"/>
+        </svg>
+        <div class="tool-name">Size guide</div>
+        <div class="tool-desc">Find your Mestrae size with our conversion chart and foot measurement guide. Includes the important note on how interchangeable heels size differently.</div>
+        <div class="tool-link">Find your size <span class="tool-arrow">&#8594;</span></div>
+      </a>
+
+      <a href="calculator.html" class="tool-card available">
+        <p class="tool-phase">Height</p>
+        <svg class="tool-icon" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <rect x="8" y="32" width="6" height="8" rx="1" fill="#E8F0F1" stroke="#1E2B2C" stroke-width="1.2"/>
+          <rect x="18" y="24" width="6" height="16" rx="1" fill="#E8F0F1" stroke="#1E2B2C" stroke-width="1.2"/>
+          <rect x="28" y="16" width="6" height="24" rx="1" fill="#E8F0F1" stroke="#1E2B2C" stroke-width="1.2"/>
+          <rect x="38" y="8" width="6" height="32" rx="1" fill="#C9A8B2" stroke="#1E2B2C" stroke-width="1.2"/>
+        </svg>
+        <div class="tool-name">Heel height calculator</div>
+        <div class="tool-desc">Answer a few questions about your day and lifestyle. We will tell you whether flat, 2.5 inch, or 3.5 inch heels make the most sense for you — and why.</div>
+        <div class="tool-link">Find your height <span class="tool-arrow">&#8594;</span></div>
+      </a>
+
+      <a href="quiz.html" class="tool-card available">
+        <p class="tool-phase">Style</p>
+        <svg class="tool-icon" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="24" cy="24" r="16" stroke="#1E2B2C" stroke-width="1.5"/>
+          <circle cx="24" cy="24" r="6" fill="#C9A8B2" stroke="#1E2B2C" stroke-width="1.2"/>
+          <line x1="24" y1="8" x2="24" y2="14" stroke="#1E2B2C" stroke-width="1.2" stroke-linecap="round"/>
+          <line x1="24" y1="34" x2="24" y2="40" stroke="#1E2B2C" stroke-width="1.2" stroke-linecap="round"/>
+          <line x1="8" y1="24" x2="14" y2="24" stroke="#1E2B2C" stroke-width="1.2" stroke-linecap="round"/>
+          <line x1="34" y1="24" x2="40" y2="24" stroke="#1E2B2C" stroke-width="1.2" stroke-linecap="round"/>
+        </svg>
+        <div class="tool-name">Style quiz</div>
+        <div class="tool-desc">Five questions about where you go and how you live. We match you to the Mestrae shoe and heel combination that fits your life, not just your foot.</div>
+        <div class="tool-link">Take the quiz <span class="tool-arrow">&#8594;</span></div>
+      </a>
+
+    </div>
+  </div>
+</section>
+
+<!-- CARE: tools for after you buy -->
+<section class="care-section">
+  <div class="container">
+    <div class="section-header fade-up">
+      <p class="section-eyebrow">After you buy</p>
+      <h2 class="section-title">Tools to look after what you own</h2>
+    </div>
+    <div class="care-cards fade-up d1">
+
+      <a href="timer.html" class="tool-card available">
+        <p class="tool-phase">Comfort</p>
+        <svg class="tool-icon" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="24" cy="26" r="16" stroke="#1E2B2C" stroke-width="1.5"/>
+          <line x1="24" y1="26" x2="24" y2="16" stroke="#1E2B2C" stroke-width="1.5" stroke-linecap="round"/>
+          <line x1="24" y1="26" x2="30" y2="31" stroke="#C9A8B2" stroke-width="1.5" stroke-linecap="round"/>
+          <line x1="18" y1="6" x2="30" y2="6" stroke="#1E2B2C" stroke-width="1.5" stroke-linecap="round"/>
+          <line x1="24" y1="6" x2="24" y2="10" stroke="#1E2B2C" stroke-width="1.5" stroke-linecap="round"/>
+        </svg>
+        <div class="tool-name">Comfort timer</div>
+        <div class="tool-desc">One tap to start. Tracks how long you have been in heels and gently reminds you when it is time to switch to flats. Installable on your phone.</div>
+        <div class="tool-link">Open timer <span class="tool-arrow">&#8594;</span></div>
+      </a>
+
+      <a href="care.html" class="tool-card available">
+        <p class="tool-phase">Care</p>
+        <svg class="tool-icon" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M24 40C24 40 10 32 10 20C10 14.477 14.477 10 20 10C22.19 10 24.209 10.724 25.836 11.962C27.463 10.724 29.482 10 31.672 10C37.195 10 41.672 14.477 41.672 20C41.672 32 28 40 28 40" stroke="#1E2B2C" stroke-width="1.5" stroke-linecap="round"/>
+          <path d="M14 20C14 20 14 16 18 14" stroke="#1E2B2C" stroke-width="1.2" stroke-linecap="round"/>
+        </svg>
+        <div class="tool-name">Care guide</div>
+        <div class="tool-desc">How to clean leather and vegan shoes, maintain the heel mechanism, store them properly, and know when to get in touch about a repair.</div>
+        <div class="tool-link">Read the guide <span class="tool-arrow">&#8594;</span></div>
+      </a>
+
+      <a href="closet.html" class="tool-card" style="opacity:0.5; pointer-events:none;">
+        <p class="tool-phase">Collection</p>
+        <svg class="tool-icon" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <rect x="8" y="8" width="14" height="14" rx="1.5" stroke="#5C6B6E" stroke-width="1.5"/>
+          <rect x="26" y="8" width="14" height="14" rx="1.5" stroke="#5C6B6E" stroke-width="1.5"/>
+          <rect x="8" y="26" width="14" height="14" rx="1.5" stroke="#C9A8B2" stroke-width="1.5"/>
+          <rect x="26" y="26" width="14" height="14" rx="1.5" stroke="#5C6B6E" stroke-width="1.5"/>
+        </svg>
+        <div class="tool-name muted">My Mestrae closet</div>
+        <div class="tool-desc">Track your owned shoes and heel sets, get maintenance reminders, and see AI outfit suggestions. Coming after launch.</div>
+        <div class="tool-link soon">Coming November 2026</div>
+      </a>
+
+    </div>
+  </div>
+</section>
+
+<!-- COMING SOON -->
+<section class="soon-section">
+  <div class="container">
+    <div class="section-header fade-up">
+      <p class="section-eyebrow">In development</p>
+      <h2 class="section-title">More tools on the way</h2>
+    </div>
+    <div class="soon-grid fade-up d1">
+      <div class="soon-card">
+        <div class="soon-name">Sustainability tracker</div>
+        <div class="soon-desc">See how many pairs of shoes your Mestrae collection has replaced and the estimated environmental impact.</div>
+        <span class="soon-badge">2026</span>
+      </div>
+      <div class="soon-card">
+        <div class="soon-name">3D product viewer</div>
+        <div class="soon-desc">Rotate any shoe 360 degrees and watch the heel swap animation before you buy.</div>
+        <span class="soon-badge">2026</span>
+      </div>
+      <div class="soon-card">
+        <div class="soon-name">Outfit matcher</div>
+        <div class="soon-desc">Upload an outfit and get suggestions for which Mestrae heel set works best with it.</div>
+        <span class="soon-badge">2027</span>
+      </div>
+      <div class="soon-card">
+        <div class="soon-name">Mestrae AI assistant</div>
+        <div class="soon-desc">Ask anything — sizing, shipping, mechanism, care — and get a thoughtful answer any time of day.</div>
+        <span class="soon-badge">2026</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PHILOSOPHY -->
+<section class="philosophy">
+  <div class="container">
+    <div class="philosophy-inner">
+      <div class="fade-up">
+        <h2 class="phil-title">Tools are how we think<br>about <em>customer care.</em></h2>
+        <p class="phil-body">Most shoe brands expect you to figure it out yourself. Mestrae was built by an engineer, and engineers believe that the right information at the right moment makes everything easier. These tools exist because buying the wrong size, the wrong heel height, or a shoe you do not know how to care for is a problem we can prevent before it happens.</p>
+      </div>
+      <ul class="phil-list fade-up d2">
+        <li><div class="phil-dot"></div>Every tool is free, no account required to use it</li>
+        <li><div class="phil-dot"></div>No recommendations are tied to upselling a more expensive product</li>
+        <li><div class="phil-dot"></div>The comfort timer exists because we believe heels should not hurt</li>
+        <li><div class="phil-dot"></div>The size guide was written for our specific shoes, not copied from a generic chart</li>
+        <li><div class="phil-dot"></div>If a tool does not answer your question, email us directly</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="container">
+    <div class="footer-grid">
+      <div>
+        <div class="footer-brand">Mestrae</div>
+        <p class="footer-tagline">Interchangeable heels built for the way women actually live. Est. 2016, Kuala Lumpur.</p>
+        <div class="footer-social">
+          <a href="https://instagram.com" target="_blank">Instagram</a>
+          <a href="https://mestrae.substack.com" target="_blank">Substack</a>
+          <a href="https://www.youtube.com/channel/UCxHOxnBYmGdhOZ-XzTzIYOQ" target="_blank">YouTube</a>
+        </div>
+      </div>
+      <div>
+        <div class="footer-col-title">Shop</div>
+        <ul class="footer-links">
+          <li><a href="shop.html">All styles</a></li>
+          <li><a href="shop.html?filter=heels">Heel sets</a></li>
+          <li><a href="size-guide.html">Size guide</a></li>
+          <li><a href="shipping.html">Shipping</a></li>
+        </ul>
+      </div>
+      <div>
+        <div class="footer-col-title">Company</div>
+        <ul class="footer-links">
+          <li><a href="about.html">About</a></li>
+          <li><a href="shift.html">The Shift</a></li>
+          <li><a href="where-we-are.html">Where we are</a></li>
+          <li><a href="https://mestrae.substack.com" target="_blank">Substack</a></li>
+        </ul>
+      </div>
+      <div>
+        <div class="footer-col-title">Support</div>
+        <ul class="footer-links">
+          <li><a href="contact.html">Contact us</a></li>
+          <li><a href="contact.html#faq">FAQ</a></li>
+          <li><a href="care.html">Care guide</a></li>
+          <li><a href="mailto:info@mestrae.com">info@mestrae.com</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p class="footer-copy">&copy; 2026 Mestrae. All rights reserved.</p>
+      <ul class="footer-legal">
+        <li><a href="privacy.html">Privacy</a></li>
+        <li><a href="terms.html">Terms</a></li>
+        <li><a href="shipping.html">Shipping &amp; Returns</a></li>
+      </ul>
+    </div>
+  </div>
+</footer>
+
+<script>
+  const obs = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); obs.unobserve(e.target); } });
+  }, { threshold: 0.08 });
+  document.querySelectorAll('.fade-up').forEach(el => obs.observe(el));
+  function toggleMenu() {
+    const links = document.querySelector('.nav-links');
+    const open = links.style.display === 'flex';
+    Object.assign(links.style, { display: open ? 'none' : 'flex', flexDirection: 'column', position: 'absolute', top: '100%', left: '0', right: '0', background: '#1A1A1A', padding: '16px 24px', gap: '20px', zIndex: '99' });
+  }
+</script>
+</body>
+</html>
