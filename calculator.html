@@ -221,7 +221,7 @@
     <div class="fade-up">
       <p class="eyebrow">Tools</p>
       <h1 class="page-title">Find your <em>ideal heel height.</em></h1>
-      <p class="page-subtitle">Six questions about how you live and move. We will match you to the heel height that makes the most sense for your day — and tell you why.</p>
+      <p class="page-subtitle">Six questions about how you live and move. We will match you to the heel height and style that makes the most sense for your day — and tell you why.</p>
     </div>
   </div>
 </section>
@@ -429,18 +429,34 @@
               <div class="height-label">2" block</div>
             </div>
             <div class="height-bar">
+              <div class="height-fill" style="height:44px;" id="bar-20s"></div>
+              <div class="height-label">2" stiletto</div>
+            </div>
+            <div class="height-bar">
               <div class="height-fill" style="height:58px;" id="bar-25"></div>
               <div class="height-label">2.5" block</div>
             </div>
             <div class="height-bar">
-              <div class="height-fill" style="height:80px;" id="bar-35"></div>
+              <div class="height-fill" style="height:58px;" id="bar-25s"></div>
+              <div class="height-label">2.5" stiletto</div>
+            </div>
+            <div class="height-bar">
+              <div class="height-fill" style="height:80px;" id="bar-35b"></div>
+              <div class="height-label">3.5" block</div>
+            </div>
+            <div class="height-bar">
+              <div class="height-fill" style="height:80px;" id="bar-35c"></div>
+              <div class="height-label">3.5" column</div>
+            </div>
+            <div class="height-bar">
+              <div class="height-fill" style="height:80px;" id="bar-35s"></div>
               <div class="height-label">3.5" stiletto</div>
             </div>
           </div>
         </div>
         <div class="sidebar-card sidebar-note">
-          <p>Every Mestrae shoe comes with flat covers included. The heels are sold as separate sets, so you can mix and match across any height or style.</p>
-          <p>You are never locked into one height. That is the whole point.</p>
+          <p>Every Mestrae shoe comes with flat covers included. The heels are sold as separate sets — block heels, column heels, and stilettos — across five heights.</p>
+          <p>You are never locked into one height or style. That is the whole point.</p>
         </div>
         <div class="medical-note" id="medical-note" style="display:none;">
           <div class="medical-label">A note on medical conditions</div>
@@ -645,18 +661,17 @@
     // Events / formal / evening-focused
     else if (isEvents && (isShort || isMedium) && isConfident) {
       primary = '3.5" stiletto';
-      secondary = '2.5" block';
-      intro = 'For evenings, weddings, galas, and occasions where you want the full effect, the 3.5" stiletto is the right choice. You are confident in heels, the wear time is contained, and the occasions call for it. The 2.5" block is there for the moments within those same events where you need something slightly more grounded.';
-      highlightBar('bar-35', true);
-      highlightBar('bar-25', false);
+      secondary = '3.5" column heel';
+      intro = 'For evenings, weddings, galas, and occasions where you want the full effect, the 3.5" range is your answer. The stiletto is the classic choice for pure elegance; the column heel gives you the same height with a more architectural, sculpted look; the block is there when you want height with maximum stability. The 2.5" block or stiletto is your backup for longer stretches within the same event.';
+      highlightBar('bar-35s', true); highlightBar('bar-35c', false); highlightBar('bar-35b', false);
       shopLink = 'shop.html?height=35';
     }
 
     // Events but moderate experience
     else if (isEvents && !isConfident) {
       primary = '2.5" block';
-      secondary = '3.5" stiletto';
-      intro = 'For evenings and special occasions, the 2.5" block gives you a substantial, elegant lift with a base that is genuinely stable. As your confidence grows, the 3.5" stiletto is an easy step up — and because Mestrae heels are interchangeable, you can make that call on the night rather than in advance.';
+      secondary = '2.5" stiletto';
+      intro = 'For evenings and special occasions, the 2.5" block gives you a substantial, elegant lift with a base that is genuinely stable. As your confidence builds, the 2.5" stiletto gives you the same height with a more refined silhouette — and because Mestrae heels are interchangeable, you can try the difference on the same night rather than committing in advance.';
       highlightBar('bar-25', true);
       highlightBar('bar-35', false);
     }
@@ -715,8 +730,12 @@
       'flat': { desc: 'The included flat cover. Zero heel, full comfort, still the Mestrae sole. Your starting point and your safety net.' },
       '1.5" block': { desc: 'A subtle, wide block heel. Gives you the posture adjustment and the heel silhouette without the height. The most comfortable heeled option in the range.' },
       '2" block': { desc: 'A solid, stable block heel. Enough lift to be intentional, low enough to be practical across a full day on varied surfaces.' },
+      '2" stiletto': { desc: 'The 2" stiletto offers the same low-risk height as the block but with a sleeker silhouette. A good stepping stone for those building confidence in thinner heels.' },
       '2.5" block': { desc: 'The most versatile height in the Mestrae range. Elegant, professional, and stable enough for long days. The heel most customers reach for first.' },
-      '3.5" stiletto': { desc: 'The statement heel. For evenings, events, and occasions where you want the full effect. Refined, elongating, and best for shorter stretches of standing.' },
+      '2.5" stiletto': { desc: 'The same height as the 2.5" block but with a slimmer, more refined heel. Elegant enough for evenings, lower-risk than the full 3.5". A strong middle ground.' },
+      '3.5" block': { desc: 'A wide, stable block at full height. The most grounded version of the 3.5" — strong presence, solid base. Good for evenings where you will be on your feet.' },
+      '3.5" column heel': { desc: 'A tapered sculpted heel — wider than a stiletto, more architectural than a block. Sits between the two in both stability and effect. Distinctive and design-forward.' },
+      '3.5" stiletto': { desc: 'The classic statement heel. Thin, elongating, refined. For evenings, weddings, galas, and occasions where you want the full effect. Best for shorter periods of standing.' },
     };
 
     const cards = document.getElementById('heel-cards');
@@ -762,3 +781,4 @@
 </script>
 </body>
 </html>
+
